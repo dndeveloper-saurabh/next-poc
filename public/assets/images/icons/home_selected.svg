@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   height="100px"
+   width="100px"
+   data-name="Layer 1"
+   viewBox="0 0 100 100"
+   x="0px"
+   y="0px"
+   version="1.1"
+   id="svg839"
+   sodipodi:docname="home copy.svg"
+   inkscape:version="1.0.1 (c497b03c, 2020-09-10)">
+  <metadata
+     id="metadata845">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+ 
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1371"
+     inkscape:window-height="878"
+     id="namedview841"
+     showgrid="false"
+     inkscape:zoom="3.56"
+     inkscape:cx="50"
+     inkscape:cy="50"
+     inkscape:window-x="0"
+     inkscape:window-y="23"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="svg839" />
+  <title
+     id="title833">Home</title>
+  <path
+     d="M100,53a2.24,2.24,0,0,1-2.53,2.53c-3,0-6.07,0-9.11,0-1.45,0-1.68.25-1.68,1.72q0,15.34,0,30.68A6.33,6.33,0,0,1,80,94.72H63c-2.29,0-2.91-.66-2.91-3,0-5.24,0-10.48,0-15.72a10,10,0,0,0-19.62-2.7A12.51,12.51,0,0,0,40,76.71c0,5,0,10,0,15.07,0,2.27-.69,3-3,3H20.27c-4.34,0-7-2.6-6.94-6.93,0-5,0-9.9,0-14.85q0-7.86,0-15.72c0-1.39-.26-1.65-1.64-1.65q-4.28,0-8.56,0c-2.42,0-3.13-.67-3.13-3,0-2,0-4,0-6.07A5.06,5.06,0,0,1,1.92,42.3Q21,26.42,40.06,10.53l3.5-2.91a10,10,0,0,1,12.95,0L98.05,42.27a5,5,0,0,1,1.94,4C100,48.55,100,50.79,100,53Z"
+     id="path835" fill="#4C72FA" />
+</svg>

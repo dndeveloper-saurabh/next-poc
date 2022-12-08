@@ -1,0 +1,64 @@
+// --------------------
+// doubt forum
+
+$base-color: #fafafa;
+$light-color: #ffffff;
+$icon-color: #949494;
+$focus-color: #f2f2f2;
+$highlight-color: #891010;
+$text-color: #050505;
+
+// <======================================>
+//              LIGHT MODE
+// <======================================>
+
+// $light-base-color: #fafafa;
+$light-base-color: #f1f2f2;
+$light-primary-color: #ffffff;
+$light-primary-color-rgb: 255, 255, 255;
+$light-secondary-color: #000000;
+$light-text-color-main: #050505;
+$light-text-color-main-rgb: 5,5,5;
+$light-text-color-invert: #ffffff;
+$light-icon-color: #949494;
+$light-focus-color: #e6e6e6;
+$light-highlight-color: #891010;
+$light-livesession-sidebar-color: #f5f5f5;
+$light-navbar-color: #ffffff;
+$light-textfield-color: #dde0e1;
+$light-quiz-option-color: #444444;
+$light-quiz-option-hover: #e0e0e0;
+$light-restainer-color: rgba(255, 255, 255, 0.9);
+$light-link-color: #195faa;
+$light-doubt-forum-headers: #282829;
+$light-doubt-forum-subheader: #939598;
+$light-doubt-sidebar-bar-hover: #e3e6e8;
+$light-doubt-comments-background: #f7f7f8;
+$light-info-background: #f2f2f2;
+// <======================================>
+//              DARK MODE
+// <======================================>
+$dark-base-color: #121212;
+$dark-textfield-color: #282828;
+$dark-primary-color: #181818;
+$dark-primary-color-rgb: 24, 24, 24;
+$dark-secondary-color: #000;
+$dark-text-color-main: #ffffff;
+$dark-text-color-main-rgb: 255, 255, 255;
+$dark-text-color-invert: #000000;
+$dark-icon-color: #000;
+$dark-focus-color: #000;
+// $dark-highlight-color: #ff0000;
+$dark-highlight-color: #bb281b;
+
+$dark-livesession-sidebar-color: #2c2c2c;
+$dark-navbar-color: #161616;
+$dark-quiz-option-color: #cecece;
+$dark-quiz-option-hover: #5f5f5f;
+$dark-restainer-color: rgba(0, 0, 0, 0.8);
+$dark-link-color: #58a2f1;
+$dark-doubt-forum-headers: #dbdbdb;
+$dark-doubt-forum-subheader: #c0c0c0;
+$dark-doubt-sidebar-bar-hover: rgba(255, 255, 255, 0.25);
+$dark-doubt-comments-background: #383838;
+$dark-info-background: rgba(0, 0, 0, 0.5);

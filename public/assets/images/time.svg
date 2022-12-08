@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   version="1.1"
+   id="Capa_1"
+   x="0px"
+   y="0px"
+   viewBox="0 0 512 512"
+   style="enable-background:new 0 0 512 512;"
+   xml:space="preserve"
+   sodipodi:docname="time.svg"
+   inkscape:version="1.0.1 (c497b03c, 2020-09-10)"><metadata
+   id="metadata2093"><rdf:RDF><cc:Work
+       rdf:about=""><dc:format>image/svg+xml</dc:format><dc:type
+         rdf:resource="http://purl.org/dc/dcmitype/StillImage" /></cc:Work></rdf:RDF></metadata><defs
+   id="defs2091" /><sodipodi:namedview
+   pagecolor="#ffffff"
+   bordercolor="#666666"
+   borderopacity="1"
+   objecttolerance="10"
+   gridtolerance="10"
+   guidetolerance="10"
+   inkscape:pageopacity="0"
+   inkscape:pageshadow="2"
+   inkscape:window-width="689"
+   inkscape:window-height="480"
+   id="namedview2089"
+   showgrid="false"
+   inkscape:zoom="0.28808594"
+   inkscape:cx="256"
+   inkscape:cy="256"
+   inkscape:window-x="0"
+   inkscape:window-y="23"
+   inkscape:window-maximized="0"
+   inkscape:current-layer="Capa_1" />
+<path
+   style="fill:#00abe9;stroke-width:0.932203"
+   d="M 256,17.355932 C 124.83898,17.355932 17.355932,124.83898 17.355932,256 17.355932,387.16102 124.83898,494.64407 256,494.64407 387.16102,494.64407 494.64407,387.16102 494.64407,256 494.64407,124.83898 387.16102,17.355932 256,17.355932 Z"
+   id="path2046" />
+<path
+   style="fill:#0095ff;stroke-width:0.932203"
+   d="M 494.64407,256 C 494.64407,387.16102 387.16102,494.64407 256,494.64407 V 17.355932 c 131.16102,0 238.64407,107.483048 238.64407,238.644068 z"
+   id="path2048" />
+<path
+   style="fill:#e7e7e7;stroke-width:0.932203"
+   d="M 256,74.220339 C 155.88042,74.220339 74.220339,155.88042 74.220339,256 74.220339,356.11771 155.88042,437.77966 256,437.77966 356.11958,437.77966 437.77966,356.11771 437.77966,256 437.77966,155.88042 356.11958,74.220339 256,74.220339 Z"
+   id="path2050" />
+<path
+   style="fill:#d3d3d8;stroke-width:0.932203"
+   d="m 437.77966,256 c 0,100.11771 -81.66008,181.77966 -181.77966,181.77966 V 74.220339 c 100.11958,0 181.77966,81.660081 181.77966,181.779661 z"
+   id="path2052" />
+<polygon
+   style="fill:#5a5a5a"
+   points="337.599,328.599 256,273.999 241,264.099 241,121 271,121 271,247.899 354.401,303.399 "
+   id="polygon2054"
+   transform="matrix(0.93220339,0,0,0.93220339,17.355932,17.355932)" />
+<polygon
+   style="fill:#444444"
+   points="337.599,328.599 256,273.999 256,121 271,121 271,247.899 354.401,303.399 "
+   id="polygon2056"
+   transform="matrix(0.93220339,0,0,0.93220339,17.355932,17.355932)" />
+<g
+   id="g2058">
+</g>
+<g
+   id="g2060">
+</g>
+<g
+   id="g2062">
+</g>
+<g
+   id="g2064">
+</g>
+<g
+   id="g2066">
+</g>
+<g
+   id="g2068">
+</g>
+<g
+   id="g2070">
+</g>
+<g
+   id="g2072">
+</g>
+<g
+   id="g2074">
+</g>
+<g
+   id="g2076">
+</g>
+<g
+   id="g2078">
+</g>
+<g
+   id="g2080">
+</g>
+<g
+   id="g2082">
+</g>
+<g
+   id="g2084">
+</g>
+<g
+   id="g2086">
+</g>
+</svg>

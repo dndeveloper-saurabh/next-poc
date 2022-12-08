@@ -1,0 +1,1264 @@
+.landing__section {
+  background: #000;
+  position: sticky;
+  min-height: 200vh;
+  width: 100vw;
+}
+.landing__section * {
+  font-family: "Poppins", sans-serif;
+  box-sizing: border-box;
+  transition: none;
+}
+.desktop__landing__footer {
+  z-index: 998;
+  bottom: 0px;
+  width: 100%;
+  padding-top: 2em;
+}
+.desktop__landing__footer .footer__wrapper {
+  padding: 15px 0px;
+  width: calc(100vw - 80px);
+  max-width: 1544px;
+  margin: auto;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+.desktop__landing__footer .footer__wrapper h6 {
+  font-weight: 400;
+  font-size: 15px;
+  text-shadow: 0 0 5px rgba(0, 0, 0, 0.466);
+  color: #d7d7d7;
+}
+.desktop__landing__footer .footer__wrapper svg {
+  margin-left: 7.5px;
+  cursor: pointer;
+  text-shadow: 0 0 5px rgba(0, 0, 0, 0.466);
+  width: 24px;
+  height: 24px;
+  color: #d7d7d7;
+  transition: all 0.25s ease;
+}
+.desktop__landing__footer .footer__wrapper svg:hover {
+  color: white;
+  transition: all 0.25s ease;
+}
+.animation__wrapper {
+  position: relative;
+}
+.mac__wrapper {
+  z-index: 106;
+  transform-origin: center 88px;
+  width: 1362px;
+  height: 898px;
+  position: relative;
+  left: 50%;
+  margin-left: -681px;
+}
+.macbook__pro__wrapper:before {
+  content: "";
+  display: block;
+  top: 0;
+  left: 0;
+  width: 1362px;
+  height: 898px;
+  position: relative;
+  left: 50%;
+  margin-left: -681px;
+}
+.macbook__pro__wrapper .mac__desktop {
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  top: 0px;
+  width: 882px;
+  height: 552px;
+  background-size: 882px 552px;
+  -webkit-transform: perspective(0);
+  transform: perspective(0);
+}
+.steps__circle {
+  position: fixed;
+  top: 50%;
+  right: 3.5%;
+  z-index: 9999;
+  transform: translateY(-50%);
+}
+.steps__circle div {
+  min-width: 7px;
+  min-height: 7px;
+  border: 1px solid #a8a8a8;
+  border-radius: 50%;
+  margin: 0.75rem 0.25rem;
+  cursor: pointer;
+  transition: 0.25s ease all;
+  background: grey;
+}
+.steps__circle div:hover {
+  background: white !important;
+  transition: 0.25s ease all;
+}
+.videos__text, .live__text {
+  color: white;
+  position: absolute;
+  top: 45%;
+  left: 55%;
+  font-size: 1.3rem;
+  width: 37%;
+  background: linear-gradient(90deg, rgba(0, 0, 0, 1), #fff);
+  background-repeat: no-repeat;
+  overflow: hidden;
+  background-clip: text;
+  -webkit-background-clip: text;
+  animation-fill-mode: forwards;
+}
+.videos__text h2, .live__text h2 {
+  font-weight: 600;
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+}
+.videos__text h2 {
+  background-color: #2a2a72;
+  background-image: linear-gradient(315deg, #2a2a72 0%, #009ffd 74%);
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.live__text h2 {
+  background-color: #ee8c68;
+  background-image: linear-gradient(315deg, #ee8c68 0%, #eb6b9d 74%);
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.dashboard__text {
+  color: white;
+  position: absolute;
+  top: 45%;
+  left: 6.5%;
+  font-size: 1.25rem;
+  width: 32.5%;
+  background: linear-gradient(90deg, rgba(0, 0, 0, 1), #fff);
+  background-repeat: no-repeat;
+  overflow: hidden;
+  background-clip: text;
+  -webkit-background-clip: text;
+  animation-fill-mode: forwards;
+}
+.dashboard__text h2 {
+  font-weight: 600;
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+  background-color: #f9484a;
+  background-image: linear-gradient(315deg, #f9484a 0%, #fbd72b 74%);
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.mobile__hero {
+  z-index: 14;
+  background: rgba(14, 14, 14, 1);
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  min-height: 100vh;
+}
+.mobile__hero .wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+.mobile__hero .wrapper #content {
+  position: relative;
+  color: white;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+}
+.mobile__hero .wrapper #content h2 {
+  font-size: 3.25rem;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+  background: linear-gradient(90deg, #fff, rgba(0, 0, 0, 1), rgba(0, 0, 0, 1));
+  background-repeat: no-repeat;
+  overflow: hidden;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: rgba(255, 255, 255, 0);
+  animation-fill-mode: forwards;
+  -webkit-animation-fill-mode: forwards;
+  background-position: left;
+  background-size: 0%;
+}
+.mobile__hero .wrapper #content h3 {
+  color: white;
+  font-size: 1.75rem;
+  font-weight: 400;
+}
+.mobile__hero .phones__wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+.mobile__hero .phones__wrapper .bleeding-bg {
+  height: 50vh;
+  width: 25vh;
+  top: 50%;
+  left: 25%;
+  transform: translate(-50%, -50%);
+  position: absolute;
+  border-radius: 50%;
+  background: var(--home-radial);
+}
+.mobile__hero .phones__wrapper .backdrop {
+  backdrop-filter: blur(60px);
+  height: 60vh;
+  width: 60vh;
+  top: 50%;
+  left: 25%;
+  transform: translate(-50%, -50%);
+  position: absolute;
+  background: transparent;
+}
+.mobile__hero .phones__wrapper #content {
+  min-height: 100vh;
+  position: relative;
+}
+.mobile__hero .phones__wrapper #content .app__wrapper {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  position: absolute;
+}
+.mobile__hero .phones__wrapper #content .app__wrapper .iphone__chassis {
+  background: transparent;
+  position: relative;
+  height: 65vh !important;
+  width: unset;
+  top: 0;
+}
+.mobile__hero .phones__wrapper #content .app__wrapper img {
+  display: block;
+  height: 62vh;
+  width: unset;
+  border-radius: 32.5px;
+  position: relative;
+  top: 2.5px;
+  left: 0;
+  transform: none;
+}
+.mobile__hero .phones__wrapper #content .app__wrapper .app__splash {
+  z-index: 110;
+  position: absolute;
+  top: 8%;
+  left: 50%;
+  transform: translate(-50%, 0%);
+  width: 88.3%;
+  height: 16.2vh;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: black;
+}
+.mobile__hero .phones__wrapper #content .app__wrapper .app__splash .desktop__overlay {
+  position: absolute;
+  bottom: 0px;
+  opacity: 0.75;
+  top: 0px;
+  left: 0px;
+  right: 0;
+  width: 100%;
+  height: 16.2vh;
+  margin: 0 auto;
+  background: black;
+  z-index: 23;
+}
+.mobile__hero .phones__wrapper #content .app__wrapper .app__splash img.mac__ {
+  height: unset;
+  top: unset;
+}
+.mobile__hero .phones__wrapper #content .app__wrapper .app__splash video, .mobile__hero .phones__wrapper #content .app__wrapper .app__splash img {
+  margin: 0 auto;
+  width: 100%;
+  aspect-ratio: 1.7777777778;
+  object-fit: fill;
+}
+.mobile__hero .phones__wrapper #content .app__wrapper #homescreen {
+  z-index: 99;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.mobile__hero .phones__wrapper #content .app__wrapper #homescreen .hide__bar {
+  z-index: 105;
+  min-width: 118px;
+  min-height: 20px;
+  background: #000;
+  position: absolute;
+  top: 2%;
+  left: 23%;
+}
+.mobile__hero .phones__wrapper #content .app__wrapper #livescreen {
+  position: absolute;
+  z-index: 100;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.mobile__hero .phones__wrapper #content .app__wrapper #livescreen2 {
+  position: absolute;
+  z-index: 101;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.mobile__hero .phones__wrapper #content .app__wrapper #livescreen2 .hide__bar {
+  z-index: 100;
+  min-width: 118px;
+  min-height: 20px;
+  background: #000;
+  position: absolute;
+  top: 2%;
+  left: 23%;
+}
+.mobile__hero .phones__wrapper #content .app__wrapper #livescreen2 .live__tag {
+  background: rgba(255, 0, 0, 1);
+  color: white;
+  padding: 2px 9px 3px 10px;
+  border-radius: 25px;
+  font-size: 11px;
+  font-weight: 600;
+  position: absolute;
+  top: 27%;
+  left: 5%;
+  z-index: 105;
+  animation: blink-animation 1.5s ease infinite both;
+  -webkit-animation: blink-animation 1.5s ease infinite both;
+}
+.mobile__hero .phones__wrapper #content .app__wrapper #livescreen2 img {
+  z-index: 99;
+}
+.mobile__hero .phones__wrapper #content .app__wrapper #searchscreen {
+  position: absolute;
+  z-index: 104;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.mobile__hero .phones__wrapper #content .app__wrapper #doubtscreen {
+  position: absolute;
+  z-index: 103;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.mobile__hero .phones__wrapper #descriptions #homedesc h1 {
+  background: var(--var-border-home-icon);
+  background-clip: text;
+  background-size: 200% auto;
+  text-fill-color: transparent;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.mobile__hero .phones__wrapper #descriptions #doubtdesc h1 {
+  background: var(--var-border-doubts-icon);
+  background-clip: text;
+  background-size: 200% auto;
+  text-fill-color: transparent;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.mobile__hero .phones__wrapper #descriptions #livedesc h1 {
+  background: var(--var-border-videos-icon);
+  background-clip: text;
+  background-size: 200% auto;
+  text-fill-color: transparent;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.mobile__hero .phones__wrapper #descriptions #livedesc2 h1 {
+  background: var(--var-border-news-icon);
+  background-clip: text;
+  background-size: 200% auto;
+  text-fill-color: transparent;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.mobile__hero .phones__wrapper #descriptions #newsdesc h1 {
+  background: var(--var-border-news-icon);
+  background-clip: text;
+  background-size: 200% auto;
+  text-fill-color: transparent;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.mobile__hero .phones__wrapper #descriptions #searchdesc h1 {
+  background: var(--var-border-blaze-icon);
+  background-clip: text;
+  background-size: 200% auto;
+  text-fill-color: transparent;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.mobile__hero .phones__wrapper #descriptions div {
+  position: absolute;
+  z-index: 105;
+  top: 42%;
+  left: 45%;
+}
+.mobile__hero .phones__wrapper #descriptions div p {
+  padding-top: 5px;
+  font-size: 1.25rem;
+  color: white;
+  white-space: nowrap;
+  letter-spacing: 1px;
+}
+.mobile__hero .phones__wrapper #descriptions div h1 {
+  font-weight: 600;
+  font-size: 2.5rem;
+  padding-bottom: 15px;
+}
+.mobile__hero .phones__wrapper #descriptions div .play-button {
+  width: 150px;
+  position: relative;
+  margin-top: 160px;
+  margin-left: -9px;
+}
+.mobile__hero .phones__wrapper #descriptions div .play-button img {
+  width: 100%;
+}
+.mobile__hero .excited__action {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  background: linear-gradient(0deg, rgba(10, 32, 87, 1) 0%, rgba(0, 0, 0, 0.9142156862745098) 67%, rgba(0, 0, 0, 0.04306722689075626) 100%);
+  z-index: 100;
+}
+.mobile__hero .excited__action #content {
+  position: relative;
+  min-height: 100vh;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.mobile__hero .excited__action #content h2 {
+  font-size: 3rem;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+.mobile__hero .excited__action #content p {
+  font-size: 1.25rem;
+  width: 40%;
+  font-weight: 300;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+.mobile__hero .excited__action #content button {
+  margin: 1rem auto;
+  background: white;
+  color: black;
+  border: 1px solid transparent;
+  padding: 1rem 2.5rem;
+  font-size: 1.2rem;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background, color, ease-in-out 250ms;
+}
+.mobile__hero .excited__action #content button:hover {
+  color: white;
+  background: transparent;
+  border: 1px solid white;
+}
+.mobile__hero .excited__action #content #free {
+  font-size: 0.8rem;
+}
+.macbook__pro__wrapper .subjects__row {
+  position: absolute;
+  top: 68px;
+  left: 256px;
+  right: 256px;
+}
+.macbook__pro__wrapper #icon__top__left__behind {
+  -webkit-transform: perspective(0);
+  transform: perspective(0);
+  z-index: 1;
+}
+.macbook__pro__wrapper #dashboard__screen {
+  width: 30%;
+  border-radius: 5px;
+  right: 1rem;
+  top: 22.5rem;
+  position: absolute;
+  z-index: 9;
+  box-shadow: 0px 0px 8px 2px rgba(255, 255, 255, 0.2);
+}
+.macbook__pro__wrapper #dashboard__screen .wrapper img {
+  display: block;
+  border-radius: 5px;
+  max-width: 100% !important;
+}
+.macbook__pro__wrapper #blaze__screen {
+  width: 30%;
+  position: absolute;
+  z-index: 9;
+  right: 1rem;
+  top: 22.5rem;
+  border-radius: 5px;
+  box-shadow: 0px 0px 8px 2px rgba(255, 255, 255, 0.2);
+}
+.macbook__pro__wrapper #blaze__screen .wrapper {
+  position: relative;
+}
+.macbook__pro__wrapper #blaze__screen .wrapper img {
+  display: block;
+  max-width: 100% !important;
+  border-radius: 5px;
+}
+.macbook__pro__wrapper #bottom__left__2, .macbook__pro__wrapper #bottom__right__subject, .macbook__pro__wrapper #bottom__left__subject, .macbook__pro__wrapper #icon__top__left__behind {
+  opacity: 1 !important;
+}
+.subject__wrapper .subject__center {
+  position: absolute;
+  z-index: 2;
+  width: 600px;
+  top: 128px;
+  left: 320px;
+}
+.subject__wrapper .subject__left__front {
+  position: absolute;
+  width: 394px;
+  top: 280px;
+  left: 280px;
+  -webkit-transform: perspective(0);
+  transform: perspective(0);
+  z-index: 3;
+}
+.subject__wrapper .subject__top__right {
+  position: absolute;
+  width: 192px;
+  top: 58px;
+  right: 256px;
+  -webkit-transform: perspective(0);
+  transform: perspective(0);
+  z-index: 3;
+}
+.mac__text {
+  position: absolute;
+  top: 0;
+  left: 0;
+  flex-direction: column;
+  right: 0;
+  bottom: 0;
+  color: white;
+  text-align: center;
+  z-index: 1000;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+}
+.mac__text .down__scroll__indicator {
+  position: relative;
+}
+.mac__text #scrollindicator span {
+  margin-top: 100px;
+  position: absolute;
+  left: 50%;
+  width: 24px;
+  height: 24px;
+  margin-left: -12px;
+  border-left: 1px solid #fff;
+  border-bottom: 1px solid #fff;
+  -webkit-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+  -webkit-animation: sdb07 2s infinite;
+  animation: sdb07 2s infinite;
+  opacity: 0;
+  box-sizing: border-box;
+}
+.mac__text #scrollindicator span:nth-of-type(1) {
+  -webkit-animation-delay: 0s;
+  animation-delay: 0s;
+}
+.mac__text #scrollindicator span:nth-of-type(2) {
+  top: 16px;
+  -webkit-animation-delay: 0.15s;
+  animation-delay: 0.15s;
+}
+.mac__text #scrollindicator span:nth-of-type(3) {
+  top: 32px;
+  -webkit-animation-delay: 0.3s;
+  animation-delay: 0.3s;
+}
+@-webkit-keyframes sdb07 {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes sdb07 {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+.experience__redefined {
+  text-align: center;
+  margin-top: -2rem;
+  z-index: 1;
+  background: linear-gradient(90deg, #fff, rgba(0, 0, 0, 1), rgba(0, 0, 0, 1));
+  background-repeat: no-repeat;
+  overflow: hidden;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: rgba(255, 255, 255, 0);
+  animation-fill-mode: forwards;
+  -webkit-animation-fill-mode: forwards;
+  background-position: left;
+}
+.experience__redefined h1 {
+  font-size: 3.5rem;
+  font-weight: 600;
+}
+.mac__text h1, .promotion__text h1 {
+  font-size: 7.5rem;
+  margin: 0;
+  font-weight: 700;
+}
+.mac__text h2, .promotion__text h2 {
+  margin: 0;
+  font-size: 3rem;
+}
+.promotion__text p {
+  padding: 1rem 0;
+  margin: 0 auto;
+  width: 50%;
+  text-align: center;
+}
+.showcase__text {
+  text-align: left;
+  color: white;
+  width: 50%;
+}
+.showcase__text h1 {
+  font-size: 7.5rem;
+  margin: 0;
+  font-weight: 700;
+}
+.showcase__text h2 {
+  font-size: 3rem;
+}
+.showcase__text p {
+  padding: 1rem 0;
+}
+.nav__wrapper {
+  position: fixed;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin: 0 auto;
+  height: 52px;
+  left: 0;
+  right: 0;
+  top: 0;
+  z-index: 99;
+  width: calc(100vw - 80px);
+  max-width: 1544px;
+  margin: 1.5rem auto;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+.nav__wrapper .nav__logo .nav__logo__img {
+  height: 100%;
+  max-height: 72px;
+  width: unset;
+  cursor: pointer;
+}
+.nav__wrapper * {
+  z-index: 4;
+}
+.nav__wrapper .nav__links a {
+  padding-right: 25px;
+  font-size: 0.9rem;
+  color: white;
+  transition: 0.2s ease;
+  font-weight: 500;
+  text-shadow: 0 0 10px rgba(49, 49, 49, 0.466);
+  backdrop-filter: blur(10px);
+}
+.nav__wrapper .nav__links a:hover {
+  color: #6b0d0d;
+  transition: 0.2s ease all;
+}
+.nav__wrapper .nav__links .nav__link {
+  text-decoration: none;
+  color: white;
+  margin: 0 0rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+}
+.classroom__navbar .nav__links .nav__link.signup__btn {
+  border: 2px solid white;
+  border-radius: 25px;
+  padding: 0.5rem 1.5rem;
+  -webkit-transition: all ease-in-out var(--transition-speed);
+  transition: all ease-in-out var(--transition-speed);
+}
+.classroom__navbar .nav__links .nav__link.signup__btn:hover {
+  background: white;
+  color: var(--color-highlight);
+}
+.nav__wrapper .nav__links .nav__link.signup__btn {
+  border: 2px solid white;
+  border-radius: 25px;
+  padding: 0.5rem 1.5rem;
+  -webkit-transition: all ease-in-out var(--transition-speed);
+  transition: all ease-in-out var(--transition-speed);
+}
+.nav__wrapper .nav__links .nav__link.signup__btn:hover {
+  background: white;
+  color: var(--color-highlight);
+}
+.call__to__action .start__learning__btn {
+  cursor: pointer;
+  z-index: 999;
+  margin-top: 2rem;
+  margin-bottom: 0rem;
+  border-radius: 7.5px;
+  background: linear-gradient(to bottom, #ea0304, #a10e0e);
+  color: white;
+  font-weight: 600;
+  padding: 0.8rem 2rem;
+  filter: brightness(0.95) saturate(1);
+  transition: all ease 0.2s;
+}
+.call__to__action .start__learning__btn:hover {
+  filter: brightness(1) saturate(1.05);
+  transform: scale(1.05);
+  transition: all ease 0.2s;
+}
+.mac__text__mobile {
+  top: 0;
+  z-index: 2;
+  left: 0;
+  flex-direction: column;
+  right: 0;
+  bottom: 0;
+  color: white;
+  text-align: center;
+  z-index: 10;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+}
+.mac__text__mobile * {
+  z-index: 2;
+}
+.promotion__text__mobile {
+  z-index: 2;
+  margin-top: -5rem;
+  text-align: center;
+  padding-bottom: 5rem;
+  color: white;
+}
+.mac__text__mobile h1, .promotion__text h1 {
+  font-size: 4rem;
+  z-index: 2;
+  margin: 0;
+  font-weight: 700;
+}
+.mac__text__mobile h2, .promotion__text h2 {
+  z-index: 2;
+  margin: 0;
+  font-size: 2rem;
+}
+.promotion__text__mobile p {
+  padding: 1rem 0;
+  margin: 0 auto;
+  width: 50%;
+  text-align: center;
+}
+.nav__wrapper__mobile {
+  position: absolute;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin: 0 auto;
+  height: 72px;
+  left: 0;
+  right: 0;
+  max-width: 1024px;
+  margin: 1.5rem auto;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+.nav__wrapper .nav__logo .nav__logo__img {
+  height: 100%;
+  max-height: 72px;
+}
+.nav__wrapper * {
+  z-index: 4;
+}
+.doubts__section {
+  background: white;
+}
+.doubts__section * {
+  color: black;
+}
+.doubts__section .doubts__content {
+  padding: 8rem 8rem;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+.doubts__section .doubts__content h2 {
+  font-weight: 700;
+  font-size: 4.25rem;
+}
+.doubts__section .doubts__content h3 {
+  font-size: 1.75rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+}
+.doubts__section .doubts__content p {
+  text-align: justify;
+}
+.parallax__video {
+  margin: 2rem auto;
+  width: 75%;
+  display: block;
+}
+.blaze__section {
+  background: white;
+  filter: brightness(0.95);
+  min-height: 100vh;
+  min-width: 100vw;
+  margin: 0;
+  padding: 0;
+  position: relative;
+}
+.blaze__section * {
+  color: black;
+}
+.blaze__section .blaze__intro {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+.blaze__section .blaze__intro h1 {
+  font-size: 4.25rem;
+  font-weight: 600;
+}
+.blaze__section .blaze__intro h2 {
+  font-size: 2rem;
+  font-weight: 300;
+}
+.blaze__section .blaze__content {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  opacity: 0;
+}
+.blaze__section .blaze__content #top-right-teacher {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+.blaze__section .blaze__content #top-right-teacher img {
+  width: 25vw;
+  height: 25vw;
+  display: block;
+}
+.blaze__section .blaze__content #bottom-left-student {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+.blaze__section .blaze__content #bottom-left-student img {
+  width: 25vw;
+  height: 25vw;
+  display: block;
+}
+.blaze__section .blaze__content .blaze__content__content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+}
+.blaze__section .blaze__content .blaze__content__content h2 {
+  font-size: 4rem;
+  font-weight: 700;
+  color: var(--color-highlight);
+}
+.blaze__section .blaze__content .blaze__content__content h2 span {
+  font-weight: 300;
+}
+.blaze__section .blaze__content .blaze__content__content h3 {
+  font-weight: 300;
+}
+.blaze__section .blaze__content .blaze__content__content p {
+  width: 40%;
+  text-align: center;
+  margin-top: 1rem;
+  font-weight: 300;
+}
+.final__footer {
+  display: none;
+  opacity: 0;
+  justify-content: space-between;
+  margin: auto;
+  padding-bottom: 0px;
+  width: calc(100vw - 80px);
+  max-width: 1544px;
+  padding-bottom: 10px;
+  align-items: flex-start;
+}
+.final__footer h6 {
+  font-weight: 400;
+  font-size: 15px;
+  text-shadow: 0 0 5px rgba(0, 0, 0, 0.466);
+  color: #d7d7d7;
+}
+.final__footer svg {
+  margin-left: 7.5px;
+  cursor: pointer;
+  text-shadow: 0 0 5px rgba(0, 0, 0, 0.466);
+  width: 24px;
+  height: 24px;
+  color: #d7d7d7;
+  transition: all 0.25s ease;
+}
+.final__footer svg:hover {
+  color: white;
+  transition: all 0.25s ease;
+}
+.final__footer .social__links div {
+  display: flex;
+  color: #d7d7d7;
+}
+.final__footer .social__links h6 {
+  color: #d7d7d7;
+  padding-top: 10px;
+  font-size: 15px;
+}
+.final__footer .company__details {
+  color: #d7d7d7;
+}
+.final__footer .company__details h1 {
+  padding-bottom: 10px;
+  font-size: 13.5px;
+}
+.final__footer .company__details h6 {
+  padding-bottom: 5px;
+  font-size: 13.5px;
+}
+.final__footer .company__details h6:hover {
+  color: #338ed8;
+}
+.final__footer .other__links {
+  color: #d7d7d7;
+}
+.final__footer .other__links h1 {
+  padding-bottom: 10px;
+  font-size: 13.5px;
+}
+.final__footer .other__links h6 {
+  padding-bottom: 5px;
+  font-size: 13.5px;
+}
+.final__footer .other__links h6:hover {
+  color: #338ed8;
+}
+.final__footer .app__links {
+  color: #d7d7d7;
+}
+.final__footer .app__links h1 {
+  font-size: 13.5px;
+}
+.final__footer .app__links div {
+  width: 125px;
+}
+.final__footer .app__links div img {
+  width: 100%;
+  margin-left: -7px;
+}
+.login__wrapper {
+  width: 272px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+.login__wrapper .login__header {
+  margin-top: 0.75rem;
+  margin-bottom: -0.25rem;
+  font-size: 1.3rem;
+}
+.login__wrapper .login__logo {
+  display: block;
+  max-width: 80%;
+}
+.login__wrapper .login__content {
+  margin: 1rem 0;
+  margin-bottom: 1.5rem;
+  font-size: 1rem;
+}
+@keyframes blink-animation {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@-webkit-keyframes blink-animation {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@media screen and (max-width: 1024px) and (min-width: 769px) and (orientation: "portrait") {
+  .videos__text, .live__text {
+    left: 60%;
+    width: 30%;
+  }
+  .videos__text h2, .live__text h2 {
+    font-size: 2rem;
+  }
+  .videos__text p, .live__text p {
+    font-size: 1rem;
+  }
+  .dashboard__text {
+    left: 10%;
+  }
+  .dashboard__text h2 {
+    font-size: 2rem;
+  }
+  .dashboard__text p {
+    font-size: 1rem;
+  }
+  .desktop__landing__footer .footer__wrapper {
+    padding: 15px 0px;
+  }
+  .phones__wrapper #descriptions div {
+    left: 52% !important;
+  }
+  .phones__wrapper #descriptions div h1 {
+    font-size: 2rem !important;
+  }
+  .phones__wrapper #descriptions div p {
+    font-size: 1rem !important;
+  }
+  .phones__wrapper .app__splash video {
+    margin-left: 28px !important;
+  }
+  .phones__wrapper #content {
+    min-height: 100vh;
+    position: relative;
+  }
+  .phones__wrapper #content .backdrop {
+    height: 50vh !important;
+    width: 50vh !important;
+    left: 33.5% !important;
+  }
+  .phones__wrapper #content .bleeding-bg {
+    left: 25%;
+  }
+  .phones__wrapper #content img {
+    display: block;
+    height: 62vh !important;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    position: absolute;
+    border-radius: 35px !important;
+  }
+}
+@media screen and (max-width: 1024px) and (min-width: 769px) and (orientation: "landscape") {
+  .videos__text, .live__text {
+    left: 55%;
+    width: 30%;
+    top: 37.5%;
+  }
+  .videos__text h2, .live__text h2 {
+    font-size: 1.5rem;
+  }
+  .videos__text p, .live__text p {
+    font-size: 0.85rem;
+  }
+  .macbook__pro__wrapper #dashboard__screen, .macbook__pro__wrapper #blaze__screen {
+    width: 25% !important;
+    top: 17.5rem;
+  }
+  .dashboard__text {
+    left: 5%;
+    top: 37.5%;
+  }
+  .dashboard__text h2 {
+    font-size: 1.5rem;
+  }
+  .dashboard__text p {
+    font-size: 0.85rem;
+  }
+  .desktop__landing__footer .footer__wrapper {
+    padding: 10px 0;
+  }
+  .phones__wrapper #descriptions div {
+    left: 45% !important;
+  }
+  .phones__wrapper #descriptions div h1 {
+    font-size: 2rem !important;
+  }
+  .phones__wrapper #descriptions div p {
+    font-size: 1rem !important;
+  }
+  .phones__wrapper #content {
+    min-height: 100vh;
+    position: relative;
+  }
+  .phones__wrapper #content .backdrop {
+    height: 70vh !important;
+    width: 62.5vh !important;
+    left: 24% !important;
+  }
+  .phones__wrapper #content .bleeding-bg {
+    left: 25%;
+  }
+  .phones__wrapper #content img {
+    display: block;
+    height: 62vh !important;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    position: absolute;
+  }
+}
+@media screen and (max-width: 768px) {
+  .videos__text, .live__text {
+    left: 30%;
+    width: 50%;
+    top: 75%;
+    z-index: 98;
+  }
+  .videos__text h2, .live__text h2 {
+    font-size: 2rem;
+  }
+  .videos__text p, .live__text p {
+    font-size: 1rem;
+  }
+  .macbook__pro__wrapper #dashboard__screen, .macbook__pro__wrapper #blaze__screen {
+    width: 25% !important;
+    top: 20rem;
+  }
+  .dashboard__text {
+    left: -46%;
+    top: 75%;
+    width: 50%;
+    z-index: 98;
+  }
+  .dashboard__text h2 {
+    font-size: 2rem;
+  }
+  .dashboard__text p {
+    font-size: 1rem;
+  }
+  .desktop__landing__footer .footer__wrapper {
+    padding: 10px 0;
+  }
+  .final__footer .copyright {
+    width: 200px;
+  }
+  .final__footer div h1 {
+    font-size: 12px;
+  }
+  .final__footer div h6 {
+    font-size: 10px;
+  }
+  .final__footer div .play-button {
+    width: 100px !important;
+  }
+  .steps__circle {
+    display: none;
+  }
+  .phones__wrapper #descriptions div {
+    left: 52.5% !important;
+  }
+  .phones__wrapper #descriptions div h1 {
+    font-size: 1.75rem !important;
+  }
+  .phones__wrapper #descriptions div p {
+    font-size: 0.85rem !important;
+  }
+  .phones__wrapper #descriptions div .play-button {
+    width: 125px !important;
+  }
+  .phones__wrapper #content {
+    min-height: 100vh;
+    position: relative;
+  }
+  .phones__wrapper #content .backdrop {
+    height: 70vh !important;
+    width: 62.5vh !important;
+    left: 23.5% !important;
+  }
+  .phones__wrapper #content .bleeding-bg {
+    left: 25%;
+  }
+  .phones__wrapper #content img {
+    display: block;
+    height: 62vh !important;
+    border-radius: 36px !important;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    position: absolute;
+  }
+}

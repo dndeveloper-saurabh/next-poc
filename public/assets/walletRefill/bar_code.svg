@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   height="60"
+   viewBox="0 0 400.00001 60"
+   width="400"
+   version="1.1"
+   id="svg901"
+   sodipodi:docname="bar_code.svg"
+   inkscape:version="1.0.1 (c497b03c, 2020-09-10)">
+  <metadata
+     id="metadata907">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs905" />
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1183"
+     inkscape:window-height="768"
+     id="namedview903"
+     showgrid="false"
+     inkscape:zoom="1.4103825"
+     inkscape:cx="200"
+     inkscape:cy="60"
+     inkscape:window-x="0"
+     inkscape:window-y="23"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="svg901" />
+  <g
+     fill="#4b4948"
+     transform="matrix(1.2896395,0,0,-1.2868219,-121.0956,987.87771)"
+     id="g899">
+    <path
+       d="m 95.9813,674.435 h -2.0825 v 93.253 h 2.0825 z"
+       id="path833" />
+    <path
+       d="m 112.643,674.435 h -2.083 v 93.253 h 2.083 z"
+       id="path835" />
+    <path
+       d="m 131.322,674.435 h -2.083 v 93.253 h 2.083 z"
+       id="path837" />
+    <path
+       d="m 160.479,674.435 h -2.083 v 93.253 h 2.083 z"
+       id="path839" />
+    <path
+       d="m 175.058,674.435 h -2.083 v 93.253 h 2.083 z"
+       id="path841" />
+    <path
+       d="m 183.453,674.435 h -2.082 v 93.253 h 2.082 z"
+       id="path843" />
+    <path
+       d="m 200.115,674.435 h -2.083 v 93.253 h 2.083 z"
+       id="path845" />
+    <path
+       d="m 218.642,674.435 h -3.949 v 93.253 h 3.949 z"
+       id="path847" />
+    <path
+       d="m 235.346,674.435 h -1.974 v 93.253 h 1.974 z"
+       id="path849" />
+    <path
+       d="m 264.46,674.435 h -3.948 v 93.253 h 3.948 z"
+       id="path851" />
+    <path
+       d="m 279.169,674.435 h -3.949 v 93.253 h 3.949 z"
+       id="path853" />
+    <path
+       d="m 291.86,674.435 h -3.948 v 93.253 h 3.948 z"
+       id="path855" />
+    <path
+       d="m 320.757,674.435 h -3.948 v 93.253 h 3.948 z"
+       id="path857" />
+    <path
+       d="m 335.336,674.435 h -8.114 v 93.253 h 8.114 z"
+       id="path859" />
+    <path
+       d="M 354.079,674.435 H 341.67 v 93.253 h 12.409 z"
+       id="path861" />
+    <path
+       d="m 324.836,674.435 h -1.975 v 93.253 h 1.975 z"
+       id="path863" />
+    <path
+       d="m 364.601,674.435 h -1.974 v 93.253 h 1.974 z"
+       id="path865" />
+    <path
+       d="m 368.702,674.435 h -1.975 v 93.253 h 1.975 z"
+       id="path867" />
+    <path
+       d="m 377.119,674.435 h -1.974 v 93.253 h 1.974 z"
+       id="path869" />
+    <path
+       d="m 391.763,674.435 h -1.974 v 93.253 h 1.974 z"
+       id="path871" />
+    <path
+       d="m 400.158,674.435 h -4.252 v 93.253 h 4.252 z"
+       id="path873" />
+    <path
+       d="m 404.063,674.435 h -1.974 v 93.253 h 1.974 z"
+       id="path875" />
+    <path
+       d="m 299.93,674.435 h -6.031 v 93.253 h 6.031 z"
+       id="path877" />
+    <path
+       d="m 314.509,674.435 h -7.984 v 93.253 h 7.984 z"
+       id="path879" />
+    <path
+       d="m 272.791,674.435 h -1.671 v 93.253 h 1.671 z"
+       id="path881" />
+    <path
+       d="m 104.225,674.435 h -6.1609 v 93.253 h 6.1609 z"
+       id="path883" />
+    <path
+       d="m 127.135,674.435 h -8.179 v 93.253 h 8.179 z"
+       id="path885" />
+    <path
+       d="m 150.044,674.435 h -16.64 v 93.253 h 16.64 z"
+       id="path887" />
+    <path
+       d="m 168.983,674.435 h -6.421 v 93.253 h 6.421 z"
+       id="path889" />
+    <path
+       d="m 191.957,674.435 h -6.421 v 93.253 h 6.421 z"
+       id="path891" />
+    <path
+       d="m 210.311,674.435 h -7.984 v 93.253 h 7.984 z"
+       id="path893" />
+    <path
+       d="m 231.072,674.435 h -10.196 v 93.253 h 10.196 z"
+       id="path895" />
+    <path
+       d="m 247.799,674.435 h -10.197 v 93.253 h 10.197 z"
+       id="path897" />
+  </g>
+</svg>
