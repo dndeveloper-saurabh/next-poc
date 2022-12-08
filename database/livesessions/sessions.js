@@ -482,8 +482,9 @@ export const getCurrentWeek = async (date) => {
 export const fetchSessions = async (grade, isInstructor) => {
   let grades = [grade];
   if(isInstructor) {
-    // grades = ['class_2', 'class_9', 'class_10'];
-    grades = getAvailableGrades(true);
+    grades = ['class_2', 'class_9', 'class_10'];
+    // TODO: getAvailableGrades for production
+    // grades = getAvailableGrades(true);
   }
   let _posts = [];
   let _postMap = {};

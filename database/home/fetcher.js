@@ -11,7 +11,6 @@ import {
   planet8
 } from "../../public/assets";
 import axios from "axios";
-import {isProduction} from "../../hooks/isProduction";
 
 export const getSubjectMeta = async ({ grade, subjectCode }) => {
   return await (await import('../../firebase-config')).db
@@ -201,13 +200,13 @@ export const getMainCarouselData = async ({ grade, tier_type }) => {
   return snapshot.docs.map((doc) => doc.data()).filter(c => ["all", "web", "tablet"].includes(c.device_type));
 };
 
-export const getGradeNameByValue = (value) => {
-  const isPresent = getAvailableGrades().find(c => c.value === value);
-  if(!isPresent) throw new Error('This Grade "' + value + '" is not supported yet. Please contact Pustack administrator');
-  return isPresent.grade;
-}
+// export const getGradeNameByValue = (value) => {
+//   const isPresent = getAvailableGrades().find(c => c.value === value);
+//   if(!isPresent) throw new Error('This Grade "' + value + '" is not supported yet. Please contact Pustack administrator');
+//   return isPresent.grade;
+// }
 
-export const getAvailableGrades = (reduced, excludeClass2) => {
+export const getAvailableGrades = (reduced, excludeClass2, isProduction) => {
   // console.log('planet1 - ', planet1);
   let grades = [
     {grade: "Class 5", value: "class_5", planet: planet1_onboard},

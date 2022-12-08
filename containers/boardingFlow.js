@@ -1769,7 +1769,7 @@ export default function OnBoardingFlow({setCloseInstallApp = () => {}, isOpen = 
             <h6>I study in</h6>
           </div>
           <div className="select__classes">
-            {getAvailableGrades(null, true).map(({ planet, grade, enableToSelect, value }) => (
+            {getAvailableGrades(null, true, isProduction).map(({ planet, grade, enableToSelect, value }) => (
               <div className={"class__item" + ((isProduction ? enableToSelect : true) ? '' : ' disabled') + (activeUserGrade === value ? ' active' : activeUserGrade ? ' not-active' : '')} onClick={() => {
                 if(isProduction ? enableToSelect : true) setUserGrade(value);
               }} key={value}>
