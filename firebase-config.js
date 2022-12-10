@@ -41,6 +41,21 @@ const isMessagingSupported = firebase.messaging.isSupported();
 if (isMessagingSupported) {
   messaging = firebase.messaging();
 }
+//
+//
+// const db = "";
+// const rdb = "";
+// const auth = "";
+// const googleProvider = "";
+// const facebookProvider = "";
+// const appleProvider = "";
+// const storage = "";
+// const firebase = "";
+// const functions = "";
+// const firebaseApp = "";
+// const phoneAuth = "";
+// const messaging = "";
+// const isMessagingSupported = "";
 
 export {
   db,
@@ -50,6 +65,7 @@ export {
   facebookProvider,
   appleProvider,
   storage,
+  firebase,
   functions,
   firebaseApp,
   phoneAuth,

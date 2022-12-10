@@ -1,76 +1,37 @@
-export { showSnackbar } from "./functions/show-snackbar";
-export { quillToReact } from "./functions/quill";
-export { reactToQuill } from "./functions/quill";
-export { quillToPlainText } from "./functions/quill";
-export { isValidYouTubeUrl } from "./functions/youtube";
-export {youTubeGetID} from "./functions/youtube";
-export {getIndianTime, fetchIndianTime, castIndianTime} from "./functions/getIndianTime";
-export {monthToStrFormat} from "./functions/monthToStringFormatter";
-export { hourToStrFormat } from "./functions/hourToStringConverter";
-export { shadeColor } from "./functions/shadeColor";
-export { careFormattedDate } from "./functions/careFormattedDate";
-export { formatCallDuration } from "./functions/formatCallDuration";
-export { groupCareMessages } from "./functions/groupCareMessages";
-export { makeUniqueId } from "./functions/makeUniqueId";
-export { makeUniqueNumericId } from "./functions/makeUniqueNumericId";
-export { rtmTokenBuilder } from "./functions/rtmTokenBuilder";
-export { formatBillDuration } from "./functions/formatBillDuration";
-export {Validate as AppValidate} from './global/Validate';
-// -------------------- doubt forum
+export const starPath =
+  "M93.658,7.186,68.441,60.6,12.022,69.2C1.9,70.731-2.15,83.763,5.187,91.227l40.818,41.557-9.654,58.7c-1.738,10.611,8.959,18.559,17.918,13.6l50.472-27.718,50.472,27.718c8.959,4.922,19.656-2.986,17.918-13.6l-9.654-58.7,40.818-41.557c7.337-7.464,3.282-20.5-6.835-22.029L141.04,60.6,115.824,7.186A12.139,12.139,0,0,0,93.658,7.186Z";
 
-export {
-  getDateStringServ,
-  formatTime,
-  generateUrlFromString,
-  generateRandomString,
-  splitLongString,
-  numReaderFriendlyFormat,
-  futureformatTime,
-} from "./doubts_forum/utils";
+export const VAPIDKEY =
+  "BBAS6jVsiEE86EtJvP9RGSkPt46szXb2Ao7pfUdOL0xhhDiiPGnzgwN3utpw_O6RFMbuxgui2d3F7W98jFB5ZWk";
 
-// -------------------- newsfeed
+export const agoraAppID = "320f1867bc3d4922b4da5963a9f2b760";
 
-export {
-  getVideoCover,
-  debounce,
-  linkParser,
-  getYoutubeID,
-  removeAtIndex,
-} from "./newsfeed/utils";
+export const PUSHY_SECRET_API_KEY =
+  "73572a9672a97ef4af6e38167d99d87825d53642114ff16780f3082f9973c16f";
 
-export { getDateInYYYYMMDDFormat, loadingWrapper } from "./functions/utils";
+export const FCM_AUTH_HEADER =
+  "key=AAAAmhuAeFI:APA91bHSnIpAbEKtDTjvZH1F3xtJvHIlz_m1GOOgzbtZdsiqXpUk7QZvVdKs_9PIbnENdz_ytxaEjFqihGA9MZsW7S6FS1WsOOTDfawNdW_6iVbeduNZOxMVwfEzM69QpHsEVouUQFyd";
 
-// =================> Blaze
-export {
-  createBlazeOrder,
-  rescheduleBlazeReservationByUser,
-} from "./blaze/cloud-functions";
+export const firebaseAPiKey = "AIzaSyCgfeFcXVvvuIp79IJD8KCahJo2PzrHDco";
 
-//
-export { loadScript } from "./loadScript";
+export const firebaseDbURL = "https://avian-display-193502.firebaseio.com";
 
-// links
+export const appGooglePlayLink =
+  "https://play.google.com/store/apps/details?id=com.pustack.android.pustack&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1";
 
-export { privacyPolicy, termsOfService, refundAndCancellationPolicy } from "./links";
+export const appAppleLink = "https://apps.apple.com/app/pustack/id6444080075";
 
-export { groupBlazeMessages, getGrade } from "./blaze/groupBlazeMessages";
-export {
-  pickAgentCloudFunction,
-  updateChatImage,
-  updateStudentCareMeta,
-} from "./pustack-care";
+export const googlePlayBadge =
+  "https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png";
 
-export {
-  starPath,
-  VAPIDKEY,
-  agoraAppID,
-  PUSHY_SECRET_API_KEY,
-  FCM_AUTH_HEADER,
-  firebaseAPiKey,
-  firebaseDbURL,
-  appGooglePlayLink,
-  googlePlayBadge,
-  ALREADY_EXIST_PHONE_LOGIN_CODE
-} from "./constants";
+export const ALREADY_EXIST_PHONE_LOGIN_CODE = 'already-exists-phone_login';
+export const ALREADY_EXIST_EMAIL_LOGIN_CODE = 'already-exists-email_login'
 
-export { subjectColors } from "./global";
+export const privacyPolicy =
+  "https://firebasestorage.googleapis.com/v0/b/avian-display-193502.appspot.com/o/legal%2FPrivacy%20Policy.pdf?alt=media&token=7233bfb7-dd7b-4587-ba0b-e72bc78bbe4d";
+
+export const termsOfService =
+  "https://firebasestorage.googleapis.com/v0/b/avian-display-193502.appspot.com/o/legal%2FTerms%20of%20Service.pdf?alt=media&token=c108b0eb-31f0-4101-8a4a-096e0ec00f8f";
+
+export const refundAndCancellationPolicy =
+  "https://firebasestorage.googleapis.com/v0/b/avian-display-193502.appspot.com/o/legal%2FRefund%20Policy.pdf?alt=media&token=b75e6bbb-91d4-47fd-9fb4-e1c63ab40e7e"

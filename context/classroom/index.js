@@ -1,16 +1,195 @@
 import React, { useState, createContext, useEffect, useContext } from "react";
 
-import {
-  fetchLectureItem,
-  fetchLectureHeaderItem,
-  getChapterLastEngagementData,
-  getUserLatestEngagement,
-} from "../../database";
+// import {
+//   fetchLectureItem,
+//   fetchLectureHeaderItem,
+//   getChapterLastEngagementData,
+//   getUserLatestEngagement,
+// } from "../../database";
 import { UserContext } from "../global/user-context";
 import { PustackProContext } from "../global/PustackProContext";
 import useQuery from "../../hooks/query/useQuery";
 
+function youTubeGetID(url) {
+  var ID = "";
+  url = url
+    .replace(/(>|<)/gi, "")
+    .split(/(vi\/|v=|\/v\/|youtu\.be\/|\/embed\/)/);
+  if (url[2] !== undefined) {
+    ID = url[2].split(/[^0-9a-z_\-]/i);
+    ID = ID[0];
+  } else {
+    ID = url;
+  }
+  return ID;
+}
+
 export const ClassroomContext = createContext();
+
+const getUserLatestEngagement = async ({ grade, userId }) => {
+  return await require('../../firebase-config').db
+    .collection("user_engagement")
+    .doc(grade)
+    .collection(userId)
+    .doc("latest_engagement")
+    .get()
+    .then((doc) => doc.data()?.chapter_list);
+};
+
+const fetchLectureItem = async ({
+                                  grade,
+                                  lecture_id,
+                                  chapter,
+                                  tab_id,
+                                }) => {
+  const _category = chapter.split("_")[3];
+  const _subject = chapter.split("_")[4];
+
+  let subjectPath = `${grade}_learn_${_category}`;
+
+  if (_category !== "maths" && _category !== "mathematics") {
+    subjectPath = `${grade}_learn_${_category}_${_subject}`;
+  }
+
+  if (lecture_id && chapter && tab_id) {
+    return await require('../../firebase-config').db
+      .collection("cms_data")
+      .doc(grade)
+      .collection("scope")
+      .doc(`${grade}_learn`)
+      .collection("category")
+      .doc(`${grade}_learn_${_category}`)
+      .collection("subject")
+      .doc(subjectPath)
+      .collection("chapter")
+      .doc(chapter)
+      .collection("tab")
+      .doc(tab_id)
+      .collection("lecture_item")
+      .doc(lecture_id)
+      .get()
+      .then((doc) => {
+        if (doc.exists) {
+          let _data = doc.data();
+
+          if (_data?.lecture_item_type === "video") {
+            return {
+              type: "video",
+              category: _data?.category_name,
+              chapter: _data?.chapter_name,
+              youtube: youTubeGetID(_data?.youtube_url),
+              notes: _data?.notes_link,
+              item: _data
+            };
+          } else if (_data?.lecture_item_type === "note") {
+            return {
+              type: "note",
+              category: _data?.category_name,
+              chapter: _data?.chapter_name,
+              notes: _data?.notes_link,
+              youtube: null,
+              item: _data
+            };
+          }
+        }
+
+        return null;
+      })
+      .catch((err) => console.log(err));
+  } else return null;
+};
+
+const fetchLectureHeaderItem = async ({
+                                        grade,
+                                        lecture_id,
+                                        parent_id,
+                                        chapter,
+                                        tab_id,
+                                      }) => {
+  const _category = chapter.split("_")[3];
+  const _subject = chapter.split("_")[4];
+  let subjectPath = `${grade}_learn_${_category}`;
+
+  if (_category !== "maths" && _category !== "mathematics") {
+    subjectPath = `${grade}_learn_${_category}_${_subject}`;
+  }
+
+  if (lecture_id && parent_id && chapter && tab_id) {
+    return await require('../../firebase-config').db
+      .collection("cms_data")
+      .doc(grade)
+      .collection("scope")
+      .doc(`${grade}_learn`)
+      .collection("category")
+      .doc(`${grade}_learn_${_category}`)
+      .collection("subject")
+      .doc(subjectPath)
+      .collection("chapter")
+      .doc(chapter)
+      .collection("tab")
+      .doc(tab_id)
+      .collection("lecture_item")
+      .doc(parent_id)
+      .collection("lecture_header_item")
+      .doc(lecture_id)
+      .get()
+      .then((doc) => {
+        if (doc.exists) {
+          let _data = doc.data();
+
+          if (_data?.lecture_header_item_type === "video") {
+            return {
+              type: "video",
+              category: _data?.category_name,
+              chapter: _data?.chapter_name,
+              youtube: youTubeGetID(_data?.youtube_url),
+              notes: _data?.notes_link,
+              item: _data
+            };
+          } else if (_data?.lecture_header_item_type === "note") {
+            return {
+              type: "note",
+              category: _data?.category_name,
+              chapter: _data?.chapter_name,
+              notes: _data?.notes_link,
+              youtube: null,
+              item: _data
+            };
+          }
+        }
+
+        return null;
+      });
+  } else return null;
+};
+
+const getChapterLastEngagementData = async ({
+                                              userId,
+                                              grade,
+                                              chapter_id,
+                                            }) => {
+  if (chapter_id) {
+    const category = chapter_id.split("_")[3];
+    const subject = chapter_id.split("_")[4];
+
+    let chapterPath = `${grade}_learn_${category}_${grade}_learn_${category}_${subject}`;
+
+    if (category === "maths") {
+      chapterPath = `${grade}_learn_${category}_${grade}_learn_${category}`;
+    }
+
+    return await require('../../firebase-config').db
+      .collection("user_engagement")
+      .doc(grade)
+      .collection(userId)
+      .doc(chapterPath)
+      .collection(chapter_id)
+      .doc("engagement_map")
+      .get()
+      .then((doc) => doc.data())
+      .catch((error) => console.error(error));
+  } else return null;
+};
 
 export const ClassroomContextProvider = (props) => {
   const [videoID, setVideoID] = useState(null);
@@ -365,6 +544,7 @@ export const ClassroomContextProvider = (props) => {
       };
     }
   };
+
 
   const chapterLastEngagementData = async () => {
     const data = await getChapterLastEngagementData({

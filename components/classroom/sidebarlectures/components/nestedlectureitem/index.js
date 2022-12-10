@@ -1,14 +1,14 @@
 import React, { useContext } from "react";
-import Lottie from "lottie-react-web";
+// import Lottie from "lottie-react-web";
+const List = dynamic(() => import('@material-ui/core/List'));
+const Icon = dynamic(() => import('@material-ui/core/Icon'));
+const ListItem = dynamic(() => import('@material-ui/core/ListItem'));
+const Collapse = dynamic(() => import('@material-ui/core/Collapse'));
+const ExpandLess = dynamic(() => import('@material-ui/icons/ExpandLess'));
+const ExpandMore = dynamic(() => import('@material-ui/icons/ExpandMore'));
+const ListItemIcon = dynamic(() => import('@material-ui/core/ListItemIcon'));
+const ListItemText = dynamic(() => import('@material-ui/core/ListItemText'));
 
-import List from "@material-ui/core/List";
-import Icon from "@material-ui/core/Icon";
-import ListItem from "@material-ui/core/ListItem";
-import Collapse from "@material-ui/core/Collapse";
-import ExpandLess from "@material-ui/icons/ExpandLess";
-import ExpandMore from "@material-ui/icons/ExpandMore";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import ListItemText from "@material-ui/core/ListItemText";
 
 import {
   ClassroomContext,
@@ -24,6 +24,7 @@ import {
   LockIcon as LockedIconImage,
 } from "../../../../../public/assets";
 import Image from "next/image";
+import dynamic from "next/dynamic";
 
 const CheckIcon = () => (
   <Icon>
@@ -210,10 +211,10 @@ export default function ClassroomNestedLectureItem({
                   </button>
                 ) : (
                   <h5 className="video__seeking__lottie">
-                    <Lottie
-                      options={{ animationData: videoPlaying, loop: true }}
-                      isPaused={!playing || videoSeeking}
-                    />
+                    {/*<Lottie*/}
+                    {/*  options={{ animationData: videoPlaying, loop: true }}*/}
+                    {/*  isPaused={!playing || videoSeeking}*/}
+                    {/*/>*/}
                   </h5>
                 )
               ) : (

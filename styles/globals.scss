@@ -2365,6 +2365,11 @@ small {
     height: 100%;
     position: relative;
 
+    iframe {
+      width: 100%;
+      height: 100%;
+    }
+
     @media only screen and (max-width: 980px) {
       flex: 0;
       width: 100%;
@@ -8009,5 +8014,62 @@ small {
   }
   100% {
     transform: rotate(270deg) translateY(-130px);
+  }
+}
+
+.tab_container {
+  display: flex;
+  color: white;
+  width: 100%;
+  padding-left: 10px;
+
+  .tab_item {
+    overflow: auto;
+    display: flex;
+    align-items: center;
+    padding: 10px 15px;
+    flex-shrink: 0;
+    flex-grow: 1;
+    margin: 6px 5px;
+    position: relative;
+
+    &:first-child {
+
+      &::before {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        height: 2px;
+        width: 100%;
+        z-index: 1;
+        background-color: red;
+      }
+    }
+
+    p {
+      white-space: nowrap;
+    }
+  }
+}
+
+
+.lecture_item {
+  display: flex;
+  align-items: center;
+  padding: 10px 15px;
+
+  svg {
+    //width: 15px;
+    zoom: .14;
+  }
+
+  p {
+    margin-left: 15px;
+  }
+
+  .expand_svg {
+    font-size: 10px;
   }
 }

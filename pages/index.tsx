@@ -1,21 +1,32 @@
 import Head from 'next/head'
 import Image from 'next/image'
-import React, {useContext, useEffect, useState} from 'react';
+import React, {useContext, useEffect, useLayoutEffect, useState} from 'react';
 import DesktopLanding from '../components/PustackLanding';
 import initialize from '../animations';
 // @ts-ignore
 // import {isMessagingSupported, messaging} from '../firebase-config';
 import logo from '../public/assets/images/logo.png'
 import {UserContext, ThemeContext} from '../context';
-import {
-  getCareMessageCount,
-  userImportantData,
-} from "../database";
 import {logOut} from "../services";
 import {defaultPic} from "../public/assets";
 
 const VAPIDKEY =
   "BBAS6jVsiEE86EtJvP9RGSkPt46szXb2Ao7pfUdOL0xhhDiiPGnzgwN3utpw_O6RFMbuxgui2d3F7W98jFB5ZWk";
+
+
+const getCareMessageCount = ({ userId, grade }) => {
+  return (require('../firebase-config')).db
+    .collection("user_notifications")
+    .doc(grade)
+    .collection("user_notifications")
+    .doc(userId);
+};
+
+const userImportantData = (userId) => {
+  // .then((doc) => doc.data().tier === "pro");
+
+  return (require('../firebase-config')).db.collection("users").doc(userId);
+};
 
 export default function Home() {
   const [isSliderOpen, setIsSliderOpen] = useState(false);

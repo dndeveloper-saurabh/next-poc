@@ -1,6 +1,11 @@
+// import React from 'react'
+// export default function BoardingFlow() {
+//   return <p>NIce one</p>
+// }
+
 import React, { useState, useMemo, useContext, useCallback, useEffect, useRef } from "react";
 import SwipeableViews from "react-swipeable-views";
-import {Apple, Facebook, Facebook2, Google, logoDark} from "../public/assets";
+import {Apple, Facebook, Facebook2, Google, logoDark, planet7, planet8, planet1_onboard, planet2_onboard, planet3_onboard} from "../public/assets";
 import snipperFirstFrame from "../public/assets/images/snippetFirstFrame.jpg";
 import PhoneInput from "react-phone-input-2";
 import ErrorOutlineIcon from "@material-ui/icons/ErrorOutline";
@@ -14,23 +19,15 @@ import phoneVerification from "../public/assets/onboarding/phone_verification.sv
 import phoneVerificationHand from "../public/assets/onboarding/phone_verification_hand.svg";
 import planetEarth from "../public/assets/onboarding/planet_earth.svg";
 import Timer from "react-compound-timer";
-import {
-  deleteUserFromDatabase,
-  getUserInfoById,
-  rewardProMembership,
-  uploadFinalUserInfo,
-  uploadUserInfo
-} from "../database";
 import astronaut from "../public/assets/onboarding/astronaut.json";
 import phone from "../public/assets/onboarding/phone.svg";
-import {ALREADY_EXIST_PHONE_LOGIN_CODE, loadingWrapper, showSnackbar} from "../helpers";
+import {ALREADY_EXIST_PHONE_LOGIN_CODE} from "../helpers";
 import {
   signIn, signInWithPhone, submit,
   submitPhoneNumberAuthCode
 } from "../services/auth";
 import phoneSocial from "../public/assets/onboarding/phone_social.svg";
-import {ALREADY_EXIST_EMAIL_LOGIN_CODE} from "../helpers/constants";
-import {getAvailableGrades} from "../database/home/fetcher";
+import {ALREADY_EXIST_EMAIL_LOGIN_CODE} from "../helpers";
 import comet from "../public/assets/onboarding/comet.svg";
 import gulu from "../public/assets/onboarding/gulu.svg";
 import mars from "../public/assets/onboarding/mars.svg";
@@ -45,7 +42,6 @@ import planet3 from "../public/assets/onboarding/planet_3.svg";
 import planet4 from "../public/assets/onboarding/planet_4.svg";
 import planet5 from "../public/assets/onboarding/planet_5.svg";
 import planet6 from "../public/assets/onboarding/planet_6.svg";
-import firebase from "firebase";
 import packageInfo from "../package.json";
 // import "../onboarding/style.scss";
 // import "../onboardingMobile/style.scss";
@@ -54,6 +50,7 @@ import Drawer from "@material-ui/core/Drawer";
 import {useRouter} from "next/router";
 import useAppleDevice from "../hooks/isAppleDevice";
 import Image from "next/image";
+import {castIndianTime} from '../helpers/getIndianTime'
 
 const useForceUpdate = () => {
   const [, setValue] = useState(0);
@@ -62,6 +59,245 @@ const useForceUpdate = () => {
 
 const phoneRouteSteps = ['login', 'otp', 'social', 'grade'];
 const emailRouteSteps = ['login', 'phone', 'otp', 'grade'];
+
+
+const uploadUserInfo = async (
+  userId,
+  name,
+  email = null,
+  avatarUrl,
+  isInstructor,
+  phoneNumber = null,
+  countryCode
+) => {
+  let time_now = await castIndianTime();
+
+  await require('../firebase-config').db
+    .collection("users")
+    .doc(userId)
+    .set({
+      app_rating: null,
+      app_rating_history: [],
+      email: email,
+      grade: null,
+      has_rated_app: false,
+      is_instructor: isInstructor,
+      name: name,
+      phone_country_code: countryCode,
+      phone_number: phoneNumber ? phoneNumber : null,
+      pro_expiration_date: null,
+      profile_url: avatarUrl,
+      role: isInstructor ? "PuStack Faculty" : "Student", //TODO change as required
+      sign_up_ts: +time_now,
+      tier: "free",
+      uid: userId,
+      source: "web " + version,
+    })
+    .then(() => console.log("done1"))
+    .catch((err) => console.log(err));
+
+  await require('../firebase-config').db
+    .collection("users")
+    .doc(userId)
+    .collection("meta")
+    .doc(userId)
+    .set({
+      name: name,
+      profile_url: avatarUrl,
+      role: isInstructor ? "PuStack Faculty" : "Student",
+    })
+    .then(() => console.log("done2"))
+    .catch((err) => console.log(err));
+
+  return +time_now;
+};
+
+const uploadFinalUserInfo = async (userId, userData) => {
+  let flag1 = false;
+  let flag2 = false;
+
+  await require('../firebase-config').db
+    .collection("users")
+    .doc(userId)
+    .set(userData, { merge: true })
+    .then(() => (flag1 = true))
+    .catch((er) => {
+      console.log(er);
+      flag1 = false;
+    });
+
+  await require('../firebase-config').db
+    .collection("users")
+    .doc(userId)
+    .collection("meta")
+    .doc(userId)
+    .set({
+      name: userData.name,
+      profile_url: userData.profile_url,
+      role: "Student",
+    })
+    .then(() => (flag2 = true))
+    .catch(() => (flag2 = false));
+
+  return flag1 && flag2;
+};
+
+const rewardProMembership = async (uid, days) => {
+  try {
+    const userDocRef = require('../firebase-config').db.collection("users").doc(uid);
+    const userDocQuery = await userDocRef.get();
+    const userData = userDocQuery.data();
+    const hasProPlan = userData["tier"] === "pro";
+
+    if (hasProPlan) {
+      const _proExpirationDate = userData["pro_expiration_date"];
+
+      return await userDocRef
+        .set(
+          {
+            pro_expiration_date: _proExpirationDate.toDate().addDays(days),
+          },
+          { merge: true }
+        )
+        .then(() => true)
+        .catch(() => false);
+    } else {
+      console.log("first time user");
+
+      let _proExpirationDate = new Date();
+      _proExpirationDate.setDate(_proExpirationDate.getDate() + 7);
+
+      return await userDocRef
+        .set(
+          {
+            tier: "pro",
+            pro_expiration_date: _proExpirationDate,
+          },
+          { merge: true }
+        )
+        .then(() => true)
+        .catch(() => false);
+    }
+  } catch (e) {
+    return "Error in rewardProMembership " + e;
+  }
+};
+
+const deleteUserFromDatabase = (userId) => {
+  require('../firebase-config').db.collection("users").doc(userId).delete();
+};
+
+
+export const getAvailableGrades = (reduced, excludeClass2) => {
+  // console.log('planet1 - ', planet1);
+
+  let grades = [
+    {grade: "Class 5", value: "class_5", planet: planet1_onboard},
+    {grade: "Class 6", value: "class_6", planet: planet2_onboard},
+    {grade: "Class 7", value: "class_7", planet: planet3_onboard},
+    {grade: "Class 8", value: "class_8", planet: planet4},
+    {grade: "Class 9", value: "class_9", planet: planet5, standard: true, enableToSelect: true},
+    {grade: "Class 10", value: "class_10", planet: planet6, standard: true, enableToSelect: true},
+    {grade: "Class 11", value: "class_11", planet: planet7, standard: true},
+    {grade: "Class 12", value: "class_12", planet: planet8, standard: true}
+  ];
+
+  if(!excludeClass2) grades.splice(0,0,
+    {grade: "Class 2", value: "class_2"},
+  )
+
+  // TODO: isProduction
+  // if(isProduction) {
+  //   grades = [
+  //     {grade: "Class 9", value: "class_9", planet: planet5, standard: true, enableToSelect: true},
+  //     {grade: "Class 10", value: "class_10", planet: planet6, standard: true, enableToSelect: true},
+  //   ]
+  // }
+
+  if(reduced) return grades.map(c => c.value);
+  return grades;
+
+  // let gradeCollection = 'grades_dev';
+  // // let gradeCollection = process.env.NODE_ENV === 'production' ? 'grades' : 'grades_dev';
+  // const snapshot = await db
+  //   .collection(gradeCollection)
+  //   .doc('available_grades')
+  //   .get();
+  //
+  // return snapshot.exists ? snapshot.data() : {};
+}
+
+const getUserInfoById = async (getUserId) => {
+  let name,
+    profile_url,
+    role,
+    email,
+    isInstructor,
+    sign_up_ts,
+    phone_number,
+    has_rated_app,
+    app_rating,
+    pro_expiration_date,
+    tier,
+    grade,
+    phone_country_code;
+
+  await require('../firebase-config').db
+    .collection("users")
+    .doc(getUserId)
+    .get()
+    .then(async (doc) => {
+      if (doc.exists) {
+        name = doc.data().name;
+        grade = doc.data().grade;
+        profile_url = doc.data().profile_url;
+        role = doc.data().role;
+        email = doc.data().email;
+        isInstructor = doc.data().is_instructor;
+        sign_up_ts = doc.data().sign_up_ts;
+        phone_number = doc.data().phone_number;
+        phone_country_code = doc.data().phone_country_code;
+        has_rated_app = doc.data().has_rated_app;
+        app_rating = doc.data().app_rating;
+        pro_expiration_date = doc.data().pro_expiration_date;
+        tier = doc.data().tier;
+      } else {
+        console.log("No user found");
+      }
+    })
+    .catch((er) => {
+      // console.log(er);
+      name = null;
+      grade = null;
+      profile_url = null;
+      role = null;
+      email = null;
+      isInstructor = null;
+      sign_up_ts = null;
+      phone_number = null;
+      phone_country_code = null;
+      has_rated_app = null;
+      app_rating = null;
+      pro_expiration_date = null;
+      tier = null;
+    });
+
+  return [
+    name,
+    profile_url,
+    role,
+    email,
+    isInstructor,
+    sign_up_ts,
+    phone_number,
+    has_rated_app,
+    app_rating,
+    pro_expiration_date,
+    tier,
+    grade,
+    phone_country_code,
+  ];
+};
 
 export default function OnBoardingFlow({setCloseInstallApp = () => {}, isOpen = true, handleClose = () => {}}) {
   const router = useRouter()
@@ -265,7 +501,7 @@ export default function OnBoardingFlow({setCloseInstallApp = () => {}, isOpen = 
     // }, 2000);
 
     if(!window.recaptchaVerifier && isOpen) {
-      window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier(
+      window.recaptchaVerifier = new (require('../firebase-config')).firebase.auth.RecaptchaVerifier(
         `recaptcha-container`,
         {
           size: "invisible",
@@ -439,7 +675,7 @@ export default function OnBoardingFlow({setCloseInstallApp = () => {}, isOpen = 
               setUser(data);
               setIsUserProTier(tier !== "free");
               setIsInstructor(is_instructor);
-              loadingWrapper();
+              // loadingWrapper();
               sendToUrl("/classroom?subject=physics&chapter=class_9_learn_science_physics_sound");
             }, 2000);
             return setTimeout(handleSliderClose, 1500);
@@ -717,7 +953,7 @@ export default function OnBoardingFlow({setCloseInstallApp = () => {}, isOpen = 
       }
 
       handleSliderClose();
-      setTimeout(() => loadingWrapper(), 1000);
+      // setTimeout(() => loadingWrapper(), 1000);
 
       setTimeout(() => {
         setUser(_user);
@@ -739,7 +975,7 @@ export default function OnBoardingFlow({setCloseInstallApp = () => {}, isOpen = 
 
       setTimeout(() => setOpenFreeTrial(true), 6000);
     } else {
-      showSnackbar("Some error occured, please try again", "error");
+      // showSnackbar("Some error occured, please try again", "error");
     }
   };
 

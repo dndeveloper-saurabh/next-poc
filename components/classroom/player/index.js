@@ -1,10 +1,26 @@
-import React, { Component } from "react";
-import Plyr from "plyr";
-import Lottie from "lottie-react-web";
+import React, {Component, useEffect, useRef} from "react";
+// import Plyr from "plyr";
+// import Lottie from "lottie-react-web";
 import { logoDark, nounBook, circularProgress } from "../../../public/assets";
 import Image from "next/image";
+import dynamic from "next/dynamic";
+const YouTube = dynamic(() => import('react-youtube'));
 
-export default class ClassroomPlayer extends Component {
+export default function ClassroomPlayer({video_id}) {
+
+  return (
+    <div className={"classroom-player-wrapper"}>
+      <YouTube
+        videoId={video_id || ''}
+        id={'video-preview'}
+        containerClassName={'video__wrapper'}
+        onReady={() => {}}
+      />
+    </div>
+  )
+}
+
+class ClassroomClassroomPlayerPlayer extends Component {
   intervalID = 0;
 
   constructor(props) {
@@ -262,9 +278,9 @@ export default class ClassroomPlayer extends Component {
               onClick={() => isSmallScreen && setVideoSeeking(false)}
             >
               <div className="lottie__progress">
-                <Lottie
-                  options={{ animationData: circularProgress, loop: true }}
-                />
+                {/*<Lottie*/}
+                {/*  options={{ animationData: circularProgress, loop: true }}*/}
+                {/*/>*/}
               </div>
               <div className="classroom__video__branding">
                 <Image src={nounBook} alt="pustack logo" draggable={false} />

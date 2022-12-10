@@ -3,27 +3,22 @@ import { useMediaQuery } from "react-responsive";
 import { usePageVisibility } from "react-page-visibility";
 import TopBarProgress from "react-topbar-progress-indicator";
 
-import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
-import PdfPreview from "../../components/pdf-preview/index";
+const ChevronLeftIcon = dynamic(() => import('@material-ui/icons/ChevronLeft'));
+
 
 import {
   ClassroomNavbar,
   ClassroomPlayer,
   ClassroomSidebar,
 } from "../../components";
-import {
-  getLectureItemsForChapter,
-  getUserDailyEngagement,
-  userEngagementChapterData,
-  userEngagementMapData,
-} from "../../database";
 import { ClassroomContext, UserContext } from "../../context";
 import { proLogoDark } from "../../public/assets";
 
-import {AppValidate} from "../../helpers";
 import {useRouter} from "next/router";
 import Link from "next/link";
 import Image from "next/image";
+import dynamic from "next/dynamic";
+import Plyr from "plyr-react";
 
 TopBarProgress.config({
   barColors: {
@@ -32,6 +27,159 @@ TopBarProgress.config({
   },
   shadowBlur: 5,
 });
+
+class AppValidate {
+
+  /**
+   *
+   * @param value
+   * @returns {boolean}
+   */
+  static isNotNull(value) {
+    return value !== null;
+  }
+
+  /**
+   *
+   * @param value
+   * @returns {boolean}
+   */
+  static isNotUndefined(value) {
+    return value !== undefined;
+  }
+
+  /**
+   *
+   * @param value
+   * @returns {boolean}
+   */
+  static isDefined(value) {
+    return Validate.isNotNull(value) && Validate.isNotUndefined(value)
+  }
+
+  /**
+   * @description It checks for the corresponding keys in the provided object that these are not null/undefined.
+   * @param obj {Object<keys>}
+   * @param keys {Array<string>}
+   * @returns {boolean}
+   */
+  static requiredAll(obj, keys) {
+    if(!obj) return false;
+    let isValid = true;
+    for(let key of keys) {
+      if(!Validate.isDefined(obj[key])) {
+        isValid = false;
+        break;
+      }
+    }
+    return isValid;
+  }
+}
+
+
+const userEngagementMapData = async ({ userId, grade, chapter_id }) => {
+  if (chapter_id) {
+    const category = chapter_id.split("_")[3];
+    const subject = chapter_id.split("_")[4];
+
+    let chapterPath = `${grade}_learn_${category}_${grade}_learn_${category}_${subject}`;
+
+    if (category === "maths") {
+      chapterPath = `${grade}_learn_${category}_${grade}_learn_${category}`;
+    }
+
+    return await (require('../../firebase-config')).db
+      .collection("user_engagement")
+      .doc(grade)
+      .collection(userId)
+      .doc(chapterPath)
+      .collection(chapter_id)
+      .doc("engagement_map")
+      .get()
+      .then((doc) => doc.data())
+      .catch((error) => console.log(error));
+  } else return null;
+};
+
+const userEngagementChapterData = async ({
+                                           userId,
+                                           grade,
+                                           chapter_id,
+                                         }) => {
+  if (chapter_id) {
+    const category = chapter_id.split("_")[3];
+    const subject = chapter_id.split("_")[4];
+
+    let chapterPath = `${grade}_learn_${category}_${grade}_learn_${category}_${subject}`;
+
+    if (category === "maths") {
+      chapterPath = `${grade}_learn_${category}_${grade}_learn_${category}`;
+    }
+
+    return await (require('../../firebase-config')).db
+      .collection("user_engagement")
+      .doc(grade)
+      .collection(userId)
+      .doc(chapterPath)
+      .get()
+      .then((doc) => doc.data())
+      .catch((error) => console.log(error));
+  } else return null;
+};
+
+const getUserDailyEngagement = async ({ grade, userId, yearMonth }) => {
+  return await (require('../../firebase-config')).db
+    .collection("user_engagement")
+    .doc("daily_engagement")
+    .collection(userId)
+    .doc(yearMonth)
+    .get()
+    .then((doc) => {
+      if (doc.exists) return doc.data();
+      else return null;
+    });
+};
+
+const getLectureItemsForChapter = async ({ grade, chapter_id }) => {
+  const _category = chapter_id.split("_")[3];
+  const _subject = chapter_id.split("_")[4];
+
+  let subjectPath = `${grade}_learn_${_category}`;
+
+  if (_category !== "maths" && _category !== "mathematics") {
+    subjectPath = `${grade}_learn_${_category}_${_subject}`;
+  }
+
+  return await (require('../../firebase-config')).db
+    .collection("cms_data")
+    .doc(grade)
+    .collection("scope")
+    .doc(`${grade}_learn`)
+    .collection("category")
+    .doc(`${grade}_learn_${_category}`)
+    .collection("subject")
+    .doc(subjectPath)
+    .collection("chapter")
+    .doc(chapter_id)
+    .get()
+    .then((doc) => {
+      if (doc.exists) {
+        let tabs = [];
+
+        let _tabs_map = doc.data()._meta;
+
+        _tabs_map.sort((a, b) => (a.serial_order > b.serial_order ? 1 : -1));
+
+        for (var i = 0; i < _tabs_map?.length; i++) {
+          tabs.push(_tabs_map[i]);
+        }
+
+        return [doc.data(), tabs];
+      }
+
+      return null;
+    });
+};
 
 const changeUserGrade = async (userId, grade) => {
   return await require('../../firebase-config').db
@@ -131,6 +279,7 @@ export default function AuthClassroom() {
   const [elapsedPercentage, setElapsedPercentage] = useState(0);
   const [lectureItem, setLectureItem] = useState(null);
   const [chapterData, setChapterData] = useState(null);
+  const [inBrowser, setInBrowser] = useState(false);
 
   const [linkGrade, setLinkGrade] = useState(null);
 
@@ -149,6 +298,12 @@ export default function AuthClassroom() {
 
 
   useEffect(() => {
+    console.log('classroomVideId, videoId - ', classroomVideoID, videoId);
+  }, [classroomVideoID, videoId]);
+
+  useEffect(() => {
+
+    setInBrowser(true);
     if(user && lectureItem1) {
       setLectureItem(lectureItem1);
     }
@@ -1050,7 +1205,7 @@ export default function AuthClassroom() {
       <div className="classroom__topbar">
         {videoSeeking && !showOnlyLogo && <TopBarProgress />}
       </div>
-      {!isMobileScreen && <ClassroomNavbar
+      {inBrowser && !isMobileScreen && <ClassroomNavbar
         title={classroomData?.chapter_name}
         chapterID={classroomChapter}
       />}
@@ -1063,24 +1218,34 @@ export default function AuthClassroom() {
           </div>
           {(classroomVideoID || videoId) ? (
             <>
-              <ClassroomPlayer
-                video_id={classroomVideoID ?? videoId}
-                playing={playing}
-                setPlaying={setPlaying}
-                nextItem={nextItem}
-                setActiveItem={setActiveItem}
-                setLectureTier={setLectureTier}
-                setVideoDuration={setVideoDuration}
-                setLastEngagement={setLastEngagement}
-                isUserProTier={isUserProTier}
-                videoSeeking={videoSeeking}
-                setVideoSeeking={setVideoSeeking}
-                isSmallScreen={isSmallScreen}
-                isTabletScreen={isTabletScreen}
-                setAutoPlay={setAutoPlay}
-                showOnlyLogo={showOnlyLogo}
-                isLoggedOutUser={Boolean(user)}
-              />
+              <div className={"classroom-player-wrapper"}>
+                <Plyr
+                  source={{
+                    type: "video",
+                    // @ts-ignore
+                    sources: [{ src: classroomVideoID ?? videoId, provider: 'youtube' }],
+                  }}
+                  autoPlay={true}
+                />
+              </div>
+              {/*<ClassroomPlayer*/}
+              {/*  video_id={classroomVideoID ?? videoId}*/}
+              {/*  playing={playing}*/}
+              {/*  setPlaying={setPlaying}*/}
+              {/*  nextItem={nextItem}*/}
+              {/*  setActiveItem={setActiveItem}*/}
+              {/*  setLectureTier={setLectureTier}*/}
+              {/*  setVideoDuration={setVideoDuration}*/}
+              {/*  setLastEngagement={setLastEngagement}*/}
+              {/*  isUserProTier={isUserProTier}*/}
+              {/*  videoSeeking={videoSeeking}*/}
+              {/*  setVideoSeeking={setVideoSeeking}*/}
+              {/*  isSmallScreen={inBrowser && isSmallScreen}*/}
+              {/*  isTabletScreen={inBrowser && isTabletScreen}*/}
+              {/*  setAutoPlay={setAutoPlay}*/}
+              {/*  showOnlyLogo={showOnlyLogo}*/}
+              {/*  isLoggedOutUser={Boolean(user)}*/}
+              {/*/>*/}
             </>
           ) : (
             <div className="classroom-player-wrapper">
@@ -1129,14 +1294,14 @@ export default function AuthClassroom() {
           isLoggedOutUser={!user}
         />
 
-        {isNotes && (
-          <PdfPreview
-            pdf={classroomNotes}
-            onClose={() => {
-              setIsNotes(false);
-            }}
-          />
-        )}
+        {/*{isNotes && (*/}
+        {/*  <PdfPreview*/}
+        {/*    pdf={classroomNotes}*/}
+        {/*    onClose={() => {*/}
+        {/*      setIsNotes(false);*/}
+        {/*    }}*/}
+        {/*  />*/}
+        {/*)}*/}
       </div>
     </div>
   );

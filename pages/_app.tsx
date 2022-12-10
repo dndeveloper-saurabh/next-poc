@@ -1,6 +1,7 @@
 import '../styles/globals.scss'
 import '../components/style.css'
 import "react-circular-progressbar/dist/styles.css";
+import "plyr-react/plyr.css";
 import "react-phone-input-2/lib/style.css";
 import type { AppProps } from 'next/app';
 import {

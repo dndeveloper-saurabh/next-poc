@@ -1,5 +1,4 @@
 import { deleteUserFromDatabase } from "../../database";
-import firebase from "firebase/app";
 import {
   db,
   auth,
@@ -439,7 +438,7 @@ export const submitPhoneNumberAuthCode = async (
   if (updatePhone) {
     return auth.currentUser
       .updatePhoneNumber(
-        firebase.auth.PhoneAuthProvider.credential(
+        require('../../firebase-config').firebase.auth.PhoneAuthProvider.credential(
           otpConfirm.verificationId,
           code
         )
@@ -451,7 +450,7 @@ export const submitPhoneNumberAuthCode = async (
       });
   }
 
-  const credential = firebase.auth.PhoneAuthProvider.credential(
+  const credential = require('../../firebase-config').firebase.auth.PhoneAuthProvider.credential(
     otpConfirm.verificationId,
     code
   );

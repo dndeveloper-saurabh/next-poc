@@ -35,12 +35,12 @@ let ist = {
    * @deprecated
    * @returns {boolean}
    */
-  isExpired: function () {
+  isExpired: function() {
     let ts_now = new Date().getTime();
     return !this.timestamp || !this.updated_ts || (this.updated_ts + this.expiration_ts) < ts_now;
   },
-  fetch: async function () {
-    if (this.interval_id) clearInterval(this.interval_id);
+  fetch: async function() {
+    if(this.interval_id) clearInterval(this.interval_id);
     this.interval_id = setInterval(() => {
       this.interval_count++;
     }, this.INTERVAL_MS)
@@ -63,19 +63,19 @@ let ist = {
     const date = new Date(data.timestamp);
     this.on_first_load = +date;
   },
-  get: async function () {
-    if (!this.on_first_load) await this.fetch();
+  get: async function() {
+    if(!this.on_first_load) await this.fetch();
     /**
      * Fetching on another condition where the on_first_load is more than 15 minutes old.
      */
-    if (this.interval_count * this.INTERVAL_MS > 15 * 60 * 1000) await this.fetch();
+    if(this.interval_count * this.INTERVAL_MS > 15 * 60 * 1000) await this.fetch();
     return this.on_first_load + (this.interval_count * this.INTERVAL_MS);
   },
   /**
    * @deprecated
    * @param timestamp
    */
-  update: function (timestamp) {
+  update: function(timestamp) {
     this.updated_ts = new Date().getTime();
     this.timestamp = timestamp;
   }
@@ -103,7 +103,7 @@ export async function castIndianTime() {
  * @deprecated
  */
 export async function fetchIndianTime(signal = null, refreshed = false) {
-  if (!ist.isExpired() && !refreshed) {
+  if(!ist.isExpired() && !refreshed) {
     const nd = new Date(ist.timestamp);
 
     nd.date = nd.getDate();

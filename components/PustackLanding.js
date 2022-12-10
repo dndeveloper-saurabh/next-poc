@@ -3,23 +3,14 @@ import Image from 'next/image';
 import Typewriter from "typewriter-effect";
 import {appLive, appDoubts} from "../public/assets";
 import logowhite from "../public/assets/images/logo-white.png";
-import firstFrame from '../public/assets/images/snippetFirstFrame.jpg';
-import initialize from "../animations";
 import OnBoardingFlow from '../containers/boardingFlow';
 
 import iPhone2 from "../public/assets/images/landing/iPhone2.png"
 
-import {
-  termsOfService,
-  privacyPolicy,
-  appGooglePlayLink,
-  googlePlayBadge,
-} from "../helpers";
 
 
 // import {useHistory, useLocation} from "react-router-dom";
 // import OnBoardingFlow from "../boardingFlow";
-import {appAppleLink} from "../helpers/constants";
 // import PustackFooter from "../../../components/global/pustack-footer";
 
 export default function DesktopLanding({isSliderOpen, setIsSliderOpen}) {

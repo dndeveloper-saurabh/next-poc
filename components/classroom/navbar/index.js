@@ -5,8 +5,8 @@ import {
   CircularProgressbarWithChildren,
   buildStyles,
 } from "react-circular-progressbar";
-import Tooltip from "@material-ui/core/Tooltip";
-import { makeStyles } from "@material-ui/core/styles";
+// import Tooltip from "@material-ui/core/Tooltip";
+// import { makeStyles } from "@material-ui/core/styles";
 
 import {UserContext, ClassroomContext} from "../../../context";
 import { logoDark, proLogoDark } from "../../../public/assets";
@@ -15,19 +15,19 @@ import Image from "next/image";
 import {useRouter} from "next/router";
 // import OnBoarding from "../../../containers/landing/onboarding";
 
-const useStylesBootstrap = makeStyles((theme) => ({
-  arrow: {
-    color: theme.palette.common.black,
-  },
-  tooltip: {
-    backgroundColor: "rgba(0,0,0,0.65)",
-    color: "rgba(255,255,255,1)",
-    fontWeight: 400,
-    fontSize: theme.typography.pxToRem(12.5),
-    padding: ".35rem .75rem",
-    borderRadius: "8px",
-  },
-}));
+// const useStylesBootstrap = makeStyles((theme) => ({
+//   arrow: {
+//     color: theme.palette.common.black,
+//   },
+//   tooltip: {
+//     backgroundColor: "rgba(0,0,0,0.65)",
+//     color: "rgba(255,255,255,1)",
+//     fontWeight: 400,
+//     fontSize: theme.typography.pxToRem(12.5),
+//     padding: ".35rem .75rem",
+//     borderRadius: "8px",
+//   },
+// }));
 
 export default function ClassroomNavbar({ title, chapterID }) {
   const [chapterEngagement] = useContext(ClassroomContext).chapterEngagement;
@@ -40,7 +40,7 @@ export default function ClassroomNavbar({ title, chapterID }) {
   const [trailColor, setTrailColor] = useState("rgba(255,255,255,0.25)");
   const [user] = useContext(UserContext).user;
 
-  const tooltipClasses = useStylesBootstrap();
+  // const tooltipClasses = useStylesBootstrap();
 
   useEffect(() => {
     const totalLectures =
@@ -129,13 +129,7 @@ export default function ClassroomNavbar({ title, chapterID }) {
           </span>
         </div> :
 
-        <Tooltip
-          title={`${Math.round(progressValue)}% completed`}
-          classes={tooltipClasses}
-          placement={"bottom"}
-          enterTouchDelay={0}
-        >
-          <div className="classroom__progress">
+        <div className="classroom__progress">
             <CircularProgressbarWithChildren
               value={progressValue}
               styles={progressBarStyles}
@@ -150,8 +144,32 @@ export default function ClassroomNavbar({ title, chapterID }) {
                 style={{color: pathColor}}
               ></i>
             </CircularProgressbarWithChildren>
-          </div>
-        </Tooltip>}
+          </div>}
     </div>
   );
 }
+
+
+// <Tooltip
+//   title={`${Math.round(progressValue)}% completed`}
+//   classes={tooltipClasses}
+//   placement={"bottom"}
+//   enterTouchDelay={0}
+// >
+//   <div className="classroom__progress">
+//     <CircularProgressbarWithChildren
+//       value={progressValue}
+//       styles={progressBarStyles}
+//       strokeWidth={7}
+//     >
+//       <i
+//         className={
+//           progressValue > 90
+//             ? "fas fa-trophy cup__golden"
+//             : "fas fa-trophy"
+//         }
+//         style={{color: pathColor}}
+//       ></i>
+//     </CircularProgressbarWithChildren>
+//   </div>
+// </Tooltip>

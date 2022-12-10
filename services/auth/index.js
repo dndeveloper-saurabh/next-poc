@@ -1,8 +1,10 @@
-import { deleteUserFromDatabase } from "../../database";
-import firebase from "firebase/app";
-import {castIndianTime} from "../../helpers";
+import {castIndianTime} from "../../helpers/getIndianTime";
 
 const PROVIDER_NOT_SUPPORTED_MSG = 'The auth provider is not supported. Please contact pustack administrator.'
+
+const deleteUserFromDatabase = (userId) => {
+  require('../../firebase-config').db.collection("users").doc(userId).delete();
+};
 
 export const deleteUserFn = (uid) => {
   const deleteUser = require('../../firebase-config').functions.httpsCallable('deleteUser');
@@ -292,7 +294,7 @@ export const submitPhoneNumberAuthCode = async (
   if (updatePhone) {
     return require('../../firebase-config').auth.currentUser
       .updatePhoneNumber(
-        firebase.auth.PhoneAuthProvider.credential(
+        require('../../firebase-config').firebase.auth.PhoneAuthProvider.credential(
           otpConfirm.verificationId,
           code
         )
@@ -342,7 +344,7 @@ export const submitPhoneNumberAuthCode = async (
 
       if(!snapshot.exists && prevUser && prevUser !== result.user){
 
-        const credential = firebase.auth.PhoneAuthProvider.credential(
+        const credential = require('../../firebase-config').firebase.auth.PhoneAuthProvider.credential(
           otpConfirm.verificationId,
           code
         );

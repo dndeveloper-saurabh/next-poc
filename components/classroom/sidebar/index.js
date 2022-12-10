@@ -1,7 +1,8 @@
 import React, {useState, useContext, useEffect, useMemo} from "react";
-import Tab from "@material-ui/core/Tab";
-import Tabs from "@material-ui/core/Tabs";
-import SwipeableViews from "react-swipeable-views";
+import dynamic from 'next/dynamic';
+const Tab = dynamic(() => import('@material-ui/core/Tab'));
+const Tabs = dynamic(() => import('@material-ui/core/Tabs'));
+const SwipeableViews = dynamic(() => import('react-swipeable-views'));
 
 import { ClassroomSidebarLectures } from "../../index";
 import { ClassroomContext } from "../../../context";

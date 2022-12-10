@@ -1,13 +1,13 @@
 import React, { useContext, useState, useEffect } from "react";
-import Lottie from "lottie-react-web";
+// import Lottie from "lottie-react-web";
 import Image from "next/image";
 
-import List from "@material-ui/core/List";
-import Icon from "@material-ui/core/Icon";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import ListItemText from "@material-ui/core/ListItemText";
-import ClassroomNestedLectureItem from "./components/nestedlectureitem";
+const List = dynamic(() => import('@material-ui/core/List'));
+const Icon = dynamic(() => import('@material-ui/core/Icon'));
+const ListItem = dynamic(() => import('@material-ui/core/ListItem'));
+const ListItemIcon = dynamic(() => import('@material-ui/core/ListItemIcon'));
+const ListItemText = dynamic(() => import('@material-ui/core/ListItemText'));
+const ClassroomNestedLectureItem = dynamic(() => import('./components/nestedlectureitem'));
 
 import {
   ClassroomContext,
@@ -22,6 +22,7 @@ import {
   videoPlaying,
   NotesSVG,
 } from "../../../public/assets";
+import dynamic from "next/dynamic";
 
 const CheckIcon = () => (
   <Icon>
@@ -218,19 +219,19 @@ export default function ClassroomSidebarLectures({
                     </button>
                   ) : (
                     <h5 className="video__seeking__lottie">
-                      <Lottie
-                        options={{ animationData: videoPlaying, loop: true }}
-                        isPaused={!playing || videoSeeking}
-                      />
+                      {/*<Lottie*/}
+                      {/*  options={{ animationData: videoPlaying, loop: true }}*/}
+                      {/*  isPaused={!playing || videoSeeking}*/}
+                      {/*/>*/}
                     </h5>
                   )
                 ) : (
                   item?.lecture_item_id === activeLecture?.item && (
                     <h5 className="video__seeking__lottie">
-                      <Lottie
-                        options={{ animationData: videoPlaying, loop: true }}
-                        isPaused={!playing || videoSeeking}
-                      />
+                      {/*<Lottie*/}
+                      {/*  options={{ animationData: videoPlaying, loop: true }}*/}
+                      {/*  isPaused={!playing || videoSeeking}*/}
+                      {/*/>*/}
                     </h5>
                   )
                 )}
