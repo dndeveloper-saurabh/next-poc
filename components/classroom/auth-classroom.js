@@ -1,24 +1,21 @@
 import React, { useEffect, useContext, useState, useRef, useMemo } from "react";
 import { useMediaQuery } from "react-responsive";
 import { usePageVisibility } from "react-page-visibility";
+import dynamic from 'next/dynamic';
 import TopBarProgress from "react-topbar-progress-indicator";
 
 const ChevronLeftIcon = dynamic(() => import('@material-ui/icons/ChevronLeft'));
 
 
-import {
-  ClassroomNavbar,
-  ClassroomPlayer,
-  ClassroomSidebar,
-} from "../../components";
 import { ClassroomContext, UserContext } from "../../context";
 import { proLogoDark } from "../../public/assets";
 
 import {useRouter} from "next/router";
 import Link from "next/link";
 import Image from "next/image";
-import dynamic from "next/dynamic";
-import Plyr from "plyr-react";
+const Plyr = dynamic(() => import('plyr-react'));
+const ClassroomNavbar = dynamic(() => import('../../components/classroom/navbar'));
+const ClassroomSidebar = dynamic(() => import('../../components/classroom/sidebar'));
 
 TopBarProgress.config({
   barColors: {

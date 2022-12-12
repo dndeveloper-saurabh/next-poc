@@ -1,4 +1,4 @@
-import React, {useCallback, useEffect, useRef, useState} from 'react';
+import React, {useState} from 'react';
 // const Tab = dynamic(() => import('@material-ui/core/Tab'));
 // const Tabs = dynamic(() => import('@material-ui/core/Tabs'));
 // const SwipeableViews = dynamic(() => import('react-swipeable-views'));
@@ -8,8 +8,6 @@ import Head from 'next/head';
 import Link from 'next/link';
 import Image from 'next/image';
 import { logoDark } from "../public/assets";
-// import dynamic from 'next/dynamic';
-// const ClassroomPlayer = dynamic(() => import("../components/classroom/player"));
 // const Plyr = dynamic(() => import('plyr-react'));
 
 const getYoutubeThumbnailUrls = (videoId: string) => {
@@ -746,7 +744,7 @@ export default function NoAuthClassRoomPage({lectureItem, chapterItem, youtubeId
 			<Head>
 				<title>{lectureItem.chapter_name + " | PuStack"}</title>
 				<meta name="keywords" content={`${lectureItem.chapter_name}, ${tags}, pustack, classroom, lectures`} />
-				<meta name="description" content={"At PuStack we believe that it is our responsibility to build quality tools and generate flawless content to help students globally."} />
+				<meta name="description" content={lectureItem.image_content} />
 				<script
 					type="application/ld+json"
 					dangerouslySetInnerHTML={{__html: JSON.stringify({
@@ -755,7 +753,7 @@ export default function NoAuthClassRoomPage({lectureItem, chapterItem, youtubeId
 							contentUrl: 'https://www.youtube.com/watch?v=' + youtubeId,
 							name: lectureItem.lecture_header_item_name ?? lectureItem.lecture_item_name,
 							thumbnailUrl: getYoutubeThumbnailUrls(youtubeId),
-							description: "Chapter is well explained by Pustack Experts.",
+							description: lectureItem.image_content,
 							learningResourceType: 'Lecture',
 							educationalLevel: lectureItem.grade_name,
 							uploadDate: new Date(2018, 10, 10).toISOString()
