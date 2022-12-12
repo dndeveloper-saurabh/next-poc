@@ -7,6 +7,7 @@ import dynamic from "next/dynamic";
 const YouTube = dynamic(() => import('react-youtube'));
 
 export default function ClassroomPlayer({video_id}) {
+  console.log('video_id - ', video_id);
 
   return (
     <div className={"classroom-player-wrapper"}>

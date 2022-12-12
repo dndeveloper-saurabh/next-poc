@@ -1203,7 +1203,7 @@ export default function AuthClassroom() {
   return (
     <div className="classroom__screen__wrapper">
       <div className="classroom__topbar">
-        {videoSeeking && !showOnlyLogo && <TopBarProgress />}
+        {/*{videoSeeking && !showOnlyLogo && <TopBarProgress />}*/}
       </div>
       {inBrowser && !isMobileScreen && <ClassroomNavbar
         title={classroomData?.chapter_name}
@@ -1216,14 +1216,13 @@ export default function AuthClassroom() {
               <ChevronLeftIcon /> <span>Back to Library</span>
             </Link>
           </div>
-          {(classroomVideoID || videoId) ? (
+          {(classroomVideoID) ? (
             <>
               <div className={"classroom-player-wrapper"}>
                 <Plyr
                   source={{
                     type: "video",
-                    // @ts-ignore
-                    sources: [{ src: classroomVideoID ?? videoId, provider: 'youtube' }],
+                    sources: [{ src: classroomVideoID, provider: 'youtube' }],
                   }}
                   autoPlay={true}
                 />

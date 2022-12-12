@@ -676,7 +676,7 @@ export default function OnBoardingFlow({setCloseInstallApp = () => {}, isOpen = 
               setIsUserProTier(tier !== "free");
               setIsInstructor(is_instructor);
               // loadingWrapper();
-              sendToUrl("/classroom?subject=physics&chapter=class_9_learn_science_physics_sound");
+              sendToUrl("/auth_classroom?subject=physics&chapter=class_9_learn_science_physics_sound");
             }, 2000);
             return setTimeout(handleSliderClose, 1500);
           }
@@ -970,7 +970,7 @@ export default function OnBoardingFlow({setCloseInstallApp = () => {}, isOpen = 
         );
         localStorage.setItem("isInstructor", JSON.stringify(false));
         localStorage.setItem("isUserPro", JSON.stringify(false));
-        sendToUrl("/classroom?subject=physics&chapter=class_9_learn_science_physics_sound");
+        sendToUrl("/auth_classroom?subject=physics&chapter=class_9_learn_science_physics_sound");
       }, 2000);
 
       setTimeout(() => setOpenFreeTrial(true), 6000);
