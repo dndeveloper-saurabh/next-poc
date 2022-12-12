@@ -2663,6 +2663,7 @@ small {
 
 .classroom__screen {
   margin-top: var(--header-height);
+  max-height: calc(100vh - var(--header-height));
 
   display: flex;
   width: 100%;
@@ -2681,6 +2682,9 @@ small {
     background: #161616;
     height: 100%;
     position: relative;
+    display: flex;
+    flex-direction: column;
+    max-height: calc(100vh - var(--header-height));
 
     @media only screen and (max-width: 980px) {
       flex: 0;
@@ -8054,6 +8058,39 @@ small {
   }
 }
 
+.classroom_text-content {
+  padding: 10px 14px;
+  margin: 20px;
+  border-radius: 8px;
+  overflow: auto;
+  background-color: rgba(58, 58, 58, 0.91);
+
+  p {
+    color: #d0d0d0;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.5;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    line-clamp: 4;
+    -webkit-box-orient: vertical;
+
+    &.expanded {
+      -webkit-line-clamp: unset;
+      line-clamp: unset;
+    }
+  }
+
+  button {
+    padding: 0;
+    font-size: 12px;
+    margin: 10px 2.5px 0;
+    color: #b9b9b9;
+    cursor: pointer;
+  }
+}
 
 .lecture_item {
   display: flex;

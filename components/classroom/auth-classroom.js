@@ -1222,6 +1222,7 @@ export default function AuthClassroom() {
                 <Plyr
                   source={{
                     type: "video",
+                    // @ts-ignore
                     sources: [{ src: classroomVideoID, provider: 'youtube' }],
                   }}
                   autoPlay={true}

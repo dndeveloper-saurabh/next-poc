@@ -37,7 +37,7 @@ const getReferenceOfTheLectureItemById = async (id: string): Promise<FirebaseFir
 	let response = await getReferenceOfTheChapterById(id);
 	if(!response) return null;
 	let {ref, skippable} = response;
-	for(let i = 4; i < steps.length; i++) {
+	for(let i = 4; i < items.length; i++) {
 		let itemId = grade + '_' + items.slice(0, i+1).join('_');
 		if(skippable) {
 			itemId = grade + '_' + items.slice(0, i).join('_');
@@ -733,47 +733,19 @@ const data = [
 
 export default function NoAuthClassRoomPage({lectureItem, chapterItem, youtubeId}) {
 
-	const onRefChange = useCallback(node => {
-		console.log('node - ', node);
-		if (node === null) {
-			// DOM node referenced by ref has been unmounted
+	const tags = lectureItem.generated_tags.reduce((acc, curr, ind) => {
+		acc += curr;
 
+		if(ind !== lectureItem.generated_tags.length - 1) acc += ', '
 
-			// if(ref.current.plyr && ref.current.plyr.play) {
-			// 	console.log('ref-current - ', ref.current.plyr);
-			// 	// ref.current.plyr.play();
-			// }
-		} else {
-			// DOM node referenced by ref has changed and exists
-			// if(node.plyr && node.plyr.on) {
-			// 	node.plyr.on('ready', (a) => {
-			// 		// console.log('ready = ', a.detail.plyr.play());
-			// 		// node.plyr.play();
-			// 		setTimeout(() => {
-			// 			a.detail.plyr.play();
-			// 		}, 1000)
-			// 	})
-			// 	node.plyr.on('statechange', (a) => {
-			// 		console.log('change status - ', a);
-			// 		// if(a.detail.code !== 1) a.detail.plyr.play();
-			// 	})
-			// 	node.plyr.on('canplay', () => {
-			// 		console.log('canplay = ');
-			// 		// node.plyr.play();
-			// 	})
-			// 	node.plyr.on('loadeddata', () => {
-			// 		console.log('loadeddata = ');
-			// 		// node.plyr.play();
-			// 	})
-			// }
-		}
-	}, []); // adjust deps
+		return acc
+	}, '');
 
 	return (
 		<div className="classroom__screen__wrapper">
 			<Head>
 				<title>{lectureItem.chapter_name + " | PuStack"}</title>
-				<meta name="keywords" content={`${lectureItem.chapter_name}, pustack, classroom, lectures`} />
+				<meta name="keywords" content={`${lectureItem.chapter_name}, ${tags}, pustack, classroom, lectures`} />
 				<meta name="description" content={"At PuStack we believe that it is our responsibility to build quality tools and generate flawless content to help students globally."} />
 				<script
 					type="application/ld+json"
@@ -825,17 +797,16 @@ export default function NoAuthClassRoomPage({lectureItem, chapterItem, youtubeId
 								// @ts-ignore
 								sources: [{ src: youtubeId, provider: 'youtube' }],
 							}}
-							ref={onRefChange}
-							// autoPlay={true}
 						/>
 					</div>
 					<div className="classroom__breadcrumb">
 						<h1>{lectureItem.lecture_header_item_name ? (lectureItem.lecture_header_item_name + ' | ' + lectureItem.lecture_item_name) : lectureItem.lecture_item_name } | {lectureItem.chapter_name}</h1>
 	          <p>{chapterItem?.description ?? ''}</p>
           </div>
+					{lectureItem.image_content && <DescriptionContent content={lectureItem.image_content}/>}
 				</div>
 				<div className="classroom__sidebar dark" data-nosnippet="">
-					<div className={"tab_container"} style={{filter: 'blur(0px)', pointerEvents: 'none'}}>
+					<div className={"tab_container"} style={{filter: 'blur(8px)', pointerEvents: 'none'}}>
 						{data !== null &&
 							data?.map((tab, index) => (
 								<div className="tab_item" key={tab.tab_id}>
@@ -844,7 +815,7 @@ export default function NoAuthClassRoomPage({lectureItem, chapterItem, youtubeId
 							))}
 					</div>
 
-					<div className="classroom__tabs__wrapper" style={{filter: 'blur(0px)', pointerEvents: 'none'}}>
+					<div className="classroom__tabs__wrapper" style={{filter: 'blur(8px)', pointerEvents: 'none'}}>
 						{data !== null && (
 							data[0].lecture_items?.map((tab, index) => (
 								<div className={"lecture_item"} key={tab?.lecture_item_id}>
@@ -859,4 +830,17 @@ export default function NoAuthClassRoomPage({lectureItem, chapterItem, youtubeId
 		</div>
 	)
 
+}
+
+function DescriptionContent({content}) {
+	const [isExpand, setIsExpand] = useState(false);
+
+	return (
+		<div className="classroom_text-content">
+			<p className={isExpand ? 'expanded' : ''}>
+				{content}
+			</p>
+			<button onClick={() => setIsExpand(c => !c)}>{isExpand ? 'Show less' : 'Show more'}</button>
+		</div>
+	)
 }
