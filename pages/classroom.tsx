@@ -107,15 +107,15 @@ export async function getServerSideProps(context: { query: { item_id: any; }; })
 	// firebaseAdmin.firestore().doc()
 
 	const lectureItemRef = await getReferenceOfTheLectureItemById(itemId);
-	const chapterRef = await getReferenceOfTheChapterById(itemId);
+	// const chapterRef = await getReferenceOfTheChapterById(itemId);
 
-	if(!chapterRef) return {props: {error: "Unable to get chapter reference"}};
+	// if(!chapterRef) return {props: {error: "Unable to get chapter reference"}};
 	if(!lectureItemRef) return {props: {error: "Unable to get lectureItem reference"}};
 
 	console.log('lectureItemRef - ', lectureItemRef.path);
 
 	// Get chapter item
-	const chapterItem = (await chapterRef.ref.get()).data();
+	// const chapterItem = (await chapterRef.ref.get()).data();
 
 	// Get lecture item
 	const lectureItem = (await lectureItemRef.get()).data();
@@ -133,7 +133,7 @@ export async function getServerSideProps(context: { query: { item_id: any; }; })
 
 
 	// Pass data to the page via props
-	return { props: { chapterItem, lectureItem, youtubeId } }
+	return { props: { chapterItem: {}, lectureItem, youtubeId } }
 }
 
 const CheckIconImage = (
@@ -802,7 +802,7 @@ export default function NoAuthClassRoomPage({lectureItem, chapterItem, youtubeId
 					</div>
 					<div className="classroom__breadcrumb">
 						<h1>{lectureItem.lecture_header_item_name ? (lectureItem.lecture_header_item_name + ' | ' + lectureItem.lecture_item_name) : lectureItem.lecture_item_name } | {lectureItem.chapter_name}</h1>
-	          <p>{chapterItem?.description ?? ''}</p>
+	          {/*<p>{chapterItem?.description ?? ''}</p>*/}
           </div>
 					{lectureItem.image_content && <DescriptionContent content={lectureItem.image_content}/>}
 				</div>
