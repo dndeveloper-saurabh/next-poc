@@ -35,7 +35,8 @@ const getReferenceOfTheLectureItemById = async (id: string): Promise<FirebaseFir
 	let response = await getReferenceOfTheChapterById(id);
 	if(!response) return null;
 	let {ref, skippable} = response;
-	for(let i = 4; i < items.length; i++) {
+	const length = skippable ? items.length + 1 : items.length;
+	for(let i = 4; i < length; i++) {
 		let itemId = grade + '_' + items.slice(0, i+1).join('_');
 		if(skippable) {
 			itemId = grade + '_' + items.slice(0, i).join('_');
@@ -110,6 +111,8 @@ export async function getServerSideProps(context: { query: { item_id: any; }; })
 
 	if(!chapterRef) return {props: {error: "Unable to get chapter reference"}};
 	if(!lectureItemRef) return {props: {error: "Unable to get lectureItem reference"}};
+
+	console.log('lectureItemRef - ', lectureItemRef.path);
 
 	// Get chapter item
 	const chapterItem = (await chapterRef.ref.get()).data();
