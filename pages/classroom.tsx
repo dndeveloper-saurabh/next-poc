@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 // const Tab = dynamic(() => import('@material-ui/core/Tab'));
 // const Tabs = dynamic(() => import('@material-ui/core/Tabs'));
 // const SwipeableViews = dynamic(() => import('react-swipeable-views'));
@@ -8,6 +8,7 @@ import Head from 'next/head';
 import Link from 'next/link';
 import Image from 'next/image';
 import { logoDark } from "../public/assets";
+import {NextPageContext} from 'next';
 // const Plyr = dynamic(() => import('plyr-react'));
 
 const getYoutubeThumbnailUrls = (videoId: string) => {
@@ -92,48 +93,77 @@ const getReferenceOfTheChapterById = async (id: string): Promise<{ref: FirebaseF
 	return {ref, skippable};
 }
 
-export async function getServerSideProps(context: { query: { item_id: any; }; }) {
+// const getCookie = (cookieString: string, cookieName: string): string | null | undefined => {
+// 	let arr = cookieString.split("=")
+// 	let ind = arr.findIndex(c => c.includes(cookieName));
+// 	if(ind < 0) return null;
+// 	return arr[ind + 1];
+// }
+
+export async function getServerSideProps(context: NextPageContext ) {
 	// Fetch data from external API
 	// const res = await fetch(`https://.../data`)
 	// const data = await res.json()
 
 	const itemId = context.query.item_id;
 	// return {props: {isUser: true}}
+	//
+	// const cookie = context.req.headers.cookie;
+	//
+	// const tokenValue = getCookie(cookie, 'fsToken');
+	//
+	// console.log('tokenValue - ', tokenValue);
 
-	if(!itemId) {
-		return {props: {isUser: true}}
-	}
+	// if(tokenValue) {
+		try {
+			// const headers: HeadersInit = {
+			// 	'Content-Type': 'application/json',
+			// 	'Authorization': JSON.stringify({ token: tokenValue })
+			// };
+			//
+			// const protocol = context.req.headers['x-forwarded-proto'] || 'http'
+			// const baseUrl = context.req ? `${protocol}://${context.req.headers.host}` : ''
+			//
+			// const result = await fetch(baseUrl + '/api/validate', { headers });
+			// // return { props: {...result} };
+			// const json = await result.json();
 
-	// firebaseAdmin.firestore().doc()
+			if(!itemId) {
+				return {props: {isUser: true}}
+			}
 
-	const lectureItemRef = await getReferenceOfTheLectureItemById(itemId);
-	// const chapterRef = await getReferenceOfTheChapterById(itemId);
+			const lectureItemRef = await getReferenceOfTheLectureItemById(itemId instanceof Array ? itemId[0] : itemId);
+			// const chapterRef = await getReferenceOfTheChapterById(itemId);
 
-	// if(!chapterRef) return {props: {error: "Unable to get chapter reference"}};
-	if(!lectureItemRef) return {props: {error: "Unable to get lectureItem reference"}};
+			// if(!chapterRef) return {props: {error: "Unable to get chapter reference"}};
+			if(!lectureItemRef) return {props: {error: "Unable to get lectureItem reference"}};
 
-	console.log('lectureItemRef - ', lectureItemRef.path);
+			console.log('lectureItemRef - ', lectureItemRef.path);
 
-	// Get chapter item
-	// const chapterItem = (await chapterRef.ref.get()).data();
+			// Get chapter item
+			// const chapterItem = (await chapterRef.ref.get()).data();
 
-	// Get lecture item
-	const lectureItem = (await lectureItemRef.get()).data();
+			// Get lecture item
+			const lectureItem = (await lectureItemRef.get()).data();
 
-	// @ts-ignore
-	const youtubeUrl = lectureItem.youtube_url;
-	const youtubeId = getYoutubeID(youtubeUrl);
+			// @ts-ignore
+			const youtubeUrl = lectureItem.youtube_url;
+			const youtubeId = getYoutubeID(youtubeUrl);
 
-	// get lecture items for chapter
-	const classroomData = '';
-	const classroomTabsData = '';
-
-
-
-
-
-	// Pass data to the page via props
-	return { props: { chapterItem: {}, lectureItem, youtubeId } }
+			// Pass data to the page via props
+			return { props: { chapterItem: {}, lectureItem, youtubeId, context: 'json' } }
+		} catch (e) {
+			console.log('e - ', e);
+			// let exceptions fail silently
+			// could be invalid token, just let client-side deal with that
+		}
+	// }
+	// return {
+	// 	redirect: {
+	// 		permanent: false,
+	// 		destination: '/'
+	// 	}
+	// }
 }
 
 const CheckIconImage = (
@@ -732,7 +762,7 @@ const data = [
 	}
 ]
 
-export default function NoAuthClassRoomPage({lectureItem, chapterItem, youtubeId}) {
+export default function NoAuthClassRoomPage({lectureItem, youtubeId}) {
 
 	const tags = lectureItem.generated_tags.reduce((acc, curr, ind) => {
 		acc += curr;

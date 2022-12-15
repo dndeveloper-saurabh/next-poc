@@ -232,7 +232,6 @@ export const ClassroomContextProvider = (props) => {
 
   useEffect(() => {
     if(query.get('no_default') === 'true') return;
-    console.log('engage - - ' );
     chapterLastEngagementData();
   }, [classroomChapter, tabsData, query,]);
 
