@@ -1,3 +1,16 @@
+import {
+  planet1,
+  planet1_onboard,
+  planet2,
+  planet2_onboard,
+  planet3, planet3_onboard,
+  planet4,
+  planet5,
+  planet6,
+  planet7,
+  planet8
+} from "../public/assets";
+
 export const starPath =
   "M93.658,7.186,68.441,60.6,12.022,69.2C1.9,70.731-2.15,83.763,5.187,91.227l40.818,41.557-9.654,58.7c-1.738,10.611,8.959,18.559,17.918,13.6l50.472-27.718,50.472,27.718c8.959,4.922,19.656-2.986,17.918-13.6l-9.654-58.7,40.818-41.557c7.337-7.464,3.282-20.5-6.835-22.029L141.04,60.6,115.824,7.186A12.139,12.139,0,0,0,93.658,7.186Z";
 
@@ -35,3 +48,67 @@ export const termsOfService =
 
 export const refundAndCancellationPolicy =
   "https://firebasestorage.googleapis.com/v0/b/avian-display-193502.appspot.com/o/legal%2FRefund%20Policy.pdf?alt=media&token=b75e6bbb-91d4-47fd-9fb4-e1c63ab40e7e"
+
+
+export const getGradeNameByValue = (value) => {
+  const isPresent = getAvailableGrades().find(c => c.value === value);
+  if(!isPresent) throw new Error('This Grade "' + value + '" is not supported yet. Please contact Pustack administrator');
+  return isPresent.grade;
+}
+
+export const getAvailableGrades = (reduced, excludeClass2, isProduction) => {
+  // console.log('planet1 - ', planet1);
+
+  let grades = [
+    {grade: "Class 5", value: "class_5", planet: planet1_onboard},
+    {grade: "Class 6", value: "class_6", planet: planet2_onboard},
+    {grade: "Class 7", value: "class_7", planet: planet3_onboard},
+    {grade: "Class 8", value: "class_8", planet: planet4},
+    {grade: "Class 9", value: "class_9", planet: planet5, standard: true, enableToSelect: true},
+    {grade: "Class 10", value: "class_10", planet: planet6, standard: true, enableToSelect: true},
+    {grade: "Class 11", value: "class_11", planet: planet7, standard: true},
+    {grade: "Class 12", value: "class_12", planet: planet8, standard: true}
+  ];
+
+  if(!excludeClass2) grades.splice(0,0,
+    {grade: "Class 2", value: "class_2"},
+  )
+
+  if(isProduction) {
+    grades = [
+      {grade: "Class 9", value: "class_9", planet: planet5, standard: true, enableToSelect: true},
+      {grade: "Class 10", value: "class_10", planet: planet6, standard: true, enableToSelect: true},
+    ]
+  }
+
+  if(reduced) return grades.map(c => c.value);
+  return grades;
+
+  // let gradeCollection = 'grades_dev';
+  // // let gradeCollection = process.env.NODE_ENV === 'production' ? 'grades' : 'grades_dev';
+  // const snapshot = await db
+  //   .collection(gradeCollection)
+  //   .doc('available_grades')
+  //   .get();
+  //
+  // return snapshot.exists ? snapshot.data() : {};
+}
+
+
+export const loadingWrapper = () => {
+  document.querySelector(".loading__wrapper").style.display = "flex";
+  document.body.style.position = "fixed";
+  document.body.style.top = `-${window.scrollY}px`;
+
+  setTimeout(() => {
+    document.querySelector(".loading__wrapper").style.display = "none";
+
+    const scrollY = document.body.style.top;
+    document.body.style.position = "";
+    document.body.style.top = "";
+    window.scrollTo(0, parseInt(scrollY || "0") * -1);
+  }, 3000);
+};
+
+
+export const SNACKBAR_TYPES = ['success', 'warning', 'help', 'error']

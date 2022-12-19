@@ -273,11 +273,11 @@ export default function DesktopLanding({isSliderOpen, setIsSliderOpen}) {
             </div>
 
             <div className="down__scroll__indicator">
-              <a id="scrollindicator">
+              <div id="scrollindicator">
                 <span />
                 <span />
                 <span />
-              </a>
+              </div>
             </div>
           </div>
         </div>

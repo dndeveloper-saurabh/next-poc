@@ -1,0 +1,907 @@
+.subject__modal__back {
+  top: 0;
+  left: 50%;
+  height: calc(100vh - 5.25%);
+  width: 100%;
+  z-index: 997;
+  display: block;
+  max-width: 936px;
+  position: fixed;
+  border-radius: 10px 10px 0 0;
+  background: var(--subject-modal-bg);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  transform: translate3d(-50%, 5.25%, 0);
+  -webkit-transform: translate3d(-50%, 5.25%, 0);
+  will-change: transform;
+}
+
+.subject__modal {
+  top: 0;
+  right: 0;
+  left: 50%;
+  bottom: 0;
+  width: 100%;
+  z-index: 999;
+  height: 100vh;
+  display: block;
+  max-width: 936px;
+  perspective: 1000;
+  position: absolute;
+  -webkit-perspective: 1000;
+  backface-visibility: hidden;
+  border-radius: 10px 10px 0 0;
+  overscroll-behavior: contain;
+  -webkit-backface-visibility: hidden;
+  background: var(--subject-modal-bg);
+  transform: translate3d(-50%, 5%, 0);
+  -webkit-transform: translate3d(-50%, 5%, 0);
+  will-change: transform;
+
+  &::-webkit-scrollbar {
+    width: 0px;
+  }
+
+  .subject__modal__content {
+    position: relative;
+    border-radius: 10px 10px 0 0;
+    background: var(--subject-modal-bg);
+    overflow: hidden;
+
+    .powered__by {
+      margin: 0rem auto;
+      text-align: center;
+      margin-top: 1.5rem;
+      .pustack__powered__logo {
+        height: 64px;
+        margin: auto;
+      }
+
+      h3 {
+        color: grey;
+        font-weight: 500;
+        padding-bottom: 0rem;
+        font-size: 12px;
+      }
+    }
+
+    .subject__thumbnail {
+      border-radius: 10px 10px 0 0;
+      position: relative;
+
+      .header__visibility {
+        position: absolute;
+        top: 12vh;
+        height: 10px;
+        width: 100%;
+      }
+
+      .hero__image__wrapper {
+        text-align: center;
+        border-radius: 10px 10px 0 0;
+        background-clip: text;
+        z-index: 1;
+
+        &.maths {
+          background: linear-gradient(to top, #fb8b23, #ffdd00);
+        }
+        &.physics {
+          background: linear-gradient(to top, #ed82c1, #f9c6d7);
+        }
+        &.chemistry {
+          background: linear-gradient(to top, #ff571f, #ff8a5c);
+        }
+        &.biology {
+          background: linear-gradient(to top, #0ac2a6, #51f6f0);
+        }
+        &.history {
+          background: linear-gradient(to top, #999cff, #99c3ff);
+        }
+        &.civics {
+          background: linear-gradient(to top, #85c445, #c3db9f);
+        }
+        &.geography {
+          background: linear-gradient(to top, #ff7f5c, #ffc5ad);
+        }
+        &.economics {
+          background: linear-gradient(to top, #efbd81, #f6e8a2);
+        }
+        &.literature {
+          background: linear-gradient(to top, #ff4b33, #f78978);
+
+          img {
+            transform: scaleX(-1);
+          }
+        }
+        &.writing {
+          background: linear-gradient(to top, #00b899, #58e0bb);
+        }
+        &.grammar {
+          background: linear-gradient(to top, #de85ff, #f3c2ff);
+        }
+        &.reading {
+          background: linear-gradient(to top, #e9275b, #f07f8c);
+        }
+      }
+
+      .hero__image {
+        border-radius: 10px;
+        max-width: 18% !important;
+        margin: auto;
+        height: 340px;
+        object-fit: contain;
+        object-position: 0px 50px;
+
+        @media screen and (max-width: 500px) {
+          max-width: 15%;
+          height: 225px !important;
+          object-position: 0px 30px;
+        }
+
+        @media screen and (max-width: 770px) {
+          height: 36vh;
+        }
+      }
+
+      .subject__overlay {
+        width: 100%;
+        transition: all ease-in-out 250ms;
+        position: relative;
+        z-index: 2;
+
+        .subject__slantbox {
+          position: absolute;
+          top: 25px;
+          z-index: 100;
+          height: 150px;
+          left: -12.5%;
+          width: 125%;
+          transform: rotate(5deg);
+          background: var(--subject-modal-bg);
+
+          @media screen and (max-width: 500px) {
+            top: 0px;
+            height: 130px;
+            bottom: 0;
+            transform: rotate(6.5deg);
+          }
+        }
+
+        .subject__information {
+          position: relative;
+          margin-top: -6.5rem;
+          padding-left: 2.6rem;
+          padding-right: 2.6rem;
+          padding-bottom: 15px;
+          z-index: 200;
+
+          .subject__title {
+            h2 {
+              font-size: 2.5rem;
+              font-weight: 600;
+
+              &.maths {
+                background: linear-gradient(
+                  to left,
+                  #fb8b23 5%,
+                  #ffdd00 30%,
+                  #fb8b23 50%,
+                  #ffdd00 70%,
+                  #fb8b23 95%
+                );
+                background-clip: text;
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                text-fill-color: transparent;
+                animation: flowingText 8s linear both infinite;
+                background-size: 200% auto;
+              }
+              &.physics {
+                background: linear-gradient(
+                  to left,
+                  #ed82c1 5%,
+                  #f9c6d7 30%,
+                  #ed82c1 50%,
+                  #f9c6d7 70%,
+                  #ed82c1 95%
+                );
+                background-clip: text;
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                text-fill-color: transparent;
+                animation: flowingText 8s linear both infinite;
+                background-size: 200% auto;
+              }
+              &.chemistry {
+                background: linear-gradient(
+                  to left,
+                  #ff571f 5%,
+                  #ff8a5c 30%,
+                  #ff571f 50%,
+                  #ff8a5c 70%,
+                  #ff571f 95%
+                );
+                background-clip: text;
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                text-fill-color: transparent;
+                animation: flowingText 8s linear both infinite;
+                background-size: 200% auto;
+              }
+              &.biology {
+                background: linear-gradient(
+                  to left,
+                  #0ac2a6 5%,
+                  #51f6f0 30%,
+                  #0ac2a6 50%,
+                  #51f6f0 70%,
+                  #0ac2a6 95%
+                );
+                background-clip: text;
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                text-fill-color: transparent;
+                animation: flowingText 8s linear both infinite;
+                background-size: 200% auto;
+              }
+              &.history {
+                background: linear-gradient(
+                  to left,
+                  #999cff 5%,
+                  #99c3ff 30%,
+                  #999cff 50%,
+                  #99c3ff 70%,
+                  #999cff 95%
+                );
+                background-clip: text;
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                text-fill-color: transparent;
+                animation: flowingText 8s linear both infinite;
+                background-size: 200% auto;
+              }
+              &.civics {
+                background: linear-gradient(
+                  to left,
+                  #85c445 5%,
+                  #c3db9f 30%,
+                  #85c445 50%,
+                  #c3db9f 70%,
+                  #85c445 95%
+                );
+                background-clip: text;
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                text-fill-color: transparent;
+                animation: flowingText 8s linear both infinite;
+                background-size: 200% auto;
+              }
+              &.geography {
+                background: linear-gradient(
+                  to left,
+                  #ff7f5c 5%,
+                  #ffc5ad 30%,
+                  #ff7f5c 50%,
+                  #ffc5ad 70%,
+                  #ff7f5c 95%
+                );
+                background-clip: text;
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                text-fill-color: transparent;
+                animation: flowingText 8s linear both infinite;
+                background-size: 200% auto;
+              }
+              &.economics {
+                background: linear-gradient(
+                  to left,
+                  #efbd81 5%,
+                  #f6e8a2 30%,
+                  #efbd81 50%,
+                  #f6e8a2 70%,
+                  #efbd81 95%
+                );
+                background-clip: text;
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                text-fill-color: transparent;
+                animation: flowingText 8s linear both infinite;
+                background-size: 200% auto;
+              }
+              &.literature {
+                background: linear-gradient(
+                  to left,
+                  #ff4b33 5%,
+                  #f78978 30%,
+                  #ff4b33 50%,
+                  #f78978 70%,
+                  #ff4b33 95%
+                );
+                background-clip: text;
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                text-fill-color: transparent;
+                animation: flowingText 8s linear both infinite;
+                background-size: 200% auto;
+              }
+              &.writing {
+                background: linear-gradient(
+                  to left,
+                  #00b899 5%,
+                  #58e0bb 30%,
+                  #00b899 50%,
+                  #58e0bb 70%,
+                  #00b899 95%
+                );
+                background-clip: text;
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                text-fill-color: transparent;
+                animation: flowingText 8s linear both infinite;
+                background-size: 200% auto;
+              }
+              &.grammar {
+                background: linear-gradient(
+                  to left,
+                  #de85ff 5%,
+                  #f3c2ff 30%,
+                  #de85ff 50%,
+                  #f3c2ff 70%,
+                  #de85ff 95%
+                );
+                background-clip: text;
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                text-fill-color: transparent;
+                animation: flowingText 8s linear both infinite;
+                background-size: 200% auto;
+              }
+              &.reading {
+                background: linear-gradient(
+                  to left,
+                  #e9275b 5%,
+                  #f07f8c 30%,
+                  #e9275b 50%,
+                  #f07f8c 70%,
+                  #e9275b 95%
+                );
+                background-clip: text;
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                text-fill-color: transparent;
+                animation: flowingText 8s linear both infinite;
+                background-size: 200% auto;
+              }
+            }
+
+            .subject__description {
+              margin-top: 0.25rem;
+              width: 60%;
+              font-weight: 400;
+              font-size: 1.1rem;
+              position: relative;
+              color: var(--color-text);
+
+              &.hide {
+                height: 52px;
+                overflow: hidden;
+              }
+              p {
+                opacity: 0.6;
+              }
+
+              span {
+                color: cornflowerblue;
+                font-weight: 500;
+                cursor: pointer;
+                position: absolute;
+                width: 100px;
+                top: 21px;
+                right: 0;
+                background: linear-gradient(
+                  to right,
+                  #00000000,
+                  var(--subject-modal-bg) 5%
+                );
+              }
+
+              @media only screen and (max-width: 1024px) {
+                width: 100%;
+                font-size: 1rem;
+
+                &.hide {
+                  height: 38px;
+                }
+
+                span {
+                  top: 17.5px;
+                  right: -30px;
+                }
+              }
+            }
+          }
+
+          @media only screen and (max-width: 768px) {
+            margin-top: -6.5rem;
+            padding-left: 0.75rem;
+            padding-right: 0.75rem;
+          }
+        }
+      }
+
+      .icon-dismiss {
+        cursor: pointer;
+        position: absolute;
+        top: 1.25rem;
+        right: 1.25rem;
+        color: white;
+        font-size: 1.25rem;
+        background: rgba(24, 24, 24, 0.5);
+        width: 28px;
+        height: 28px;
+        display: grid;
+        place-items: center;
+        border-radius: 50px;
+      }
+
+      .dismiss-modal {
+        position: fixed;
+        top: 1.25rem;
+        left: 1.25rem;
+        color: var(--color-text);
+        font-size: 1.25rem;
+        width: 28px;
+        height: 28px;
+      }
+    }
+
+    .subject__content__main {
+      width: 90%;
+      margin: 0 auto;
+      margin-top: 10px;
+      margin-bottom: 30px;
+      z-index: 200;
+      position: relative;
+
+      .subject__chapters__list__wrap {
+        &::-webkit-scrollbar {
+          width: 0;
+        }
+      }
+
+      .react-swipeable-view-container {
+        max-width: 100% !important;
+      }
+
+      .subject__content__header {
+        h2 {
+          font-weight: 500;
+          color: var(--color-text);
+        }
+        margin-bottom: -1rem;
+
+        .MuiSvgIcon-root {
+          color: var(--color-text);
+          font-size: 28px;
+        }
+
+        // .MuiTabScrollButton-root.Mui-disabled {
+        //   display: none !important;
+        // }
+
+        .MuiTabs-flexContainer {
+          justify-content: space-between;
+
+          .MuiTab-textColorPrimary {
+            color: grey;
+            font-size: 18px;
+            text-transform: capitalize;
+            text-align: center;
+            width: 33.33%;
+            font-weight: 400;
+
+            @media screen and (max-width: 500px) {
+              font-size: 14px;
+            }
+          }
+
+          .Mui-selected {
+            color: var(--color-text);
+          }
+        }
+        .MuiTabs-indicator {
+          top: 44px !important;
+        }
+
+        &.lit {
+          .MuiTabs-flexContainer {
+            .MuiTab-textColorPrimary {
+              width: auto !important;
+            }
+          }
+        }
+
+        &.maths .MuiTabs-indicator {
+          background: linear-gradient(to top, #fb8b23, #ffdd00) !important;
+        }
+        &.physics .MuiTabs-indicator {
+          background: linear-gradient(to top, #ed82c1, #f9c6d7) !important;
+        }
+        &.chemistry .MuiTabs-indicator {
+          background: linear-gradient(to top, #ff571f, #ff8a5c) !important;
+        }
+        &.biology .MuiTabs-indicator {
+          background: linear-gradient(to top, #0ac2a6, #51f6f0) !important;
+        }
+        &.history .MuiTabs-indicator {
+          background: linear-gradient(to top, #999cff, #99c3ff) !important;
+        }
+        &.civics .MuiTabs-indicator {
+          background: linear-gradient(to top, #85c445, #c3db9f) !important;
+        }
+        &.geography .MuiTabs-indicator {
+          background: linear-gradient(to top, #ff7f5c, #ffc5ad) !important;
+        }
+        &.economics .MuiTabs-indicator {
+          background: linear-gradient(to top, #efbd81, #f6e8a2) !important;
+        }
+        &.literature .MuiTabs-indicator {
+          background: linear-gradient(to top, #ff4b33, #f78978) !important;
+        }
+        &.writing .MuiTabs-indicator {
+          background: linear-gradient(to top, #00b899, #58e0bb) !important;
+        }
+        &.grammar .MuiTabs-indicator {
+          background: linear-gradient(to top, #de85ff, #f3c2ff) !important;
+        }
+        &.reading .MuiTabs-indicator {
+          background: linear-gradient(to top, #e9275b, #f07f8c) !important;
+        }
+
+        .content__hr {
+          height: 1px;
+          border: none;
+          margin-top: 1rem;
+          background: var(--shadow-color);
+        }
+      }
+
+      @media screen and (max-width: 768px) {
+        // margin-top: -10px;
+        width: 96%;
+      }
+    }
+  }
+}
+
+.subject__modal__drawer {
+  .MuiBackdrop-root {
+    backdrop-filter: blur(3px);
+    -webkit-backdrop-filter: blur(3px);
+    background: rgba(0, 0, 0, 0.6);
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    transform: translate3d(0, 0, 0);
+    -webkit-transform: translate3d(0, 0, 0);
+    will-change: transform;
+  }
+  .MuiPaper-root {
+    background: transparent;
+    &::-webkit-scrollbar-track {
+      width: 0px;
+    }
+
+    &::-webkit-scrollbar {
+      width: 0px;
+      background-color: #f5f5f5;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: rgba(0, 0, 0, 025);
+    }
+
+    @media screen and (max-width: 430px) {
+      &::-webkit-scrollbar {
+        width: 0;
+      }
+    }
+  }
+}
+
+.subject__modal__wrapper {
+  height: 100vh;
+  background-color: transparent;
+
+  .close__subject__modal {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    z-index: 1;
+    pointer-events: all;
+  }
+
+  .subject__head {
+    min-height: 52px;
+    width: 100%;
+    background: var(--color-primary);
+    position: fixed !important;
+    top: 0px;
+    color: var(--color-text);
+    z-index: 999999999 !important;
+    opacity: 0;
+    display: flex;
+    align-items: center;
+    padding-left: 50px;
+    animation: fadeIn 0.125s ease;
+
+    p {
+      font-size: 20px;
+      font-weight: 500;
+    }
+
+    .maths {
+      background: linear-gradient(
+        to left,
+        #fb8b23 20%,
+        #ffdd00 40%,
+        #ffdd00 60%,
+        #fb8b23 80%
+      );
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-fill-color: transparent;
+      animation: flowingText 6s linear both infinite;
+      background-size: 200% auto;
+    }
+    .physics {
+      background: linear-gradient(
+        to left,
+        #ed82c1 20%,
+        #f9c6d7 30%,
+        #f9c6d7 60%,
+        #ed82c1 80%
+      );
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-fill-color: transparent;
+      animation: flowingText 6s linear both infinite;
+      background-size: 200% auto;
+    }
+    .chemistry {
+      background: linear-gradient(
+        to left,
+        #ff571f 5%,
+        #ff8a5c 40%,
+        #ff571f 60%,
+        #ff8a5c 60%,
+        #ff571f 95%
+      );
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-fill-color: transparent;
+      animation: flowingText 6s linear both infinite;
+      background-size: 200% auto;
+    }
+    .biology {
+      background: linear-gradient(
+        to left,
+        #0ac2a6 20%,
+        #51f6f0 40%,
+        #51f6f0 60%,
+        #0ac2a6 80%
+      );
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-fill-color: transparent;
+      animation: flowingText 8s linear both infinite;
+      background-size: 200% auto;
+    }
+    .history {
+      background: linear-gradient(
+        to left,
+        #999cff 20%,
+        #99c3ff 40%,
+        #99c3ff 60%,
+        #999cff 80%
+      );
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-fill-color: transparent;
+      animation: flowingText 6s linear both infinite;
+      background-size: 200% auto;
+    }
+    .civics {
+      background: linear-gradient(
+        to left,
+        #85c445 20%,
+        #c3db9f 40%,
+        #c3db9f 60%,
+        #85c445 80%
+      );
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-fill-color: transparent;
+      animation: flowingText 6s linear both infinite;
+      background-size: 200% auto;
+    }
+    .geography {
+      background: linear-gradient(
+        to left,
+        #ff7f5c 20%,
+        #ffc5ad 40%,
+        #ffc5ad 60%,
+        #ff7f5c 80%
+      );
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-fill-color: transparent;
+      animation: flowingText 6s linear both infinite;
+      background-size: 200% auto;
+    }
+    .economics {
+      background: linear-gradient(
+        to left,
+        #efbd81 20%,
+        #f6e8a2 40%,
+        #f6e8a2 60%,
+        #efbd81 80%
+      );
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-fill-color: transparent;
+      animation: flowingText 6s linear both infinite;
+      background-size: 200% auto;
+    }
+    .literature {
+      background: linear-gradient(
+        to left,
+        #ff4b33 20%,
+        #f78978 40%,
+        #f78978 60%,
+        #ff4b33 80%
+      );
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-fill-color: transparent;
+      animation: flowingText 6s linear both infinite;
+      background-size: 200% auto;
+    }
+    .writing {
+      background: linear-gradient(
+        to left,
+        #00b899 20%,
+        #58e0bb 40%,
+        #58e0bb 60%,
+        #00b899 80%
+      );
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-fill-color: transparent;
+      animation: flowingText 6s linear both infinite;
+      background-size: 200% auto;
+    }
+    .grammar {
+      background: linear-gradient(
+        to left,
+        #de85ff 20%,
+        #f3c2ff 40%,
+        #f3c2ff 60%,
+        #de85ff 80%
+      );
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-fill-color: transparent;
+      animation: flowingText 6s linear both infinite;
+      background-size: 200% auto;
+    }
+    .reading {
+      background: linear-gradient(to left, #e9275b 80%, #f07f8c);
+      background: linear-gradient(
+        to left,
+        #e9275b 20%,
+        #f07f8c 40%,
+        #f07f8c 60%,
+        #e9275b 80%
+      );
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-fill-color: transparent;
+      animation: flowingText 6s linear both infinite;
+      background-size: 200% auto;
+    }
+  }
+
+  .dismiss-modal-2 {
+    position: fixed !important;
+    top: 1rem;
+    left: 1.5rem;
+    z-index: 99999999999999;
+    color: white;
+    animation: fadeIn 0.125s ease both;
+
+    &.maths {
+      color: #fb8b23;
+    }
+    &.physics {
+      color: #ed82c1;
+    }
+    &.chemistry {
+      color: #ff571f;
+    }
+    &.biology {
+      color: #0ac2a6;
+    }
+    &.history {
+      color: #999cff;
+    }
+    &.civics {
+      color: #85c445;
+    }
+    &.geography {
+      color: #ff7f5c;
+    }
+    &.economics {
+      color: #efbd81;
+    }
+    &.literature {
+      color: #ff4b33;
+    }
+    &.writing {
+      color: #00b899;
+    }
+    &.grammar {
+      color: #de85ff;
+    }
+    &.reading {
+      color: #e9275b;
+    }
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .subject__modal {
+    border-radius: 0px !important;
+    height: 100vh;
+
+    transform: translate(-50%, 0%);
+    animation: jumpinSm 500ms ease-in-out both;
+
+    .subject__modal__content {
+      border-radius: 0px !important;
+      padding-bottom: 1vh;
+
+      .subject__thumbnail {
+        border-radius: 0px !important;
+        .hero__image__wrapper {
+          border-radius: 0px !important;
+          .hero__image {
+            border-radius: 0px !important;
+          }
+        }
+      }
+    }
+  }
+}
+
+@keyframes jumpinSm {
+  0% {
+    transform: translate(-50%, 125%);
+  }
+  100% {
+    transform: translate(-50%, 0%);
+  }
+}

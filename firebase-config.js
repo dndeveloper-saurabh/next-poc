@@ -38,6 +38,19 @@ appleProvider.addScope("name");
 
 const isMessagingSupported = firebase.messaging.isSupported();
 
+// auth.onAuthStateChanged(async user => {
+//   if(user) {
+//     const token = await user.getIdToken();
+//     let cookieString;
+//     let date = new Date();
+//     date.setDate(date.getDate() + 7);
+//     cookieString = `fsToken=${token}; expires=${date.toISOString()}; path=/`
+//     document.cookie = cookieString;
+//   } else {
+//     document.cookie = `fsToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/`;
+//   }
+// })
+
 if (isMessagingSupported) {
   messaging = firebase.messaging();
 }
