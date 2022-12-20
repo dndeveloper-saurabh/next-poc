@@ -384,7 +384,7 @@ const lastLocation = {pathname: '/classroom'}
 // 	return <Dashboard user={user} />
 // }
 
-export default function Dashboard({user}) {
+export default function Dashboard({user, setProSliderOpen, proSliderOpen}) {
 	const [sessionsToday, setSessionsToday] = useState([]);
 	const [sectionHighlighted, setSectionHighlighted] =
 		useContext(UserContext).sectionHighlighted;
@@ -920,7 +920,7 @@ export default function Dashboard({user}) {
 			{/*	<title>PuStack</title>*/}
 			{/*</Helmet>*/}
 			<NavbarContextProvider>
-				<Navbar setMobileOpen={setMobileOpen}/>
+				<Navbar setMobileOpen={setMobileOpen} setProSliderOpen={setProSliderOpen}/>
 			</NavbarContextProvider>
 			<Steps
 				enabled={stepsEnabled}
@@ -945,10 +945,11 @@ export default function Dashboard({user}) {
 			{/*	</Drawer>*/}
 			{/*</Hidden>*/}
 
-			<div className={"home" + (isStandardGrade ? '' : ' new-classes')} style={{overflow: stepsEnabled && "hidden"}}>
+			<div className={"home" + (isStandardGrade ? '' : ' new-classes') + (isDark ? ' dark' : '')} style={{overflow: stepsEnabled && "hidden"}}>
 				{!isTabletScreen && inBrowser && (
 					<div className="home-sidebar">
 						<HomeSidebar
+							setProSliderOpen={setProSliderOpen}
 							sectionSelected={sectionHighlighted}
 							setSectionSelected={setSectionHighlighted}
 							sessionsToday={sessionsToday}

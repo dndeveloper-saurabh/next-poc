@@ -97,7 +97,7 @@ const formatJoiningDate2 = (timestamp) => {
 	return formatDistanceToNow(new Date(timestamp));
 };
 
-const AccountSettings = ({ setBackdrop, profileVisibility }) => {
+const AccountSettings = ({ setBackdrop, profileVisibility, setProSliderOpen }) => {
 	const [user, ] = useContext(UserContext).user;
 	const [openMenu, setOpenMenu] = useContext(UserContext).openMenu;
 	const [openMenuSettings, ] =
@@ -600,7 +600,7 @@ const AccountSettings = ({ setBackdrop, profileVisibility }) => {
 							</div>
 						</Modal>
 
-						<AccountSettingsViews anchorEl={anchorEl} setAnchorEl={setAnchorEl} isOpen={isOpen} setIsOpen={setIsOpen} setBackdrop={setBackdrop} />
+						<AccountSettingsViews setProSliderOpen={setProSliderOpen} anchorEl={anchorEl} setAnchorEl={setAnchorEl} isOpen={isOpen} setIsOpen={setIsOpen} setBackdrop={setBackdrop} />
 
 						<Drawer
 							variant="temporary"

@@ -13,10 +13,12 @@ const VAPIDKEY =
   "BBAS6jVsiEE86EtJvP9RGSkPt46szXb2Ao7pfUdOL0xhhDiiPGnzgwN3utpw_O6RFMbuxgui2d3F7W98jFB5ZWk";
 
 
-export default function Home() {
+export default function Home({proSliderOpen, setProSliderOpen}) {
   // const [isSliderOpen, setIsSliderOpen] = useState(false);
   const {user, isLoading} = useAuth();
   const [isSliderOpen, setIsSliderOpen] = useContext(PustackProContext).value;
+
+  console.log('isLoading - ', isLoading);
 
   useEffect(() => {
     if(!isLoading && !user) initialize();
@@ -33,7 +35,7 @@ export default function Home() {
 
       {/*<main className={styles.main}>*/}
       {(!isLoading && !user) && <DesktopLanding isSliderOpen={isSliderOpen} setIsSliderOpen={setIsSliderOpen} />}
-      {user && <Dashboard user={user} />}
+      {user && <Dashboard user={user} setProSliderOpen={setProSliderOpen} proSliderOpen={proSliderOpen} />}
       {/*<div className="loading__wrapper" data-nosnippet="">*/}
       {/*  <div className="loading__content fadeIn">*/}
       {/*    <Image height={100} width={100}*/}

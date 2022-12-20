@@ -6,7 +6,7 @@ import "react-phone-input-2/lib/style.css";
 import type { AppProps } from 'next/app';
 import dynamic from 'next/dynamic';
 import { useRouter } from "next/router";
-// import {useEffect, useState} from 'react';
+import {useState} from 'react';
 
 // import {
 //   UserContextProvider,
@@ -25,11 +25,13 @@ const SubjectModalContextProvider = dynamic(() => import("../context/global/Subj
 const SnackbarContextProvider = dynamic(() => import("../context/snackbar"));
 const ClassroomContextProvider = dynamic(() => import("../context/classroom/index"));
 const LiveSessionContextProvider = dynamic(() => import("../context/livesessions/LiveSessionContext"));
+const PustackProSlider = dynamic(() => import("../containers/global/pro-slider"));
 
 const publicPages = ["/classroom"];
 
 export default function App({ Component, pageProps }: AppProps) {
   const router = useRouter();
+  const [proSliderOpen, setProSliderOpen] = useState(false);
 
   // const [pageLoading, setPageLoading] = useState<boolean>(false);
   // useEffect(() => {
@@ -62,13 +64,17 @@ export default function App({ Component, pageProps }: AppProps) {
                     <SubjectModalContextProvider>
                       <SnackbarContextProvider>
                         <LiveSessionContextProvider>
-                          <Component {...pageProps} />
+                          <Component {...pageProps} setProSliderOpen={setProSliderOpen} proSliderOpen={proSliderOpen} />
                         </LiveSessionContextProvider>
                       </SnackbarContextProvider>
                     </SubjectModalContextProvider>
                   </SidebarContextProvider>
                 </ClassroomContextProvider>
             )}
+            <PustackProSlider
+              isOpen={proSliderOpen}
+              handleClose={() => setProSliderOpen(c => !c)}
+            />
           </PustackProContextProvider>
         </UserContextProvider>
       </ThemeContextProvider>

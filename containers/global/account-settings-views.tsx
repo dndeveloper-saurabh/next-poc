@@ -303,7 +303,7 @@ const changeUserGrade = async (userId, grade) => {
 		.catch(() => false);
 };
 
-export default function AccountSettingsViews({anchorEl, setAnchorEl, isOpen, setIsOpen, setBackdrop}) {
+export default function AccountSettingsViews({setProSliderOpen, anchorEl, setAnchorEl, isOpen, setIsOpen, setBackdrop}) {
 	const forceUpdate = useForceUpdate();
 	const isProduction = useIsProduction();
 
@@ -341,7 +341,7 @@ export default function AccountSettingsViews({anchorEl, setAnchorEl, isOpen, set
 	const [changingGrade, setChangingGrade] = useState(false);
 	const [activeGradeItemInModal] = useState(null);
 	const [otpCode, setOtpCode] = useState(Array(6).fill(""));
-	const [phoneNumberError, setPhoneNumberError] = useState(false);
+	const [phoneNumberError, setPhoneNumberError] = useState<boolean | string>(false);
 	const [openLearnMore, setOpenLearnMore] = useState([false, false]);
 	const [openFriendsDrawer, setOpenFriendsDrawer] = useState(false);
 	const [generatingLink, setGeneratingLink] = useState(false);
@@ -678,7 +678,7 @@ export default function AccountSettingsViews({anchorEl, setAnchorEl, isOpen, set
 	};
 
 	const openProSlider = () => {
-		setIsSliderOpen(true);
+		setProSliderOpen(true);
 	};
 
 	useEffect(() => {
@@ -690,13 +690,13 @@ export default function AccountSettingsViews({anchorEl, setAnchorEl, isOpen, set
 		// TODO: Check if the phone number exists, if it does not then send and handle the error
 		setSendingOtp(true);
 
-		const isPhoneExist = functions.httpsCallable('checkIfPhoneExists');
+		const isPhoneExist = require('../../firebase-config').functions.httpsCallable('checkIfPhoneExists');
 		const response = await isPhoneExist({
 			phone_number: '+' + phoneNumber
 		})
 		if(response.data) {
 			setSendingOtp(false);
-			setPhoneNumberError('Phone number is already registered');
+			setPhoneNumberError("Phone number is already registered");
 			return;
 		}
 		console.log('isPhoneExist - ', response);

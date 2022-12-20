@@ -2,6 +2,8 @@ import {useContext, useEffect, useState} from "react";
 import {UserContext, ThemeContext} from '../context';
 import {useRouter} from 'next/router';
 import {defaultPic} from '../public/assets'
+import {VAPIDKEY} from "../helpers";
+import {castIndianTime} from "../helpers/getIndianTime";
 
 
 const getCareMessageCount = ({ userId, grade }) => {
@@ -55,6 +57,22 @@ const logOut = async () => {
   return logout_sucess;
 };
 
+const setDeviceToken = async (token, userId) => {
+  const indianTime = await castIndianTime();
+  require('../firebase-config').db.collection("user_tokens")
+    .doc(userId)
+    .set(
+      {
+        tokens: require('firebase/app').firestore.FieldValue.arrayUnion({
+          created_ts: +indianTime,
+          platform: "web",
+          token: token,
+        }),
+      },
+      { merge: true }
+    )
+    .catch((err) => console.log(err));
+};
 
 export default function useAuth() {
   const [user, setUser] = useContext(UserContext).user;
@@ -62,6 +80,8 @@ export default function useAuth() {
   const router = useRouter();
   const [userHasNoGrade, setUserHasNoGrade] = useContext(UserContext).userHasNoGrade;
   const [, setIsUserProTier] = useContext(UserContext).tier;
+  const [, setPushyData] = useContext(UserContext).pushyData;
+  const [, setBlazeCallAlert] = useContext(UserContext).blazeCallAlert;
   const [isInstructor, setIsInstructor] = useContext(UserContext).isInstructor;
   const [checkedLoggedInStatus, setCheckedLoggedInStatus] = useState(false);
   const [isDarkMode, setIsDarkMode] = useContext(ThemeContext).theme;
@@ -69,6 +89,47 @@ export default function useAuth() {
   const [, setUnreadCareMsgCount] = useContext(UserContext).unreadCareMsgCount;
   const [closeInstallApp, setCloseInstallApp] =
     useContext(UserContext).closeInstallApp;
+
+  const setDeviceTokenFn = (token) => {
+    if (user?.uid) setDeviceToken(token, user?.uid);
+  };
+
+  useEffect(() => {
+    try {
+      const firebase = require('../firebase-config');
+      if (firebase.isMessagingSupported) {
+        firebase.messaging
+          .getToken({ vapidKey: VAPIDKEY })
+          .then((token) => {
+            if (token) {
+              const localToken = localStorage.getItem("fcmToken");
+
+              if (localToken && localToken === token) {
+                // console.log(localToken);
+              } else {
+                setDeviceTokenFn(token);
+                localStorage.setItem("fcmToken", token);
+              }
+            } else console.log("No registration token available");
+          })
+          .catch((err) => console.log(err));
+
+        firebase.messaging.onMessage((payload) => {
+          let data = payload.data;
+          console.log({ payload: payload.data });
+
+          if (data?.notification_type === "session_ping") {
+            setPushyData(data);
+            setBlazeCallAlert(true);
+          } else {
+            setBlazeCallAlert(false);
+          }
+        });
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  }, []);
 
   useEffect(() => {
     // let path = window.location.pathname;

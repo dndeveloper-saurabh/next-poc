@@ -69,7 +69,7 @@ const blazeUnreadMesagesNotification = ({
 		});
 };
 
-export default function Navbar({ setMobileOpen, showMenuItem = true }) {
+export default function Navbar({ setMobileOpen, setProSliderOpen, showMenuItem = true }) {
 	const [user] = useContext(UserContext).user;
 	const [, setOpenMobileSearch] = useContext(UserContext).openMobileSearch;
 	const [isUserProTier] = useContext(UserContext).tier;
@@ -372,6 +372,7 @@ export default function Navbar({ setMobileOpen, showMenuItem = true }) {
 						<AccountSettings
 							setBackdrop={setOpenBackdrop}
 							profileVisibility={profileVisibility}
+							setProSliderOpen={setProSliderOpen}
 						/>
 					</div>
 				</div>

@@ -25,6 +25,7 @@ const HomeSidebar = ({
 	                     sectionSelected,
 	                     setSectionSelected,
 	                     sessionsToday,
+	                     setProSliderOpen
                      }) => {
 	const [isDark] = useContext(ThemeContext).theme;
 	const [isUserPro] = useContext(UserContext).tier;
@@ -184,7 +185,7 @@ const HomeSidebar = ({
 					<div className="view-benefits-wrapper">
 						<button
 							className={isDark ? "view-benefits dark" : "view-benefits"}
-							onClick={() => setIsSliderOpen(true)}
+							onClick={() => setProSliderOpen(true)}
 							aria-label="view-benifits"
 						>
 							{isUserPro ? "View Benefits" : "Join Pro"}
