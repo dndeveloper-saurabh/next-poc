@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 // import Lottie from "lottie-react-web";
+import Image from 'next/image';
 const List = dynamic(() => import('@material-ui/core/List'));
 const Icon = dynamic(() => import('@material-ui/core/Icon'));
 const ListItem = dynamic(() => import('@material-ui/core/ListItem'));
@@ -23,12 +24,11 @@ import {
   CheckIconGreen as CheckIconGreenImage,
   LockIcon as LockedIconImage,
 } from "../../../../../public/assets";
-import Image from "next/image";
 import dynamic from "next/dynamic";
 
 const CheckIcon = () => (
   <Icon>
-    <Image
+    <Image height={100} width={100}
       src={CheckIconImage}
       alt="Check Icon"
       style={{ width: "100%" }}
@@ -39,7 +39,7 @@ const CheckIcon = () => (
 
 const CheckGreenIcon = () => (
   <Icon>
-    <img
+    <Image height={100} width={100}
       src={CheckIconGreenImage}
       alt="Green"
       style={{ width: "100%" }}
@@ -50,7 +50,7 @@ const CheckGreenIcon = () => (
 
 const LockedIcon = () => (
   <Icon>
-    <img
+    <Image height={100} width={100}
       src={LockedIconImage}
       alt="PuStack Icon"
       style={{ width: "100%" }}
@@ -203,7 +203,7 @@ export default function ClassroomNestedLectureItem({
                         : setIsSliderOpen(true)
                     }
                   >
-                    <img
+                    <Image height={100} width={100}
                       className="notes__svg"
                       alt="PuStack Notes"
                       src={NotesSVG}

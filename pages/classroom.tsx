@@ -796,7 +796,7 @@ export default function NoAuthClassRoomPage({lectureItem, youtubeId}) {
 			<div className="classroom__navbar">
 				<Link href="/">
 					<div className="classroom__logo">
-						<Image className="header__leftImage" src={logoDark} alt="PuStack" draggable={false} />
+						<Image height={100} width={100} className="header__leftImage" src={logoDark} alt="PuStack" draggable={false} />
 					</div>
 				</Link>
 				<div className="separator">|</div>

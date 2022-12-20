@@ -11,6 +11,7 @@ import Timer from "react-compound-timer";
 import {ThemeContext, UserContext} from "../../context";
 import {signInWithPhone} from "../../services/auth";
 import firebase from "firebase";
+import Image from 'next/image';
 
 function ScreenLayout({children, goBack}) {
 	const SCREEN_HEADER = 'screen-header';
@@ -293,7 +294,7 @@ export default function DeleteAccountScreen({logOut, isOpen, onChange, setActive
 			{/* page 0 */}
 			<ScreenLayout goBack={goBack}>
 				<screen-body>
-					<img style={{height: '270px'}} src={ReasonForDeletingImage} alt="Reason for Deleting Image" onClick={() => setActiveIndex(1)}/>
+					<Image height={100} width={100} style={{height: '270px'}} src={ReasonForDeletingImage} alt="Reason for Deleting Image" onClick={() => setActiveIndex(1)}/>
 					<h2 style={{margin: '10px'}}>Why are you deleting your account?</h2>
 					<form style={{width: '250px'}} onChange={(e) => {
 						setReasonCode(e.target.value);
@@ -327,7 +328,7 @@ export default function DeleteAccountScreen({logOut, isOpen, onChange, setActive
 			<ScreenLayout goBack={goBack}>
 				<screen-body>
 					<div className='align-column-center'>
-						<img style={{height: '270px'}} src={EnterOTPImage} alt="Enter OTP"/>
+						<Image height={100} width={100} style={{height: '270px'}} src={EnterOTPImage} alt="Enter OTP"/>
 						<h2 style={{margin: '10px'}}>OTP Verification is required!</h2>
 						{/*<p style={{*/}
 						{/*  fontSize: '14px',*/}
@@ -355,7 +356,7 @@ export default function DeleteAccountScreen({logOut, isOpen, onChange, setActive
 				>
 					<div className="wrapper">
 						<div className="otp-verification-modal-inner">
-							<img src={smartPhone} alt="sp" draggable={false} />
+							<Image height={100} width={100} src={smartPhone} alt="sp" draggable={false} />
 							<h5>OTP Verification</h5>
 							<h6>
 								<span>Enter OTP sent to</span> + {user?.phone_country_code} {user?.phone_number}
@@ -450,14 +451,14 @@ export default function DeleteAccountScreen({logOut, isOpen, onChange, setActive
 			<ScreenLayout goBack={() => goBack(true)}>
 				<screen-body>
 					<div className='align-column-center' style={{alignItems: 'flex-start'}}>
-						<img style={{height: '270px', alignSelf: 'center'}} src={DeleteImage} alt="Delete Account"/>
+						<Image height={100} width={100} style={{height: '270px', alignSelf: 'center'}} src={DeleteImage} alt="Delete Account"/>
 						<h2 style={{margin: '10px'}}>Deleting account will do the following</h2>
 						<div className="delete-account-doings">
-							<img src={CrossSVG} alt="Cross" />
+							<Image height={100} width={100} src={CrossSVG} alt="Cross" />
 							<span>Log you out on all the devices.</span>
 						</div>
 						<div className="delete-account-doings">
-							<img src={CrossSVG} alt="Cross" />
+							<Image height={100} width={100} src={CrossSVG} alt="Cross" />
 							<span>Delete all of your account information.</span>
 						</div>
 					</div>

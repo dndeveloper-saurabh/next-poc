@@ -262,7 +262,7 @@
        d="M 83.037484,163.39248 -54.176754,280.65236"
        id="path1701"
        sodipodi:nodetypes="cc" />
-    <image
+    <Image height={100} width={100}
        width="151.69444"
        height="129.46945"
        preserveAspectRatio="none"

@@ -7,6 +7,7 @@ import React, {
 } from "react";
 // TODO: Use fetch api instead of axios
 import Axios from 'axios';
+import Image1 from 'next/image';
 import Modal from "react-modal";
 import Lottie from "lottie-react-web";
 import Resizer from "react-image-file-resizer";
@@ -505,7 +506,7 @@ const PuStackCareMobile = () => {
 			<div className="care-chat-body">
 				{showLogo && (
 					<div className="pustack-education fadeIn">
-						<img alt="pc" src={CircleLogo} ref={visibilityRef} />
+						<Image1 height={100} width={100} alt="pc" src={CircleLogo} ref={visibilityRef} />
 						<h3>PuStack Education</h3>
 						<p>Our student care agents are always happy to help.</p>
 					</div>
@@ -537,7 +538,7 @@ const PuStackCareMobile = () => {
 									>
 										{sent_by !== "student" &&
 											(position === "none" || position === "bottom") && (
-												<img
+												<Image1 height={100} width={100}
 													src={CircleLogo}
 													alt="agent"
 													className="agent-avatar"
@@ -559,7 +560,7 @@ const PuStackCareMobile = () => {
 										}}
 									>
 										{sent_by !== "student" && (
-											<img
+											<Image1 height={100} width={100}
 												src={CircleLogo}
 												alt="agent"
 												className="agent-avatar"
@@ -593,7 +594,7 @@ const PuStackCareMobile = () => {
 									>
 										{sent_by !== "student" &&
 											(position === "none" || position === "bottom") && (
-												<img
+												<Image1 height={100} width={100}
 													src={CircleLogo}
 													alt="agent"
 													className="agent-avatar"
@@ -602,7 +603,7 @@ const PuStackCareMobile = () => {
 										<div
 											className={sent_by === "student" ? "student" : "agent"}
 										>
-											<ImageMsg
+											<ImageMsg height={100} width={100}
 												attachment={attachment}
 												setOpenModal={setOpenModal}
 												setImageUrl={setImageUrl}
@@ -630,7 +631,7 @@ const PuStackCareMobile = () => {
 									>
 										{sent_by !== "student" &&
 											(position === "none" || position === "bottom") && (
-												<img
+												<Image1 height={100} width={100}
 													src={CircleLogo}
 													alt="agent"
 													className="agent-avatar"
@@ -652,7 +653,7 @@ const PuStackCareMobile = () => {
 										}}
 									>
 										{sent_by !== "student" && (
-											<img
+											<Image1 height={100} width={100}
 												src={CircleLogo}
 												alt="agent"
 												className="agent-avatar"
@@ -682,7 +683,7 @@ const PuStackCareMobile = () => {
 									>
 										{sent_by !== "student" &&
 											(position === "none" || position === "bottom") && (
-												<img
+												<Image1 height={100} width={100}
 													src={CircleLogo}
 													alt="agent"
 													className="agent-avatar"
@@ -691,7 +692,7 @@ const PuStackCareMobile = () => {
 										<div
 											className={sent_by === "student" ? "student" : "agent"}
 										>
-											<ImageMsg
+											<Image1 height={100} width={100}Msg
 												attachment={attachment}
 												setOpenModal={setOpenModal}
 												setImageUrl={setImageUrl}
@@ -717,7 +718,7 @@ const PuStackCareMobile = () => {
 				{images?.length > 0 && (
 					<>
 						<CancelIcon className="delete-image" onClick={handleImageDelete} />
-						<img className="selected-image" src={images[0]?.url} alt="img" />
+						<Image1 height={100} width={100} className="selected-image" src={images[0]?.url} alt="img" />
 					</>
 				)}
 				<div className="reply-wrapper">
@@ -729,7 +730,7 @@ const PuStackCareMobile = () => {
 						>
 							<label htmlFor="image-picker">
 								<div>
-									<img
+									<Image1 height={100} width={100}
 										className="care__input__image"
 										src={imageGallery}
 										alt="chatImageInput"
@@ -809,7 +810,7 @@ const PuStackCareMobile = () => {
 			>
 				<div className="care-chat-image">
 					<div className="container-img">
-						{imageUrl && <img src={imageUrl} alt="chatimg" draggable={false} />}
+						{imageUrl && <Image1 height={100} width={100} src={imageUrl} alt="chatimg" draggable={false} />}
 						{showPdf && (
 							<PdfPreview
 								pdf={pdfUrl}
@@ -854,7 +855,7 @@ const PuStackCareMobile = () => {
 					/>
 					<div className="info-content">
 						<div>
-							<img src={info} alt="info" />
+							<Image1 height={100} width={100} src={info} alt="info" />
 							<div>
 								<h5>What is PuStack Care?</h5>
 								<p>
@@ -868,7 +869,7 @@ const PuStackCareMobile = () => {
 							</div>
 						</div>
 						<div>
-							<img src={info} alt="info" />
+							<Image1 height={100} width={100} src={info} alt="info" />
 							<div>
 								<h5>Can agents help me know more about PuStack?</h5>
 								<p>
@@ -878,7 +879,7 @@ const PuStackCareMobile = () => {
 							</div>
 						</div>
 						<div>
-							<img src={info} alt="info" />
+							<Image1 height={100} width={100} src={info} alt="info" />
 							<div>
 								<h5>Can I get my academic doubts answered?</h5>
 								<p>
@@ -922,7 +923,7 @@ const ImageMsg = ({
 	}, [attachment]);
 
 	return imageLoaded ? (
-		<img
+		<Image1 height={100} width={100}
 			src={attachment?.attachment_url}
 			alt="img"
 			onClick={() => {
@@ -945,7 +946,7 @@ const ImageMsg = ({
 const PdfAttachment = ({ clickHandler }) => {
 	return (
 		<div className="care-pdf" onClick={clickHandler}>
-			<img src={pdfIcon} alt="img" />
+			<Image1 height={100} width={100} src={pdfIcon} alt="img" />
 			<h6> Tap to View</h6>
 		</div>
 	);

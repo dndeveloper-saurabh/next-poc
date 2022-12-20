@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useContext } from "react";
 // import { Link } from "react-router-dom";
 import Link from 'next/link';
+import Image1 from 'next/image';
 import PlayArrowIcon from "@material-ui/icons/PlayArrow";
 import { SubjectModalContext, ThemeContext } from "../../../context";
 import { logoDark2, logoLight2 } from "../../../public/assets";
@@ -50,17 +51,17 @@ export default function ChapterListCard({
 
   return (
     <Link
-      href={path ? path : `/classroom?subject=${code}&chapter=${chapter_id}`}
+      href={path ? path() : `/auth_classroom?subject=${code}&chapter=${chapter_id}`}
       onClick={() => setIsOpen(false)}
     >
       <div className="chapter__card">
         <div className="chapter__serial">{serial + 1}</div>
         <Link
-          href={path ? path : `/classroom?subject=${code}&chapter=${chapter_id}`}
+          href={path ? path() : `/auth_classroom?subject=${code}&chapter=${chapter_id}`}
           className="chapter__thumbnail"
         >
           <div className="chapter__thumbnail__wrapper">
-            <img
+            <Image1 height={100} width={100}
               src={
                 imageLoaded ? illustration_art : isDark ? logoDark2 : logoLight2
               }

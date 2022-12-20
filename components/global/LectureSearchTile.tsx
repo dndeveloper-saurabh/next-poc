@@ -7,6 +7,7 @@ import NotesSVG from "../../public/assets/images/pdf.svg";
 import YoutubeEmbed from "../../components/global/YoutubeEmbed";
 // import {useHistory} from "react-router-dom";
 import {ClassroomContext} from "../../context";
+import Image from 'next/image';
 
 const LectureSearchTile = ({
 	                           video_id,
@@ -43,7 +44,7 @@ const LectureSearchTile = ({
 		setActiveItem({
 			parent, item
 		});
-		router.push('/classroom?' + query.toString());
+		router.push('/auth_classroom?' + query.toString());
 
 	}
 
@@ -64,7 +65,7 @@ const LectureSearchTile = ({
 				<h6>{title}</h6>
 				{pdfUrl && (
 					<button onClick={() => setShowPdf(true)}>
-						<img className="notes__svg" alt="PuStack Notes" src={NotesSVG} />
+						<Image height={100} width={100} className="notes__svg" alt="PuStack Notes" src={NotesSVG} />
 					</button>
 				)}
 			</div>

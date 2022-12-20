@@ -284,7 +284,7 @@ class ClassroomClassroomPlayerPlayer extends Component {
                 {/*/>*/}
               </div>
               <div className="classroom__video__branding">
-                <Image src={nounBook} alt="pustack logo" draggable={false} />
+                <Image height={100} width={100} src={nounBook} alt="pustack logo" draggable={false} />
               </div>
             </div>
           )
@@ -294,7 +294,7 @@ class ClassroomClassroomPlayerPlayer extends Component {
             onClick={() => isSmallScreen && setVideoSeeking(false)}
           >
             <div className="classroom__video__branding">
-              <Image src={nounBook} alt="pustack logo" draggable={false} />
+              <Image height={100} width={100} src={nounBook} alt="pustack logo" draggable={false} />
             </div>
             <h6 className="classroom__video__text">This is a Pro Content</h6>
           </div>
@@ -310,7 +310,7 @@ class ClassroomClassroomPlayerPlayer extends Component {
                   : "hidden",
             }}
           >
-            <Image
+            <Image height={100} width={100}
               className="placeholder__logo"
               src={logoDark}
               alt="PuStack"

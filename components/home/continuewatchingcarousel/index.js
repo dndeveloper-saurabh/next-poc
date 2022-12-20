@@ -87,7 +87,7 @@ const ContinueWatchingCarousel = ({ setisContinueWatching }) => {
         <div className="dummy-carousel-placeholder"></div>
         {lastEngagement.map((data, i) => (
           <Link
-            href={`/classroom?subject=${getSubjectName(
+            href={`/auth_classroom?subject=${getSubjectName(
               data?.subject_id
             )}&chapter=${data?.chapter_id}`}
             key={data?.chapter_id}

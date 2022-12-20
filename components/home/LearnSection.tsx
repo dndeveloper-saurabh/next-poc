@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import ContentLoader from "react-content-loader";
 import { useMediaQuery } from "react-responsive";
+import Image from 'next/image';
 import {
 	SubjectModalContext,
 	UserContext,
@@ -666,9 +667,9 @@ const SubTile = ({
 			onClick={() => onSubjectClick(subjectCode, name, imageUrl)}
 		>
 			<div className={`sub-tile ${name}`}>
-				<img className="sub-bg" src={bg} alt="svg" draggable={false} />
+				<Image height={100} width={100} className="sub-bg" src={bg} alt="svg" draggable={false} />
 				{isLoading ? (
-					<img
+					<Image height={100} width={100}
 						className="sub-icon loading"
 						src={logoDark2}
 						alt={"logo"}
@@ -676,7 +677,7 @@ const SubTile = ({
 						key={name}
 					/>
 				) : (
-					<img
+					<Image height={100} width={100}
 						className="sub-icon"
 						src={imageUrl}
 						alt={`${name}`}

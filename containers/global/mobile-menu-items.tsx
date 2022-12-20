@@ -4,6 +4,7 @@ import Icon from "@material-ui/core/Icon";
 // import { Link, useLocation } from "react-router-dom";
 import Link from 'next/link';
 import {useRouter} from 'next/router';
+import Image from 'next/image';
 
 import homeIcon from "../../public/assets/images/icons/home.svg";
 import liveIcon from "../../public/assets/images/icons/live.svg";
@@ -79,7 +80,7 @@ export default function MobileMenuItems({
 				>
 					<div className="nav__box__wrapper">
 						<Icon className="nav__icon">
-							<img
+							<Image height={100} width={100}
 								className="nav__icon__img"
 								src={
 									selectedMenuItem === "homepage"
@@ -173,7 +174,7 @@ export default function MobileMenuItems({
 									</div>
 								</div>
 							)}
-							<img
+							<Image height={100} width={100}
 								className="nav__icon__img"
 								src={blazeIcon}
 								alt="Blaze Icon"
@@ -214,7 +215,7 @@ export default function MobileMenuItems({
 									</div>
 								</div>
 							)}
-							<img
+							<Image height={100} width={100}
 								className="nav__icon__img"
 								src={
 									selectedMenuItem === "videos"
@@ -269,7 +270,7 @@ export default function MobileMenuItems({
 //           </div>
 //         </div>
 //       )}
-//       <img
+//       <Image height={100} width={100}
 //         className="nav__icon__img"
 //         src={
 //           selectedMenuItem === "doubts"
@@ -305,7 +306,7 @@ export default function MobileMenuItems({
 // >
 //   <div className="nav__box__wrapper">
 //     <Icon className="nav__icon">
-//       <img
+//       <Image height={100} width={100}
 //         className="nav__icon__img"
 //         src={
 //           selectedMenuItem === "news"

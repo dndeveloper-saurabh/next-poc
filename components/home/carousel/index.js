@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useCallback, useContext } from "react";
 import Modal from "react-modal";
 // import { useHistory } from "react-router-dom";
+import Image from 'next/image';
 import {useRouter} from 'next/router';
 import ContentLoader from "react-content-loader";
 import CancelIcon from "@material-ui/icons/Cancel";
@@ -14,6 +15,7 @@ import {
   ThemeContext,
   UserContext,
 } from "../../../context";
+import {getYoutubeID} from '../../../helpers'
 
 export const getMainCarouselData = async ({ grade, tier_type }) => {
   const snapshot = await require('../../../firebase-config').db
@@ -23,13 +25,6 @@ export const getMainCarouselData = async ({ grade, tier_type }) => {
 
   // TODO: Temporary solution as we dont have any carousel/banner for class 9 web
   return snapshot.docs.map((doc) => doc.data()).filter(c => ["all", "web", "tablet"].includes(c.device_type));
-};
-
-const getYoutubeID = (url) => {
-  const regExp =
-    /^.*(?:(?:youtu\.be\/|v\/|vi\/|u\/\w\/|embed\/)|(?:(?:watch)?\?v(?:i)?=|\&v(?:i)?=))([^#\&\?]*).*/;
-  const match = url.match(regExp);
-  return match && match[1].length === 11 ? match[1] : false;
 };
 
 export default function HomePageCarouselSlider() {
@@ -155,7 +150,8 @@ export default function HomePageCarouselSlider() {
                       rel="noopener noreferrer"
                     >
                       <div className="embla__slide__img__wrapper">
-                        <img
+                        <Image height={100} width={100}
+                          unoptimized={true}
                           className="embla__slide__img"
                           src={item?.web_banner}
                           alt="slideimg"
@@ -164,7 +160,8 @@ export default function HomePageCarouselSlider() {
                     </a>
                   ) : (
                     <div className="embla__slide__img__wrapper">
-                      <img
+                      <Image height={100} width={100}
+                        unoptimized={true}
                         className="embla__slide__img"
                         src={item?.web_banner}
                         alt="slideimg"

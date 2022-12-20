@@ -8,7 +8,7 @@ const getDailyEngagement = async (
 	prevYearMonth,
 	isDateLessThan7
 ) => {
-	const currMonthData = await db
+	const currMonthData = await require('../../firebase-config').db
 		.collection("user_engagement")
 		.doc("daily_engagement")
 		.collection(userId)
@@ -23,7 +23,7 @@ const getDailyEngagement = async (
 	let prevMonthData = null;
 
 	if (isDateLessThan7) {
-		prevMonthData = await db
+		prevMonthData = await require('../../firebase-config').db
 			.collection("user_engagement")
 			.doc("daily_engagement")
 			.collection(userId)
@@ -241,8 +241,9 @@ const UserAnalytics = ({ aspectRatio }) => {
 								textAlign: "left",
 								lineHeight: 0.5,
 							}}
-							content={<CustomTooltip />}
+							content={<CustomTooltip active={undefined} payload={undefined} label={undefined} />}
 							cursor={true}
+							// @ts-ignore
 							position={{ x: "auto", y: 0 }}
 						/>
 						<Line

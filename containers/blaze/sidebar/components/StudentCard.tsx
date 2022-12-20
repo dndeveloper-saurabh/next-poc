@@ -136,13 +136,13 @@ const BlazeStudentCard = React.forwardRef(({
 								<div className="instructor-inner">
 									{instructorImage ? (
 										<div className="instructor-img">
-											<img
+											<Image height={100} width={100}
 												src={instructorImage}
 												className="image__instructor"
 												draggable={false}
 												alt="ins"
 											/>
-											<Image
+											<Image height={100} width={100}
 												src={verifiedCheck}
 												alt="v"
 												className="image__verified"
@@ -151,7 +151,7 @@ const BlazeStudentCard = React.forwardRef(({
 										</div>
 									) : type === "completed" ? (
 										<div className="instructor-img">
-											<img
+											<Image height={100} width={100}
 												src={unAssigned}
 												className="image__instructor"
 												alt="un"

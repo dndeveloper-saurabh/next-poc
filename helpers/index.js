@@ -96,12 +96,12 @@ export const getAvailableGrades = (reduced, excludeClass2, isProduction) => {
 
 
 export const loadingWrapper = () => {
-  document.querySelector(".loading__wrapper").style.display = "flex";
+  // document.querySelector(".loading__wrapper").style.display = "flex";
   document.body.style.position = "fixed";
   document.body.style.top = `-${window.scrollY}px`;
 
   setTimeout(() => {
-    document.querySelector(".loading__wrapper").style.display = "none";
+    // document.querySelector(".loading__wrapper").style.display = "none";
 
     const scrollY = document.body.style.top;
     document.body.style.position = "";
@@ -109,6 +109,55 @@ export const loadingWrapper = () => {
     window.scrollTo(0, parseInt(scrollY || "0") * -1);
   }, 3000);
 };
+
+export const getYoutubeID = (url) => {
+  const regExp =
+    /^.*(?:(?:youtu\.be\/|v\/|vi\/|u\/\w\/|embed\/)|(?:(?:watch)?\?v(?:i)?=|\&v(?:i)?=))([^#\&\?]*).*/;
+  const match = url.match(regExp);
+  return match && match[1].length === 11 ? match[1] : false;
+};
+
+export const loadScript = (src) => {
+  return new Promise((resolve) => {
+    const script = document.createElement("script");
+    script.src = src;
+    script.onload = () => {
+      resolve(true);
+    };
+    script.onerror = () => {
+      resolve(false);
+    };
+    document.body.appendChild(script);
+  });
+}
+
+export const RTMConfig = {
+  appId: '320f1867bc3d4922b4da5963a9f2b760'
+}
+
+export const RTCConfig = {
+  appId: '320f1867bc3d4922b4da5963a9f2b760'
+}
+
+export const WHITEBOARConfig = {
+  appIdentifier: 'VHBvQEEXEeuIHrEufR7KaQ/cMKLzXlzkZaSoQ'
+}
+
+export const baseUrl = () => {
+  if(process.env.NODE_ENV === "production") return 'https://us-central1-avian-display-193502.cloudfunctions.net'
+  // return 'http://localhost:5001/avian-display-193502/us-central1'
+  return 'https://us-central1-avian-display-193502.cloudfunctions.net'
+}
+
+export const AGORA_ROUTES = {
+  getRTMToken: '/getRTMToken',
+  getRTCToken: '/getRTCToken',
+  createRoom: '/createRoom',
+  getRoomToken: '/getRoomToken',
+  getTaskToken: '/getTaskToken',
+  uploadFileToS3: '/uploadFileToS3',
+  fileConversionAgora: '/fileConversionAgora',
+}
 
 
 export const SNACKBAR_TYPES = ['success', 'warning', 'help', 'error']

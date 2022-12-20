@@ -6,7 +6,7 @@ import ClearIcon from "@material-ui/icons/Clear";
 import CancelIcon from "@material-ui/icons/Cancel";
 import HistoryIcon from "@material-ui/icons/History";
 import CallMadeIcon from "@material-ui/icons/CallMade";
-
+import Image from 'next/image';
 import {
 	elasticHeaders,
 	META_QUERY_API,
@@ -240,7 +240,7 @@ const PuStackSearch = ({ openSearchBox, setOpenSearchBox }) => {
 					}}
 					onKeyPress={(e) => e.key === "Enter" && fetchQueryResults(searchText)}
 				/>
-				<img src={searchIcon} key="pustack-search" alt="search-icon" />
+				<Image height={100} width={100} src={searchIcon} key="pustack-search" alt="search-icon" />
 				{isLoading && (
 					<div className="loading-results">
 						<Lottie options={{ animationData: circularProgress, loop: true }} />
@@ -282,7 +282,7 @@ const PuStackSearch = ({ openSearchBox, setOpenSearchBox }) => {
 							onClick={() => fetchQueryResults(searchText)}
 						>
 							<h5>
-								<img src={searchIcon} key="pustack-search" alt="search-icon" />
+								<Image height={100} width={100} src={searchIcon} key="pustack-search" alt="search-icon" />
 							</h5>
 							<h6>
 								Search for <span>{searchText}</span>
@@ -323,7 +323,7 @@ const PuStackSearch = ({ openSearchBox, setOpenSearchBox }) => {
 											fetchQueryResults(query);
 										}}
 									>
-										<img src={searchIcon} key={i} alt="search-icon" />
+										<Image height={100} width={100} src={searchIcon} key={i} alt="search-icon" />
 										<span>{query}</span>
 									</h6>
 									<CallMadeIcon onClick={() => setSearchText(query)} />
@@ -340,7 +340,7 @@ const PuStackSearch = ({ openSearchBox, setOpenSearchBox }) => {
 											fetchQueryResults(suggestion);
 										}}
 									>
-										<img src={searchIcon} key={i} alt="search-icon" />
+										<Image height={100} width={100} src={searchIcon} key={i} alt="search-icon" />
 										<span>{suggestion}</span>
 									</h6>
 									<CallMadeIcon onClick={() => setSearchText(suggestion)} />

@@ -10,6 +10,7 @@ import Link from 'next/link';
 import Axios from 'axios';
 import {firebaseAPiKey} from "../../helpers";
 import {useRouter} from 'next/router';
+import Image from 'next/image';
 // import { Link, useLocation, useHistory } from "react-router-dom";
 import FileCopyOutlinedIcon from "@material-ui/icons/FileCopyOutlined";
 // TODO: Find another alternative of react-share
@@ -77,7 +78,7 @@ const generateInvitationLink = async (uid) => {
 };
 
 const getReferredUserList = async (uid) => {
-	return await db
+	return await require('../../firebase-config').db
 		.collection("referrals")
 		.doc(uid)
 		.get()
@@ -254,21 +255,21 @@ const AccountSettings = ({ setBackdrop, profileVisibility }) => {
 			/>
 			<div className="referral-program-div">
 				<div className="referral-program-list">
-					<img src={ShareLink} alt="generate" draggable={false} />
+					<Image height={100} width={100} src={ShareLink} alt="generate" draggable={false} />
 					<div>
 						<h4>1. Generate link</h4>
 						<h6>Generate your unique referral link</h6>
 					</div>
 				</div>
 				<div className="referral-program-list">
-					<img src={Friends} alt="invite" draggable={false} />
+					<Image height={100} width={100} src={Friends} alt="invite" draggable={false} />
 					<div>
 						<h4>2. Invite friends</h4>
 						<h6>Invite your friends to sign up through your referral link</h6>
 					</div>
 				</div>
 				<div className="referral-program-list">
-					<img src={OpenGift} alt="rewards" draggable={false} />
+					<Image height={100} width={100} src={OpenGift} alt="rewards" draggable={false} />
 					<div>
 						<h4>3. Get rewards</h4>
 						<h6>
@@ -293,7 +294,7 @@ const AccountSettings = ({ setBackdrop, profileVisibility }) => {
 			/>
 			<div className="referral-program-div">
 				<div className="referral-program-list granted">
-					<img src={info} alt="generate" draggable={false} />
+					<Image height={100} width={100} src={info} alt="generate" draggable={false} />
 					<div>
 						<h4>What happened?</h4>
 						<h6>
@@ -305,7 +306,7 @@ const AccountSettings = ({ setBackdrop, profileVisibility }) => {
 					</div>
 				</div>
 				<div className="referral-program-list granted">
-					<img src={info} alt="invite" draggable={false} />
+					<Image height={100} width={100} src={info} alt="invite" draggable={false} />
 					<div>
 						<h4>Can I earn more?</h4>
 						<h6>
@@ -334,10 +335,10 @@ const AccountSettings = ({ setBackdrop, profileVisibility }) => {
 				<div className="referral-graph">
 					<div className="main-user">
 						<div className="user-ring"></div>
-						<img src={user?.profile_url} alt={user?.name} draggable={false} />
+						<Image height={100} width={100} src={user?.profile_url} alt={user?.name} draggable={false} />
 					</div>
 					{referredList?.slice(0, 5)?.map((item, i) => (
-						<img
+						<Image height={100} width={100}
 							src={item.profile_url}
 							className={`referred-${i}`}
 							alt={item?.name}
@@ -347,7 +348,7 @@ const AccountSettings = ({ setBackdrop, profileVisibility }) => {
 					{[planet1, planet2, planet3, planet4, planet5, planet6].map(
 						(planet, i) => (
 							planet
-							// <img
+							// <Image height={100} width={100}
 							//   src={planet}
 							//   className={`planet-${i}`}
 							//   alt="planet"
@@ -361,7 +362,7 @@ const AccountSettings = ({ setBackdrop, profileVisibility }) => {
 					<div className="referred-friends">
 						{referredList?.map((item) => (
 							<div key={item?.name} className="referred-details-wrapper">
-								<img
+								<Image height={100} width={100}
 									src={item.profile_url}
 									alt={item?.name}
 									draggable={false}
@@ -413,7 +414,7 @@ const AccountSettings = ({ setBackdrop, profileVisibility }) => {
 			<div>
 				{user ? (
 					<div className="account-settings">
-						<div ref={(ref) => (recaptchaRef = ref)}>
+						<div ref={recaptchaRef}>
 							<div id="recaptcha-container" />
 						</div>
 						<Snackbar
@@ -432,9 +433,9 @@ const AccountSettings = ({ setBackdrop, profileVisibility }) => {
 								onClick={(e) =>
 									isSmallScreen ? handleAccountSettingsOpen() : handleClick(e)
 								}
-								referrerPolicy="no-referrer"
+								// referrerPolicy="no-referrer"
 							>
-								<img
+								<Image height={100} width={100}
 									className="navigation-profile-img"
 									src={user?.profile_url ? user?.profile_url : defaultPic}
 									alt="dp"
@@ -536,7 +537,7 @@ const AccountSettings = ({ setBackdrop, profileVisibility }) => {
 						>
 							<div className="referral-program">
 								<h1>Share</h1>
-								<img
+								<Image height={100} width={100}
 									src={referralImage}
 									alt="referral"
 									className="referral-banner"
@@ -588,7 +589,7 @@ const AccountSettings = ({ setBackdrop, profileVisibility }) => {
 									<WhatsappShareButton
 										url={referralLink}
 										title="PuStack invitation link"
-										seperator=": "
+										separator=": "
 										windowHeight={52}
 										windowWidth={52}
 										className="whatsapp-btn"
@@ -599,7 +600,7 @@ const AccountSettings = ({ setBackdrop, profileVisibility }) => {
 							</div>
 						</Modal>
 
-						<AccountSettingsViews anchorEl={anchorEl} setAnchorEl={setAnchorEl} isOpen={isOpen} setIsOpen={setIsOpen} profileVisibility={profileVisibility} setBackdrop={setBackdrop} />
+						<AccountSettingsViews anchorEl={anchorEl} setAnchorEl={setAnchorEl} isOpen={isOpen} setIsOpen={setIsOpen} setBackdrop={setBackdrop} />
 
 						<Drawer
 							variant="temporary"
@@ -671,7 +672,7 @@ const AccountSettings = ({ setBackdrop, profileVisibility }) => {
 			{/*    <div className="grade_change-item-container">*/}
 			{/*      {grades.map(gradeItem => (*/}
 			{/*        <div onClick={() => setActiveGradeItemInModal(gradeItem.value)} className={"grade_change-item" + (gradeItem.enable ? '' : ' disabled') + (activeGradeItemInModal === gradeItem.value ? ' active' : '') + (user?.grade === gradeItem.value ? ' current' : '')}>*/}
-			{/*          <img src={gradeItem.planet} alt={gradeItem.name}/>*/}
+			{/*          <Image height={100} width={100} src={gradeItem.planet} alt={gradeItem.name}/>*/}
 			{/*          <h4>{gradeItem.name}</h4>*/}
 			{/*        </div>*/}
 			{/*      ))}*/}

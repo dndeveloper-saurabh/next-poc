@@ -14,7 +14,7 @@ import {careFormattedDate} from "../../helpers/functions/careFormattedDate";
 import {groupCareMessages} from "../../helpers/functions/groupCareMessages";
 import {makeUniqueId} from "../../helpers/functions/makeUniqueId";
 import { UserContext, ThemeContext } from "../../context";
-
+import Image1 from 'next/image';
 import pdfIcon from "../../public/assets/images/pdf.svg";
 import SendIcon from "../../public/assets/blaze/sendIcon";
 import info from "../../public/assets/pustackCareChat/info.svg";
@@ -505,7 +505,7 @@ const PuStackCare = () => {
 			<div className="care-chat-body">
 				{showLogo && (
 					<div className="pustack-education fadeIn">
-						<img alt="pc" src={CircleLogo} ref={visibilityRef} />
+						<Image1 height={100} width={100} alt="pc" src={CircleLogo} ref={visibilityRef} />
 						<h3>PuStack Education</h3>
 						<p>Our student care agents are always happy to help.</p>
 					</div>
@@ -542,7 +542,7 @@ const PuStackCare = () => {
 									>
 										{sent_by !== "student" &&
 											(position === "none" || position === "bottom") && (
-												<img
+												<Image1 height={100} width={100}
 													src={CircleLogo}
 													alt="agent"
 													className="agent-avatar"
@@ -572,7 +572,7 @@ const PuStackCare = () => {
 										}}
 									>
 										{sent_by !== "student" && (
-											<img
+											<Image1 height={100} width={100}
 												src={CircleLogo}
 												alt="agent"
 												className="agent-avatar"
@@ -611,7 +611,7 @@ const PuStackCare = () => {
 									>
 										{sent_by !== "student" &&
 											(position === "none" || position === "bottom") && (
-												<img
+												<Image1 height={100} width={100}
 													src={CircleLogo}
 													alt="agent"
 													className={"agent-avatar"}
@@ -620,7 +620,7 @@ const PuStackCare = () => {
 										<div
 											className={sent_by === "student" ? "student" : "agent"}
 										>
-											<ImageMsg
+											<ImageMsg height={100} width={100}
 												attachment={attachment}
 												setOpenModal={setOpenModal}
 												setImageUrl={setImageUrl}
@@ -656,7 +656,7 @@ const PuStackCare = () => {
 									>
 										{sent_by !== "student" &&
 											(position === "none" || position === "bottom") && (
-												<img
+												<Image1 height={100} width={100}
 													src={CircleLogo}
 													alt="agent"
 													className={"agent-avatar"}
@@ -686,7 +686,7 @@ const PuStackCare = () => {
 										}}
 									>
 										{sent_by !== "student" && (
-											<img
+											<Image1 height={100} width={100}
 												src={CircleLogo}
 												alt="agent"
 												className="agent-avatar"
@@ -724,7 +724,7 @@ const PuStackCare = () => {
 									>
 										{sent_by !== "student" &&
 											(position === "none" || position === "bottom") && (
-												<img
+												<Image1 height={100} width={100}
 													src={CircleLogo}
 													alt="agent"
 													className={"agent-avatar"}
@@ -733,7 +733,7 @@ const PuStackCare = () => {
 										<div
 											className={sent_by === "student" ? "student" : "agent"}
 										>
-											<ImageMsg
+											<Image1 height={100} width={100}
 												attachment={attachment}
 												setOpenModal={setOpenModal}
 												setImageUrl={setImageUrl}
@@ -760,7 +760,7 @@ const PuStackCare = () => {
 				{images?.length > 0 && (
 					<>
 						<CancelIcon className="delete-image" onClick={handleImageDelete} />
-						<img className="selected-image" src={images[0]?.url} alt="img" />
+						<Image1 height={100} width={100} className="selected-image" src={images[0]?.url} alt="img" />
 					</>
 				)}
 				<div className="reply-wrapper">
@@ -772,7 +772,7 @@ const PuStackCare = () => {
 						>
 							<label htmlFor="image-picker">
 								<div>
-									<img
+									<Image1 height={100} width={100}
 										className="care__input__image"
 										src={imageGallery}
 										alt="chatImageInput"
@@ -856,7 +856,7 @@ const PuStackCare = () => {
 			>
 				<div className="care-chat-image">
 					<div className="container-img">
-						{imageUrl && <img src={imageUrl} alt="chatimg" draggable={false} />}
+						{imageUrl && <Image1 height={100} width={100} src={imageUrl} alt="chatimg" draggable={false} />}
 						{showPdf && (
 							<PdfPreview
 								pdf={pdfUrl}
@@ -899,7 +899,7 @@ const PuStackCare = () => {
 					/>
 					<div className="info-content">
 						<div>
-							<img alt="info" src={info} />
+							<Image1 height={100} width={100} alt="info" src={info} />
 							<div>
 								<h5>What is PuStack Care?</h5>
 								<p>
@@ -913,7 +913,7 @@ const PuStackCare = () => {
 							</div>
 						</div>
 						<div>
-							<img src={info} alt="info" />
+							<Image1 height={100} width={100} src={info} alt="info" />
 							<div>
 								<h5>Can agents help me know more about PuStack?</h5>
 								<p>
@@ -923,7 +923,7 @@ const PuStackCare = () => {
 							</div>
 						</div>
 						<div>
-							<img src={info} alt="info" />
+							<Image1 height={100} width={100} src={info} alt="info" />
 							<div>
 								<h5>Can I get my academic doubts answered?</h5>
 								<p>
@@ -967,7 +967,7 @@ const ImageMsg = ({
 	}, [attachment]);
 
 	return imageLoaded ? (
-		<img
+		<Image1 height={100} width={100}
 			src={attachment?.attachment_url}
 			alt="img"
 			onClick={() => {
@@ -990,7 +990,7 @@ const ImageMsg = ({
 const PdfAttachment = ({ clickHandler }) => {
 	return (
 		<div className="care-pdf" onClick={clickHandler}>
-			<img src={pdfIcon} alt="img" />
+			<Image1 height={100} width={100} src={pdfIcon} alt="img" />
 			<h6> Tap to View</h6>
 		</div>
 	);

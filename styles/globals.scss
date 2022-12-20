@@ -429,7 +429,7 @@ header {
   padding-right: 0px !important;
 }
 
-.app {
+.app, #__next {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -1970,6 +1970,7 @@ circle {
 
 .header__leftImage {
   height: 58px;
+  width: unset;
   display: flex;
 }
 
@@ -8588,6 +8589,7 @@ a {
     > img {
       object-fit: contain;
       height: 100%;
+      width: 100%;
       aspect-ratio: 16/9;
     }
 
@@ -19571,6 +19573,7 @@ a {
 
 .header__leftImage {
   height: 58px;
+  width: unset;
   display: flex;
 }
 
@@ -19941,4 +19944,180 @@ small {
     filter: var(--search-icon-filter);
     opacity: 1;
   }
+}
+
+h3 {
+  // color: #111111;
+  color: var(--color-text);
+}
+
+.home__top {
+  padding: 0px 16px;
+  padding-top: 16px;
+  align-items: center;
+
+  h3 {
+    animation: flowingText 6s linear both infinite;
+    background: linear-gradient(to left, #9ce85e 5%, #1fbfff 50%, #9ce85e 95%);
+    background-size: 200% auto;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-fill-color: transparent;
+  }
+
+  div {
+    display: flex;
+    justify-content: space-between;
+  }
+}
+
+.home__categories {
+  width: 344px;
+  background-color: var(--color-primary);
+  padding: 0px 0px;
+}
+
+.home {
+  width: 100%;
+  overflow-x: hidden;
+  background: var(--color-base);
+}
+
+.sidebarResetBtn {
+  color: darkgreen;
+  cursor: pointer;
+  font-size: 12px;
+  // background: rgba(0, 128, 0, 0.281);
+  margin-top: 0.4rem;
+  padding: 0px 8px 1px 8px;
+  border-radius: 25px;
+  border: 1px solid rgba(49, 190, 49, 0.6);
+}
+
+.sidebarResetBtnDark {
+  color: lightgreen;
+  border: 1px solid rgba(144, 238, 144, 0.6);
+}
+
+.categoriesRow {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  margin-top: 12px;
+}
+
+.noTextSelection {
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  user-select: none; /* Non-prefixed version, currently
+    supported by Chrome, Edge, Opera and Firefox */
+}
+
+.topics_toBar {
+  margin: 0px 8px;
+  padding: 8px 0px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.topics_topBar {
+  padding: 10px 16px;
+  margin: 0px 3px;
+}
+
+.subjectsChips {
+  padding: 0px 16px;
+  margin-top: 6px;
+
+  > button > a {
+    text-decoration: none;
+  }
+}
+
+.doubts__sidebar {
+  border-right: 1px solid rgba(0, 0, 0, 0.12);
+  min-height: calc(100vh - 75px);
+  background-color: var(--color-primary);
+  width: 344px;
+  left: 0;
+  top: var(--header-height);
+  bottom: 0;
+  box-shadow: var(--shadow-sidebar);
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-bottom: 1rem;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  @media screen and (min-width: 1200px) {
+    position: fixed !important;
+  }
+
+  @media only screen and (max-width: 1200px) {
+    min-height: 100vh;
+  }
+}
+.doubts__sidebar__dark {
+  background-color: #161616;
+  box-shadow: 1px 1px 5px rgb(32, 32, 32);
+
+  .home__categories {
+    background-color: #161616;
+  }
+
+  .home__top {
+    h3 {
+      color: white;
+    }
+    h4 {
+      svg {
+        margin-top: -0.25rem;
+        height: 40px;
+        width: 40px;
+      }
+    }
+  }
+
+  .categoryTile {
+    p {
+      color: lightgray;
+    }
+  }
+
+  .categoryTile:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+  }
+
+  .tabs {
+    background-color: rgb(61, 61, 61);
+  }
+
+  .tabs__label {
+    color: white;
+  }
+
+  .sortAndFilter__middleListItem {
+    color: white;
+  }
+
+  .askDoubtPopup__btn {
+    background-color: #bb281b;
+  }
+}
+
+.MuiPaper-root {
+  .doubts__sidebar {
+    top: 0;
+    padding-top: 0.75rem;
+  }
+}
+
+.greySidebar {
+  filter: grayscale(0.75);
+  user-select: none;
+  pointer-events: none;
 }

@@ -676,7 +676,7 @@ export default function OnBoardingFlow({setCloseInstallApp = () => {}, isOpen = 
               setIsUserProTier(tier !== "free");
               setIsInstructor(is_instructor);
               // loadingWrapper();
-              sendToUrl("/auth_classroom?subject=maths&chapter=class_9_learn_maths_areasofparallelogramtriangles");
+              sendToUrl("/");
             }, 2000);
             return setTimeout(handleSliderClose, 1500);
           }
@@ -970,7 +970,7 @@ export default function OnBoardingFlow({setCloseInstallApp = () => {}, isOpen = 
         );
         localStorage.setItem("isInstructor", JSON.stringify(false));
         localStorage.setItem("isUserPro", JSON.stringify(false));
-        sendToUrl("/auth_classroom?subject=maths&chapter=class_9_learn_maths_areasofparallelogramtriangles");
+        sendToUrl("/");
       }, 2000);
 
       setTimeout(() => setOpenFreeTrial(true), 6000);
@@ -1172,13 +1172,13 @@ export default function OnBoardingFlow({setCloseInstallApp = () => {}, isOpen = 
         <div className="first__page__inner">
           <div className="top__area" />
           <div className="plan__success">
-            <Image src={logoDark} alt="logo" />
+            <Image height={100} width={100} src={logoDark} alt="logo" />
             <h6>
               Learning made simple. <span>Aasaan hai!</span>
             </h6>
           </div>
           <div className="snippet__video">
-            <Image style={{width: '100%', position: 'absolute', display: 'block'}} src={snipperFirstFrame} alt=""/>
+            <Image height={100} width={100} style={{width: '100%', position: 'absolute', display: 'block'}} src={snipperFirstFrame} alt=""/>
             <video
               onCanPlay={() => {
                 setCanPlay(true);
@@ -1194,7 +1194,7 @@ export default function OnBoardingFlow({setCloseInstallApp = () => {}, isOpen = 
           </div>
           <div className="registration__page">
             <div className="phone__number">
-              <div ref={(ref) => (recaptchaRef = ref)}>
+              <div ref={recaptchaRef}>
                 <div id="recaptcha-container" className="recaptcha" />
               </div>
 
@@ -1276,7 +1276,7 @@ export default function OnBoardingFlow({setCloseInstallApp = () => {}, isOpen = 
                   }
                 }}
               >
-                <Image src={Apple} draggable={false} alt="apple icon"/>
+                <Image height={100} width={100} src={Apple} draggable={false} alt="apple icon"/>
                 {socialProcessStarted[2] ? (
                   <Lottie
                     options={{animationData: circularProgress, loop: true}}
@@ -1307,7 +1307,7 @@ export default function OnBoardingFlow({setCloseInstallApp = () => {}, isOpen = 
                   }
                 }}
               >
-                <Image src={Facebook2} draggable={false} alt="facebook icon" />
+                <Image height={100} width={100} src={Facebook2} draggable={false} alt="facebook icon" />
                 {socialProcessStarted[0] ? (
                   <Lottie
                     options={{ animationData: circularProgress, loop: true }}
@@ -1333,7 +1333,7 @@ export default function OnBoardingFlow({setCloseInstallApp = () => {}, isOpen = 
                   }
                 }}
               >
-                <Image src={Google} draggable={false} alt="google icon" />
+                <Image height={100} width={100} src={Google} draggable={false} alt="google icon" />
                 {socialProcessStarted[1] ? (
                   <Lottie
                     options={{ animationData: circularProgress, loop: true }}
@@ -1464,7 +1464,7 @@ export default function OnBoardingFlow({setCloseInstallApp = () => {}, isOpen = 
             </div>
             <div className="planets__wrapper">
               {planetsArray.map((planet, i) => (
-                <Image
+                <Image height={100} width={100}
                   key={i}
                   alt={`planet${i + 1}`}
                   className={`planet${i + 1}${
@@ -1476,21 +1476,21 @@ export default function OnBoardingFlow({setCloseInstallApp = () => {}, isOpen = 
               ))}
             </div>
             <div className="enter__code">
-              <Image
+              <Image height={100} width={100}
                 alt="code-vault"
                 className="code"
                 src={phoneVerification}
                 draggable={false}
               />
               <h6 className={`tapBg ${handMovementClasses[lastInput]}`}></h6>
-              <Image
+              <Image height={100} width={100}
                 alt="phoneVerificationHand"
                 className={`hand ${handMovementClasses[lastInput]}`}
                 src={phoneVerificationHand}
                 draggable={false}
               />
 
-              <Image
+              <Image height={100} width={100}
                 src={planetEarth}
                 className="earth"
                 alt="planetEarth"
@@ -1604,7 +1604,7 @@ export default function OnBoardingFlow({setCloseInstallApp = () => {}, isOpen = 
                 )}
               </div>
               <div className="phone__input">
-                <div ref={(ref) => (recaptchaRef = ref)}>
+                <div ref={recaptchaRef}>
                   <div id="recaptcha-container" className="recaptcha" />
                 </div>
 
@@ -1633,7 +1633,7 @@ export default function OnBoardingFlow({setCloseInstallApp = () => {}, isOpen = 
               <div className="astronaut__lottie">
                 <Lottie options={{ loop: true, animationData: astronaut }} />
               </div>
-              <Image src={phone} alt="phone" className="phone__social" />
+              <Image height={100} width={100} src={phone} alt="phone" className="phone__social" />
 
               {phoneNumberError && (
                 <div className="error__message fadeIn">
@@ -1709,7 +1709,7 @@ export default function OnBoardingFlow({setCloseInstallApp = () => {}, isOpen = 
                   }
                 }}
               >
-                <Image src={Google} draggable={false} alt="g" />
+                <Image height={100} width={100} src={Google} draggable={false} alt="g" />
                 <h6>
                   CONTINUE WITH GOOGLE{" "}
                   {socialProcessStarted[1] && (
@@ -1743,7 +1743,7 @@ export default function OnBoardingFlow({setCloseInstallApp = () => {}, isOpen = 
                   }
                 }}
               >
-                <Image src={Facebook} draggable={false} alt="fb" />
+                <Image height={100} width={100} src={Facebook} draggable={false} alt="fb" />
                 <h6>
                   CONTINUE WITH FACEBOOK
                   {socialProcessStarted[0] && (
@@ -1776,7 +1776,7 @@ export default function OnBoardingFlow({setCloseInstallApp = () => {}, isOpen = 
                   }
                 }}
               >
-                <Image src={Apple} draggable={false} alt="fb"/>
+                <Image height={100} width={100} src={Apple} draggable={false} alt="fb"/>
                 <h6>
                   CONTINUE WITH APPLE
                   {socialProcessStarted[2] && (
@@ -1793,7 +1793,7 @@ export default function OnBoardingFlow({setCloseInstallApp = () => {}, isOpen = 
             <div className="astronaut__lottie">
               <Lottie options={{ loop: true, animationData: astronaut }} />
             </div>
-            <Image
+            <Image height={100} width={100}
               src={phoneSocial}
               alt="phoneSocial"
               className="phone__social"
@@ -1900,7 +1900,7 @@ export default function OnBoardingFlow({setCloseInstallApp = () => {}, isOpen = 
             </div>
             <div className="planets__wrapper">
               {planetsArray.map((planet, i) => (
-                <Image
+                <Image height={100} width={100}
                   key={i}
                   alt={`planet${i + 1}`}
                   className={`planet${i + 1}${
@@ -1912,21 +1912,21 @@ export default function OnBoardingFlow({setCloseInstallApp = () => {}, isOpen = 
               ))}
             </div>
             <div className="enter__code">
-              <Image
+              <Image height={100} width={100}
                 alt="code-vault"
                 className="code"
                 src={phoneVerification}
                 draggable={false}
               />
               <h6 className={`tapBg ${handMovementClasses[lastInput]}`}></h6>
-              <Image
+              <Image height={100} width={100}
                 alt="phoneVerificationHand"
                 className={`hand ${handMovementClasses[lastInput]}`}
                 src={phoneVerificationHand}
                 draggable={false}
               />
 
-              <Image
+              <Image height={100} width={100}
                 src={planetEarth}
                 className="earth"
                 alt="planetEarth"
@@ -2009,7 +2009,7 @@ export default function OnBoardingFlow({setCloseInstallApp = () => {}, isOpen = 
               <div className={"class__item" + ((isProduction ? enableToSelect : true) ? '' : ' disabled') + (activeUserGrade === value ? ' active' : activeUserGrade ? ' not-active' : '')} onClick={() => {
                 if(isProduction ? enableToSelect : true) setUserGrade(value);
               }} key={value}>
-                <Image src={planet} alt="planet2" draggable={false} />
+                <Image height={100} width={100} src={planet} alt="planet2" draggable={false} />
                 <h6>{grade}</h6>
               </div>
             ))}
@@ -2020,12 +2020,12 @@ export default function OnBoardingFlow({setCloseInstallApp = () => {}, isOpen = 
             {/*]*/}
           </div>
 
-          <Image src={comet} alt="comet" className="comet" />
-          <Image src={comet} alt="comet2" className="comet2" />
+          <Image height={100} width={100} src={comet} alt="comet" className="comet" />
+          <Image height={100} width={100} src={comet} alt="comet2" className="comet2" />
 
-          <Image src={gulu} alt="gulu" className="gulu" draggable={false} />
-          <Image src={mars} alt="mars" className="mars" draggable={false} />
-          <Image
+          <Image height={100} width={100} src={gulu} alt="gulu" className="gulu" draggable={false} />
+          <Image height={100} width={100} src={mars} alt="mars" className="mars" draggable={false} />
+          <Image height={100} width={100}
             src={controlRoom}
             alt="control"
             className="control"

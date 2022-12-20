@@ -6,7 +6,7 @@ import "react-phone-input-2/lib/style.css";
 import type { AppProps } from 'next/app';
 import dynamic from 'next/dynamic';
 import { useRouter } from "next/router";
-import {useEffect} from 'react';
+// import {useEffect, useState} from 'react';
 
 // import {
 //   UserContextProvider,
@@ -24,33 +24,52 @@ const SidebarContextProvider = dynamic(() => import("../context/global/SidebarCo
 const SubjectModalContextProvider = dynamic(() => import("../context/global/SubjectModal"));
 const SnackbarContextProvider = dynamic(() => import("../context/snackbar"));
 const ClassroomContextProvider = dynamic(() => import("../context/classroom/index"));
+const LiveSessionContextProvider = dynamic(() => import("../context/livesessions/LiveSessionContext"));
 
-const publicPages = ["/classroom", "/"];
+const publicPages = ["/classroom"];
 
 export default function App({ Component, pageProps }: AppProps) {
   const router = useRouter();
 
+  // const [pageLoading, setPageLoading] = useState<boolean>(false);
+  // useEffect(() => {
+  //   const handleStart = () => { setPageLoading(true); };
+  //   const handleComplete = () => { setPageLoading(false); };
+  //
+  //   router.events.on('routeChangeStart', handleStart);
+  //   router.events.on('routeChangeComplete', handleComplete);
+  //   router.events.on('routeChangeError', handleComplete);
+  // }, [router]);
+
   const isPublicPage = publicPages.includes(router.pathname);
+
+  // if(pageLoading) return (
+  //   <div>
+  //     <h1>Page loading...</h1>
+  //   </div>
+  // )
 
   return (
     <IntroContextProvider>
       <ThemeContextProvider>
         <UserContextProvider>
-          {isPublicPage ? (
-            <Component {...pageProps} />
-          ): (
-            <PustackProContextProvider>
-              <ClassroomContextProvider>
-                <SidebarContextProvider>
-                  <SubjectModalContextProvider>
-                    <SnackbarContextProvider>
-                      <Component {...pageProps} />
-                    </SnackbarContextProvider>
-                  </SubjectModalContextProvider>
-                </SidebarContextProvider>
-              </ClassroomContextProvider>
-            </PustackProContextProvider>
-          )}
+          <PustackProContextProvider>
+            {isPublicPage ? (
+              <Component {...pageProps} />
+            ): (
+                <ClassroomContextProvider>
+                  <SidebarContextProvider>
+                    <SubjectModalContextProvider>
+                      <SnackbarContextProvider>
+                        <LiveSessionContextProvider>
+                          <Component {...pageProps} />
+                        </LiveSessionContextProvider>
+                      </SnackbarContextProvider>
+                    </SubjectModalContextProvider>
+                  </SidebarContextProvider>
+                </ClassroomContextProvider>
+            )}
+          </PustackProContextProvider>
         </UserContextProvider>
       </ThemeContextProvider>
     </IntroContextProvider>

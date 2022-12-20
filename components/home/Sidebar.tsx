@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import format from "date-fns/format";
 import Link from 'next/link';
+import Image from 'next/image';
 import CreateIcon from "@material-ui/icons/Create";
 import MenuBookIcon from "@material-ui/icons/MenuBook";
 import EmojiObjectsIcon from "@material-ui/icons/EmojiObjects";
@@ -98,13 +99,13 @@ const HomeSidebar = ({
           </div>
         </div>
 				}
-				{sessionsToday.length > 0 && (
+				{sessionsToday?.length > 0 && (
 					<>
 						<SectionDivider isDark={isDark} />
 						<div className="today-sessions">
 							<h6 className="today-sessions-heading">TODAY'S CLASSES</h6>
 							<div className="today-sessions-list">
-								{sessionsToday.map(({ session_id, name, start_ts }, i) => (
+								{sessionsToday?.map(({ session_id, name, start_ts }, i) => (
 									<Link key={session_id} href={`/classes/${session_id}`}>
 										<div
 											className={
@@ -132,7 +133,7 @@ const HomeSidebar = ({
 			<div className="section-bottom">
 				<div className={isDark ? "user-pro-section dark" : "user-pro-section"}>
 					<h6>PuStack Pro</h6>
-					<img
+					<Image height={100} width={100}
 						className="user-pro-mask-bg"
 						src={proMaskBg}
 						alt="mask"
@@ -143,7 +144,7 @@ const HomeSidebar = ({
 						className="user-pro-wrapper"
 						onClick={() => setIsSliderOpen(true)}
 					>
-						<img
+						<Image height={100} width={100}
 							className="user-pro-image astronaut"
 							src={astronaut}
 							alt="pro-img"
@@ -152,7 +153,7 @@ const HomeSidebar = ({
 								animationPlayState: isSubjectModalOpen ? "paused" : "running",
 							}}
 						/>
-						<img
+						<Image height={100} width={100}
 							className="user-pro-image planet1"
 							src={planet1}
 							alt="pro-img"
@@ -161,7 +162,7 @@ const HomeSidebar = ({
 								animationPlayState: isSubjectModalOpen ? "paused" : "running",
 							}}
 						/>
-						<img
+						<Image height={100} width={100}
 							className="user-pro-image planet2"
 							src={planet2}
 							alt="pro-img"
@@ -170,7 +171,7 @@ const HomeSidebar = ({
 								animationPlayState: isSubjectModalOpen ? "paused" : "running",
 							}}
 						/>
-						<img
+						<Image height={100} width={100}
 							className="user-pro-image planet3"
 							src={planet3}
 							alt="pro-img"

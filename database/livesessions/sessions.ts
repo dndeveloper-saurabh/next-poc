@@ -37,7 +37,7 @@ const getAvailableGrades = (reduced, excludeClass2?, isProduction?) => {
 
 	// let gradeCollection = 'grades_dev';
 	// // let gradeCollection = process.env.NODE_ENV === 'production' ? 'grades' : 'grades_dev';
-	// const snapshot = await db
+	// const snapshot = await require('../../firebase-config').db
 	//   .collection(gradeCollection)
 	//   .doc('available_grades')
 	//   .get();
@@ -172,19 +172,19 @@ export function Session(updatedSessionData, notes, oldObj, curSessionDetails, up
 	async function getDocRef(getNewDocId) {
 		if(!updatedSessionData.grade.id) throw new Error('Grade id is not present');
 		if(getNewDocId) {
-			return db
+			return require('../../firebase-config').db
 				.collection("live_session")
 				.doc(updatedSessionData.grade.id)
 				.collection("sessions").doc();
 		}
-		return db
+		return require('../../firebase-config').db
 			.collection("live_session")
 			.doc(updatedSessionData.grade.id)
 			.collection("sessions").doc(curSessionDetails.session_id);
 	}
 
 	async function deleteSessionByIdAndGrade(gradeId, sessionId) {
-		return db
+		return require('../../firebase-config').db
 			.collection("live_session")
 			.doc(gradeId)
 			.collection("sessions")
@@ -208,7 +208,7 @@ export function Session(updatedSessionData, notes, oldObj, curSessionDetails, up
 			date
 		})) throw new Error('Grade Id and Date Hash is not valid, It should be in proper format')
 		if (!objToDelete) throw new Error('Object must be provided to delete.');
-		return db
+		return require('../../firebase-config').db
 			.collection("live_session")
 			.doc(gradeId)
 			.collection("calendar_events")
@@ -222,7 +222,7 @@ export function Session(updatedSessionData, notes, oldObj, curSessionDetails, up
 
 	async function addSessionToCalendarEventList(toUpdateObj, sessionId) {
 		let monthStr = formatDateDoc({...updatedSessionData.air_time, date: updatedSessionData.air_time.day}, true, true);
-		return db
+		return require('../../firebase-config').db
 			.collection("live_session")
 			.doc(updatedSessionData.grade.id)
 			.collection("calendar_events")
@@ -251,7 +251,7 @@ export function Session(updatedSessionData, notes, oldObj, curSessionDetails, up
 	async function updateSessionToCalendarEventList(toUpdateObj, sessionId, gradeId, {year, month, date}) {
 		let monthStr = formatDateDoc({...updatedSessionData.air_time, date: updatedSessionData.air_time.day}, true, true);
 
-		const toDeleteRef = db
+		const toDeleteRef = require('../../firebase-config').db
 			.collection("live_session")
 			.doc(gradeId)
 			.collection("calendar_events")
@@ -259,7 +259,7 @@ export function Session(updatedSessionData, notes, oldObj, curSessionDetails, up
 			.collection(`${year}_${month}`)
 			.doc(`${year}_${month}_${date}`);
 
-		const toUpdateRef = db
+		const toUpdateRef = require('../../firebase-config').db
 			.collection("live_session")
 			.doc(updatedSessionData.grade.id)
 			.collection("calendar_events")
@@ -623,7 +623,7 @@ const getColorFromArray = (data) => {
 };
 
 const getReferenceFromSessionID = (session, grade = "class_10") => {
-	return db
+	return require('../../firebase-config').db
 		.collection("live_session")
 		.doc(grade)
 		.collection("sessions")
@@ -747,7 +747,7 @@ export const fetchSessionsForDateByGrade = async (grade, dateSelected, filters) 
 	let _flag = true;
 	if(!grade || !dateSelected) throw new Error('Grade and dateSelected is required to fetch the session for the date by grade.')
 	let indianTime = await castIndianTime();
-	await db.collection('live_session')
+	await require('../../firebase-config').db.collection('live_session')
 		.doc(grade)
 		.collection('calendar_events')
 		.doc('calendar_events')
@@ -1044,13 +1044,13 @@ async function getStatus(date, duration) {
 export const createSession = async (sessionData, notesFile, docId, toDeleteObj, curSessionDetails, uploadProgressCB, completeProgressCB, cloneOptions) => {
 	try {
 
-		let docRef = await db
+		let docRef = await require('../../firebase-config').db
 			.collection("live_session")
 			.doc(sessionData.grade.id)
 			.collection("sessions").doc();
 
 		if(docId) {
-			docRef = await db
+			docRef = await require('../../firebase-config').db
 				.collection("live_session")
 				.doc(sessionData.grade.id)
 				.collection("sessions").doc(docId);
@@ -1181,7 +1181,7 @@ export const createSession = async (sessionData, notesFile, docId, toDeleteObj, 
 		let monthStr = `${sessionData.air_time.year}_${sessionData.air_time.month}`;
 
 		if(docId) {
-			await db
+			await require('../../firebase-config').db
 				.collection("live_session")
 				.doc(toDeleteObj.grade.id)
 				.collection("calendar_events")
@@ -1193,7 +1193,7 @@ export const createSession = async (sessionData, notesFile, docId, toDeleteObj, 
 				}, {merge: true})
 
 			if(sessionData.grade.id !== toDeleteObj.grade.id) {
-				await db
+				await require('../../firebase-config').db
 					.collection("live_session")
 					.doc(toDeleteObj.grade.id)
 					.collection("sessions")
@@ -1203,7 +1203,7 @@ export const createSession = async (sessionData, notesFile, docId, toDeleteObj, 
 		}
 
 
-		await db
+		await require('../../firebase-config').db
 			.collection("live_session")
 			.doc(sessionData.grade.id)
 			.collection("calendar_events")
@@ -1228,7 +1228,7 @@ export const createSession = async (sessionData, notesFile, docId, toDeleteObj, 
 export const deleteSession = async (sessionData) => {
 	try {
 		// Delete from sessions collection
-		const gradeRef = db
+		const gradeRef = require('../../firebase-config').db
 			.collection('live_session')
 			.doc(sessionData.grade.id);
 		const monthStr = `${sessionData.air_time.year}_${sessionData.air_time.month}`

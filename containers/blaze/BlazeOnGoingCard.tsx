@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from "react";
 import RightRoundedIcon from '@material-ui/icons/KeyboardArrowRightRounded';
+import Image from 'next/image';
 
 const getSubject = (arr) => {
 	let sub = "";
@@ -52,7 +53,7 @@ const OngoingCard = ({ onClick, title, gradient, instructorId, sessionId, skill,
 			<div className="student-details">
 				<div className="student-inner">
 					<div className="student-img">
-						<img
+						<Image height={100} width={100}
 							src={instructorImage}
 							className="image__student"
 							draggable={false}

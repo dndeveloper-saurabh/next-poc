@@ -26,7 +26,7 @@ import dynamic from "next/dynamic";
 
 const CheckIcon = () => (
   <Icon>
-    <Image
+    <Image height={100} width={100}
       src={CheckIconImage}
       alt="Check Icon"
       style={{ width: "100%" }}
@@ -37,7 +37,7 @@ const CheckIcon = () => (
 
 const CheckGreenIcon = () => (
   <Icon>
-    <Image
+    <Image height={100} width={100}
       src={CheckIconGreenImage}
       alt="Check Icon"
       style={{ width: "100%" }}
@@ -48,7 +48,7 @@ const CheckGreenIcon = () => (
 
 const LockedIcon = () => (
   <Icon>
-    <Image
+    <Image height={100} width={100}
       src={LockedIconImage}
       alt="Lock Icon"
       style={{ width: "100%" }}
@@ -211,7 +211,7 @@ export default function ClassroomSidebarLectures({
                 isUserProTier ? (
                   classroomNotes ? (
                     <button onClick={() => setIsNotes(true)}>
-                      <img
+                      <Image height={100} width={100}
                         className="notes__svg"
                         alt="PuStack Notes"
                         src={NotesSVG}

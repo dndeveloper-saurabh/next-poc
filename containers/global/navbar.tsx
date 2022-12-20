@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 // import {Link, useLocation} from "react-router-dom";
 import {useRouter} from 'next/router';
 import Link from 'next/link';
+import Image from 'next/image';
 import MenuIcon from "@material-ui/icons/Menu";
 import { useMediaQuery } from "react-responsive";
 import MenuItems, {useStylesBootstrap} from "./menu-items";
@@ -27,9 +28,10 @@ import homeIconSelected2 from "../../public/assets/images/icons/home_selected2.s
 import homeIconSelected from "../../public/assets/images/icons/home_selected.svg";
 import homeIcon from "../../public/assets/images/icons/home.svg";
 import useStandardGrade from "../../hooks/isStandardGrade";
+import useInBrowser from '../../hooks/useInBrowser';
 
 const unreadAnswerNotification = ({ userId, grade, callback }) => {
-	return db.collection("user_notifications")
+	return require('../../firebase-config').db.collection("user_notifications")
 		.doc(grade)
 		.collection("user_notifications")
 		.doc(userId)
@@ -51,7 +53,7 @@ const blazeUnreadMesagesNotification = ({
 	                                               isExternal,
 	                                               callback,
                                                }) => {
-	return db.collection("user_notifications")
+	return require('../../firebase-config').db.collection("user_notifications")
 		.doc(isExternal ? "instructor" : grade)
 		.collection("user_notifications")
 		.doc(userId)
@@ -93,6 +95,8 @@ export default function Navbar({ setMobileOpen, showMenuItem = true }) {
 	const [blazeDarkMode, setBlazeDarkMode] = useState(false);
 	const [closeInstallApp, setCloseInstallApp] =
 		useContext(UserContext).closeInstallApp;
+
+	const inBrowser = useInBrowser();
 
 	const isSmallScreen = useMediaQuery({ query: "(max-width: 720px)" });
 	const isSmallScreen2 = useMediaQuery({ query: "(max-width: 500px)" });
@@ -152,6 +156,11 @@ export default function Navbar({ setMobileOpen, showMenuItem = true }) {
 		setSelectedMenuItem(selected_menu_item);
 	};
 
+	useEffect(() => {
+		let a = ['/', '/home'].includes(router.pathname) ? 'homepage' : router.pathname === '/classes' ? 'videos' : '';
+		setMenuItem(a);
+	}, [router.pathname]);
+
 	const getClassName = (name) =>
 		selectedMenuItem === name
 			? isDarkMode
@@ -189,7 +198,7 @@ export default function Navbar({ setMobileOpen, showMenuItem = true }) {
 				}
 			>
 				<div className="header__left">
-					{isTabletScreen && (
+					{inBrowser && isTabletScreen && (
 						<div>
 							<MenuIcon
 								onClick={() => setMobileOpen(true)}
@@ -211,7 +220,7 @@ export default function Navbar({ setMobileOpen, showMenuItem = true }) {
 					>
 						<Link href="/">
 							{isUserProTier ? (
-								<img
+								<Image height={100} width={100}
 									className="header__leftImage"
 									src={
 										showMenuItem || !isSmallScreen
@@ -223,7 +232,7 @@ export default function Navbar({ setMobileOpen, showMenuItem = true }) {
 									alt="PuStack"
 								/>
 							) : (
-								<img
+								<Image height={100} width={100}
 									className="header__leftImage"
 									src={
 										showMenuItem || !isSmallScreen
@@ -250,7 +259,7 @@ export default function Navbar({ setMobileOpen, showMenuItem = true }) {
 						>
 							<div className="nav__box__wrapper">
 								<Icon className="nav__icon">
-									<img
+									<Image height={100} width={100}
 										className="nav__icon__img"
 										src={
 											selectedMenuItem === "homepage"
@@ -267,7 +276,7 @@ export default function Navbar({ setMobileOpen, showMenuItem = true }) {
 					</Tooltip>
 				</div>
 
-				{isLargeScreen && (
+				{inBrowser && isLargeScreen && (
 					<MenuItems
 						setMenuItem={setMenuItem}
 						selectedMenuItem={selectedMenuItem}
@@ -307,7 +316,7 @@ export default function Navbar({ setMobileOpen, showMenuItem = true }) {
 											</div>
 										</div>
 									)}
-									<img
+									<Image height={100} width={100}
 										className="nav__icon__img"
 										src={
 											selectedMenuItem === "videos"
@@ -323,7 +332,7 @@ export default function Navbar({ setMobileOpen, showMenuItem = true }) {
 						</Link>
 					</Tooltip>
 					<div className="header__right-group">
-						{isAppropriateScreen && isStandardGrade && (
+						{inBrowser && isAppropriateScreen && isStandardGrade && (
 							<div
 								className="pustack-search-wrapper"
 								onClick={() => setOpenSearchBox(true)}
@@ -334,26 +343,26 @@ export default function Navbar({ setMobileOpen, showMenuItem = true }) {
 								/>
 							</div>
 						)}
-						{isSmallScreen && isStandardGrade && (
+						{inBrowser && isSmallScreen && isStandardGrade && (
 							<div
 								className={
 									profileVisibility ? "mobile-search" : "mobile-search shift"
 								}
 								onClick={() => setOpenMobileSearch(true)}
 							>
-								<img src={searchIcon} alt="search" />
+								<Image height={100} width={100} src={searchIcon} alt="search" />
 							</div>
 						)}
-						{isSmallScreen && isStandardGrade && <PuStackMobileSearch isDark={isDarkMode} />}
+						{inBrowser && isSmallScreen && isStandardGrade && <PuStackMobileSearch isDark={isDarkMode} />}
 
-						{openSearchBox && !isSmallScreen && isStandardGrade && (
+						{openSearchBox && inBrowser && !isSmallScreen && isStandardGrade && (
 							<div
 								onClick={() => setOpenSearchBox(false)}
 								className="nav-backdrop"
 							/>
 						)}
 
-						{(openSearchBox || openBackdrop) && !isSmallScreen && isStandardGrade && (
+						{(openSearchBox || openBackdrop) && inBrowser && !isSmallScreen && isStandardGrade && (
 							<div
 								className="search-backdrop"
 								onClick={() => setOpenSearchBox(false)}
@@ -367,7 +376,7 @@ export default function Navbar({ setMobileOpen, showMenuItem = true }) {
 					</div>
 				</div>
 			</div>
-			{isSmallScreen && showMenuItem && (
+			{inBrowser && isSmallScreen && showMenuItem && (
 				<div className="header_mobileMenuItems">
 					<MobileMenuItems
 						setMenuItem={setMenuItem}
@@ -384,7 +393,7 @@ export default function Navbar({ setMobileOpen, showMenuItem = true }) {
 							>
 								X
 							</h6>
-							<img src={appLogo} alt="app" />
+							<Image height={100} width={100} src={appLogo} alt="app" />
 							<div>
 								<h5>PuStack App</h5>
 								<p>Get the best of PuStack Experience</p>

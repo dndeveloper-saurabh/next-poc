@@ -5,6 +5,7 @@ import React, {
   useRef,
   useCallback,
 } from "react";
+import Image from 'next/image';
 // import { Link, useLocation } from "react-router-dom";
 import Link from 'next/link';
 import SwipeableViews from "react-swipeable-views";
@@ -212,7 +213,7 @@ export default function SubjectModal({ tabSelected }) {
           <div className="subject__modal__content">
             <div className="subject__thumbnail">
               <div className={`hero__image__wrapper ${subjectName}`}>
-                <img
+                <Image height={100} width={100}
                   src={chaptersData?.mainThumb}
                   className="hero__image"
                   draggable={false}
@@ -315,7 +316,7 @@ export default function SubjectModal({ tabSelected }) {
                             ))}
                         {subject?.chapters?.length > 5 && (
                           <div className="powered__by">
-                            <img
+                            <Image height={100} width={100}
                               src={isDark ? logoDark : logo}
                               className="pustack__powered__logo"
                               alt="logo"
@@ -348,7 +349,7 @@ export default function SubjectModal({ tabSelected }) {
                       {activeTab === chaptersData?.subjects.length &&
                         chaptersData?.tips?.length > 5 && (
                           <div className="powered__by">
-                            <img
+                            <Image height={100} width={100}
                               src={isDark ? logoDark : logo}
                               className="pustack__powered__logo"
                               alt="logo"
@@ -386,7 +387,7 @@ export default function SubjectModal({ tabSelected }) {
                         ))}
                       {chaptersData?.practice?.length > 5 && (
                         <div className="powered__by">
-                          <img
+                          <Image height={100} width={100}
                             src={isDark ? logoDark : logo}
                             className="pustack__powered__logo"
                             alt="logo"
@@ -458,7 +459,7 @@ export default function SubjectModal({ tabSelected }) {
                           ))}
                       {chaptersData?.chapters?.length > 5 && (
                         <div className="powered__by">
-                          <img
+                          <Image height={100} width={100}
                             src={isDark ? logoDark : logo}
                             className="pustack__powered__logo"
                             alt="logo"
@@ -489,7 +490,7 @@ export default function SubjectModal({ tabSelected }) {
                         ))}
                       {chaptersData?.tips?.length > 5 && (
                         <div className="powered__by">
-                          <img
+                          <Image height={100} width={100}
                             src={isDark ? logoDark : logo}
                             className="pustack__powered__logo"
                             alt="logo"
@@ -527,7 +528,7 @@ export default function SubjectModal({ tabSelected }) {
                         ))}
                       {chaptersData?.practice?.length > 5 && (
                         <div className="powered__by">
-                          <img
+                          <Image height={100} width={100}
                             src={isDark ? logoDark : logo}
                             className="pustack__powered__logo"
                             alt="logo"

@@ -2,6 +2,11 @@ import React, {useContext, useEffect, useMemo, useRef, useState} from 'react';
 import SwipeableViews from "react-swipeable-views";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import { Menu, Drawer } from "@material-ui/core";
+import {useRouter} from 'next/router';
+import Image from 'next/image';
+import { v4 as uuidv4 } from "uuid";
+// TODO: Use in-built fetch API
+import axios from 'axios';
 import {
 	astronaut,
 	BarCode, CheckIconGreen,
@@ -37,7 +42,7 @@ import confirmedLottie from "../../public/assets/lottie/confirm.json";
 import failureLottie from "../../public/assets/lottie/fail.json";
 import PhoneInput from "react-phone-input-2";
 import {ChevronRight, Info} from "@material-ui/icons";
-import {getAvailableGrades, getGradeNameByValue} from "../../helpers";
+import {getAvailableGrades, getGradeNameByValue, loadScript, baseUrl} from "../../helpers";
 import Timer from "react-compound-timer";
 import DeleteAccountScreen from "./delete-account";
 import useIsProduction from "../../hooks/isProduction";
@@ -53,7 +58,7 @@ import {
 } from "../../services/auth";
 import {loadingWrapper, starPath} from "../../helpers";
 import Resizer from "react-image-file-resizer";
-// import {db, firebaseApp, functions} from "../../../../../firebase_config";
+// import {require('../../firebase-config').db, firebaseApp, functions} from "../../../../../firebase_config";
 import firebase from "firebase";
 import CancelIcon from "@material-ui/icons/Cancel";
 import Icon from "@material-ui/core/Icon";
@@ -67,7 +72,7 @@ const SWIPE_FLOW = {
 
 const CheckGreenIcon = () => (
 	<Icon>
-		<img
+		<Image height={100} width={100}
 			alt="check-green"
 			src={CheckIconGreen}
 			style={{ width: "100%" }}
@@ -91,7 +96,7 @@ const formatJoiningDate2 = (timestamp) => {
 };
 
 const getReferredUserList = async (uid) => {
-	return await db
+	return await require('../../firebase-config').db
 		.collection("referrals")
 		.doc(uid)
 		.get()
@@ -100,7 +105,7 @@ const getReferredUserList = async (uid) => {
 };
 
 const updateUserName = async (userId, name) => {
-	return await db
+	return await require('../../firebase-config').db
 		.collection("users")
 		.doc(userId)
 		.set(
@@ -117,7 +122,7 @@ const updateProfileImage = async (file, userId) => {
 	let path = `users/user_profile/${userId}/${uuidv4()}.jpg`;
 	let _url = null;
 
-	await storage
+	await (require('../../firebase-config')).storage
 		.ref()
 		.child(path)
 		.put(await fetch(file?.url).then((r) => r.blob()))
@@ -126,7 +131,7 @@ const updateProfileImage = async (file, userId) => {
 		});
 
 	if (_url || "") {
-		return await db
+		return await require('../../firebase-config').db
 			.collection("users")
 			.doc(userId)
 			.set(
@@ -141,13 +146,13 @@ const updateProfileImage = async (file, userId) => {
 };
 
 const updateAppRating = async (userId, rating) => {
-	return await db
+	return await require('../../firebase-config').db
 		.collection("users")
 		.doc(userId)
 		.set(
 			{
 				app_rating: rating,
-				app_rating_history: firestore.FieldValue.arrayUnion({
+				app_rating_history: require('../../firebase-config').firestore.FieldValue.arrayUnion({
 					rate_ts: new Date(),
 					rating: rating,
 				}),
@@ -222,7 +227,7 @@ const refillPayment = async ({
 };
 
 const isStudentEngaged = async ({ studentId }) => {
-	return await db
+	return await require('../../firebase-config').db
 		.collection("blaze_dev")
 		.doc("collections")
 		.collection("students")
@@ -235,7 +240,7 @@ const isStudentEngaged = async ({ studentId }) => {
 				const meetingId = doc.data().active_call_id;
 
 				if (isEngaged) {
-					return await db
+					return await require('../../firebase-config').db
 						.collection("blaze_dev")
 						.doc("collections")
 						.collection("blaze_sessions")
@@ -260,7 +265,7 @@ const isStudentEngaged = async ({ studentId }) => {
 };
 
 const generateInvitationLink = async (uid) => {
-	return await Axios.post(
+	return await axios.post(
 			`https://firebasedynamiclinks.googleapis.com/v1/shortLinks?key=${firebaseAPiKey}`,
 			{
 				dynamicLinkInfo: {
@@ -290,7 +295,7 @@ const changeUserGrade = async (userId, grade) => {
 	axios.post(baseUrl() + '/refreshNotificationSubscriptionList', {
 		uid: userId
 	}).then();
-	return await db
+	return await require('../../firebase-config').db
 		.collection("users")
 		.doc(userId)
 		.set({ grade: grade }, { merge: true })
@@ -362,8 +367,7 @@ export default function AccountSettingsViews({anchorEl, setAnchorEl, isOpen, set
 	const [profileImage, setProfileImage] = useState({ url: user?.profile_url });
 	const [rating, setRating] = useState(user?.app_rating ? user?.app_rating : 0);
 
-	const history = useHistory();
-	const location = useLocation();
+	const router = useRouter();
 	let refillInput = useRef();
 	const isSmallScreen = useMediaQuery({ query: "(max-width: 500px)" });
 
@@ -470,7 +474,7 @@ export default function AccountSettingsViews({anchorEl, setAnchorEl, isOpen, set
 		// // * is_deleted - true
 		// // * email - null
 		// // * phone_number - null
-		// await db.doc('users/' + user.uuid)
+		// await require('../../firebase-config').db.doc('users/' + user.uuid)
 		//   .set({
 		//     is_deleted: true,
 		//     email: null,
@@ -507,7 +511,7 @@ export default function AccountSettingsViews({anchorEl, setAnchorEl, isOpen, set
 	};
 
 	const handleDrawerClose = () => {
-		history.push(currentPath);
+		router.push(currentPath);
 		setIsOpen(false);
 		setProfileName(user?.name);
 		setPhoneNumber(user?.phone_country_code + user?.phone_number);
@@ -582,7 +586,7 @@ export default function AccountSettingsViews({anchorEl, setAnchorEl, isOpen, set
 		//   (currentPath.split("/")[2] || "") &&
 		//   !openMenuSettings
 		// ) {
-		//   history.push("/doubts");
+		//   router.push("/doubts");
 		// }
 
 		let res = await changeUserGrade(user?.uid, grade);
@@ -596,8 +600,8 @@ export default function AccountSettingsViews({anchorEl, setAnchorEl, isOpen, set
 	};
 
 	useEffect(() => {
-		setCurrentPath(location.pathname);
-	}, [location]);
+		setCurrentPath(router.pathname);
+	}, [router.pathname]);
 
 	const updateUserFullName = async () => {
 		const isUpdated = await updateUserName(user?.uid, profileName.trim());
@@ -831,28 +835,30 @@ export default function AccountSettingsViews({anchorEl, setAnchorEl, isOpen, set
 					callback: (response) => console.log({ response }),
 					"expired-callback": () => window.recaptchaVerifier.clear(),
 				},
-				firebaseApp
+				require('../../firebase-config').firebaseApp
 			);
 		}
 	}, [activeIndex]);
 
 	useEffect(() => {
-		if (isOpen && isSmallScreen) {
-			history.listen((_, action) => {
-				if (action === "POP") {
-					if (activeIndex === 2) {
-						setActiveIndex(1);
-						history.push("/?page=settings");
-					} else if (activeIndex === 1) {
-						setActiveIndex(0);
-						history.push("/?page=account");
-					} else if (activeIndex === 0) {
-						handleDrawerClose();
-						history.push("/");
-					}
-				}
-			});
-		}
+		//TODO: Implement history.listen
+
+		// if (isOpen && isSmallScreen) {
+		// 	history.listen((_, action) => {
+		// 		if (action === "POP") {
+		// 			if (activeIndex === 2) {
+		// 				setActiveIndex(1);
+		// 				router.push("/?page=settings");
+		// 			} else if (activeIndex === 1) {
+		// 				setActiveIndex(0);
+		// 				router.push("/?page=account");
+		// 			} else if (activeIndex === 0) {
+		// 				handleDrawerClose();
+		// 				router.push("/");
+		// 			}
+		// 		}
+		// 	});
+		// }
 	}, [activeIndex]);
 
 	useEffect(() => {
@@ -900,10 +906,10 @@ export default function AccountSettingsViews({anchorEl, setAnchorEl, isOpen, set
 				<div className="referral-graph">
 					<div className="main-user">
 						<div className="user-ring"></div>
-						<img src={user?.profile_url} alt={user?.name} draggable={false} />
+						<Image height={100} width={100} src={user?.profile_url} alt={user?.name} draggable={false} />
 					</div>
 					{referredList?.slice(0, 5)?.map((item, i) => (
-						<img
+						<Image height={100} width={100}
 							src={item.profile_url}
 							className={`referred-${i}`}
 							alt={item?.name}
@@ -913,7 +919,7 @@ export default function AccountSettingsViews({anchorEl, setAnchorEl, isOpen, set
 					{[planet1, planet2, planet3, planet4, planet5, planet6].map(
 						(planet, i) => (
 							planet
-							// <img
+							// <Image height={100} width={100}
 							//   src={planet}
 							//   className={`planet-${i}`}
 							//   alt="planet"
@@ -927,7 +933,7 @@ export default function AccountSettingsViews({anchorEl, setAnchorEl, isOpen, set
 					<div className="referred-friends">
 						{referredList?.map((item) => (
 							<div key={item?.name} className="referred-details-wrapper">
-								<img
+								<Image height={100} width={100}
 									src={item.profile_url}
 									alt={item?.name}
 									draggable={false}
@@ -946,20 +952,20 @@ export default function AccountSettingsViews({anchorEl, setAnchorEl, isOpen, set
 
 	const UserCard = () => (
 		<div className="user-card">
-			<img
+			<Image height={100} width={100}
 				className="user-card-background"
 				src={goldCard}
 				alt="user-card-bg"
 				draggable={false}
 			/>
 
-			<img
+			<Image height={100} width={100}
 				src={PustackLogoGold}
 				alt="gold"
 				className="pustack-gold"
 				draggable={false}
 			/>
-			<img
+			<Image height={100} width={100}
 				className="user-card-sim"
 				src={goldSim}
 				alt="user-card-sim"
@@ -989,7 +995,7 @@ export default function AccountSettingsViews({anchorEl, setAnchorEl, isOpen, set
 
 	useEffect(() => {
 		const orderStatusListener = () => {
-			const doc = db.collection("orders").doc(orderId);
+			const doc = require('../../firebase-config').db.collection("orders").doc(orderId);
 			setProcessingOrder(true);
 
 			return doc.onSnapshot((docSnapshot) => {
@@ -1103,10 +1109,10 @@ export default function AccountSettingsViews({anchorEl, setAnchorEl, isOpen, set
 					<h2 className="page-title">
 						<ArrowBackIcon onClick={handleDrawerClose} />
 					</h2>
-					<img
+					<Image height={100} width={100}
 						onClick={() => {
 							setActiveIndex(1);
-							history.push(
+							router.push(
 								`${
 									currentPath === "/"
 										? ""
@@ -1121,7 +1127,7 @@ export default function AccountSettingsViews({anchorEl, setAnchorEl, isOpen, set
 				</> : (
 					<>
 						<h2 className="page-title">Account</h2>
-						<img
+						<Image height={100} width={100}
 							onClick={() => setActiveIndex(1)}
 							src={settingsIcon}
 							alt="SI"
@@ -1132,26 +1138,26 @@ export default function AccountSettingsViews({anchorEl, setAnchorEl, isOpen, set
 			</div>
 			<div className="page-content">
 				<div className="user-card">
-					<img
+					<Image height={100} width={100}
 						className="user-card-background"
 						src={goldCard}
 						alt="user-card-bg"
 						draggable={false}
 					/>
-					<img
+					<Image height={100} width={100}
 						className="user-profile-picture"
 						src={user?.profile_url ? user?.profile_url : defaultPic}
 						onClick={() => setActiveIndex(1)}
 						alt="userdp"
 						draggable={false}
 					/>
-					<img
+					<Image height={100} width={100}
 						src={PustackLogoGold}
 						alt="gold"
 						className="pustack-gold"
 						draggable={false}
 					/>
-					<img
+					<Image height={100} width={100}
 						className={
 							!user?.is_external_instructor
 								? "user-card-sim"
@@ -1212,7 +1218,7 @@ export default function AccountSettingsViews({anchorEl, setAnchorEl, isOpen, set
 							</div>
 						</div>
 						<div className={"user-validity"}>
-							<img
+							<Image height={100} width={100}
 								src={memberSince}
 								alt="member-since"
 								draggable={false}
@@ -1286,7 +1292,7 @@ export default function AccountSettingsViews({anchorEl, setAnchorEl, isOpen, set
 						}
 					>
 						<h6>PuStack Pro</h6>
-						<img
+						<Image height={100} width={100}
 							className="user-pro-mask-bg"
 							src={proMaskBg}
 							alt="pro-mask-bg"
@@ -1297,7 +1303,7 @@ export default function AccountSettingsViews({anchorEl, setAnchorEl, isOpen, set
 							className="user-pro-wrapper"
 							onClick={() => setIsSliderOpen(true)}
 						>
-							<img
+							<Image height={100} width={100}
 								className="user-pro-image astronaut"
 								src={astronaut}
 								alt="pro-img"
@@ -1308,7 +1314,7 @@ export default function AccountSettingsViews({anchorEl, setAnchorEl, isOpen, set
 										: "running",
 								}}
 							/>
-							<img
+							<Image height={100} width={100}
 								className="user-pro-image planet1"
 								src={planet1}
 								alt="pro-img"
@@ -1319,7 +1325,7 @@ export default function AccountSettingsViews({anchorEl, setAnchorEl, isOpen, set
 										: "running",
 								}}
 							/>
-							<img
+							<Image height={100} width={100}
 								className="user-pro-image planet2"
 								src={planet2}
 								alt="pro-img"
@@ -1330,7 +1336,7 @@ export default function AccountSettingsViews({anchorEl, setAnchorEl, isOpen, set
 										: "running",
 								}}
 							/>
-							<img
+							<Image height={100} width={100}
 								className="user-pro-image planet3"
 								src={planet3}
 								alt="pro-img"
@@ -1394,7 +1400,7 @@ export default function AccountSettingsViews({anchorEl, setAnchorEl, isOpen, set
 					</div>
 				)}
 			</div>
-			{isInstructor && !isSmallScreen && <div className="manage-content" onClick={() => history.push('/cms')}>
+			{isInstructor && !isSmallScreen && <div className="manage-content" onClick={() => router.push('/cms')}>
         Manage Content
       </div>}
 			<div
@@ -1459,7 +1465,7 @@ export default function AccountSettingsViews({anchorEl, setAnchorEl, isOpen, set
 								orderStatus ? "pos-receipt" : "pos-receipt-hidden"
 							}
 						>
-							<img
+							<Image height={100} width={100}
 								src={PosReceiptOriginal}
 								alt="receipt"
 								draggable={false}
@@ -1468,14 +1474,14 @@ export default function AccountSettingsViews({anchorEl, setAnchorEl, isOpen, set
 
 						{orderStatus && (
 							<div className="pos-full-receipt">
-								<img
+								<Image height={100} width={100}
 									src={PosReceipt}
 									alt="receipt"
 									draggable={false}
 								/>
 								<div className="pos-receipt-details">
 									<div className="receipt-head">
-										<img src={nounBook} alt="logo" />
+										<Image height={100} width={100} src={nounBook} alt="logo" />
 										<h1>PuStack Wallet</h1>
 									</div>
 
@@ -1501,7 +1507,7 @@ export default function AccountSettingsViews({anchorEl, setAnchorEl, isOpen, set
 										<h1>TOTAL</h1> <h4>₹ {refillAmount}</h4>
 									</div>
 									<div className="receipt-bar">
-										<img
+										<Image height={100} width={100}
 											src={BarCode}
 											alt="barcode"
 											draggable={false}
@@ -1547,13 +1553,13 @@ export default function AccountSettingsViews({anchorEl, setAnchorEl, isOpen, set
 							</div>
 						)}
 						<div className={orderStatus ? "hide-pos" : ""}>
-							<img
+							<Image height={100} width={100}
 								className="pos-original"
 								src={PosOriginal}
 								alt="posoriginal"
 								draggable={false}
 							/>
-							<img
+							<Image height={100} width={100}
 								className="pos-top"
 								src={Pos}
 								alt="pos"
@@ -1750,7 +1756,7 @@ export default function AccountSettingsViews({anchorEl, setAnchorEl, isOpen, set
 					}
 				>
 					<label htmlFor="profile-input">
-						<img
+						<Image height={100} width={100}
 							className="user-profile-picture"
 							src={profileImage?.url || defaultPic}
 							alt="userdp"
@@ -1862,7 +1868,7 @@ export default function AccountSettingsViews({anchorEl, setAnchorEl, isOpen, set
 					</h6>
 				</div>
 				<div className="poweredbySection">
-					<img
+					<Image height={100} width={100}
 						className="powered__by__icon"
 						src={isDark ? PustackLogoDark : PustackLogo}
 						alt="pustack-logo"
@@ -1889,7 +1895,7 @@ export default function AccountSettingsViews({anchorEl, setAnchorEl, isOpen, set
 				<div className={"grade_change-item-container" + (changingGrade ? ' changing' : '')}>
 					{grades.map(gradeItem => (
 						<div key={gradeItem.value} onClick={() => handleGradeChange(gradeItem.value, gradeItem.enable)} className={"grade_change-item" + (gradeItem.enable ? '' : ' disabled') + (activeGradeItemInModal === gradeItem.value || user?.grade === gradeItem.value ? ' active' : '')}>
-							<img style={{opacity: changingGrade === gradeItem.value ? 0 : 1}} src={gradeItem.planet} alt={gradeItem.name}/>
+							<Image height={100} width={100} style={{opacity: changingGrade === gradeItem.value ? 0 : 1}} src={gradeItem.planet} alt={gradeItem.name}/>
 							<h4 style={{opacity: changingGrade === gradeItem.value ? 0 : 1}}>{gradeItem.name}</h4>
 							<div className="loader" style={{opacity: changingGrade === gradeItem.value ? 1 : 0}}>
 								<Lottie
@@ -1977,7 +1983,7 @@ export default function AccountSettingsViews({anchorEl, setAnchorEl, isOpen, set
 						</div>
 					)}
 
-					{/*<div ref={(ref) => (recaptchaRef = ref)}>*/}
+					{/*<div ref={recaptchaRef}>*/}
 					{/*  <div id="recaptcha-container" />*/}
 					{/*</div>*/}
 
@@ -1991,7 +1997,7 @@ export default function AccountSettingsViews({anchorEl, setAnchorEl, isOpen, set
 						>
 							<div className="wrapper">
 								<div className="otp-verification-modal-inner">
-									<img src={smartPhone} alt="sp" draggable={false} />
+									<Image height={100} width={100} src={smartPhone} alt="sp" draggable={false} />
 									<h5>OTP Verification</h5>
 									<h6>
 										<span>Enter OTP sent to</span> +{phoneNumber}

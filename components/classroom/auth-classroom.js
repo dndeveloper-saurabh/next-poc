@@ -1248,7 +1248,7 @@ export default function AuthClassroom() {
             <div className="classroom-player-wrapper">
               <div className="classroom__video__seeking other__grade">
                 <div className="classroom__no__video">
-                  <Image
+                  <Image height={100} width={100}
                     src={proLogoDark}
                     alt={'Pustack Lecture'}
                     className="no__video"

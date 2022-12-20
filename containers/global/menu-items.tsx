@@ -3,7 +3,7 @@ import Icon from "@material-ui/core/Icon";
 import Link from 'next/link';
 import {useRouter} from 'next/router';
 import { makeStyles } from "@material-ui/core/styles";
-
+import Image from 'next/image';
 import blazeIcon from "../../public/assets/images/icons/flash.svg";
 import {
 	SidebarContext,
@@ -174,7 +174,7 @@ export default function MenuItems({
 						{/*    </div>*/}
 						{/*  </div>*/}
 						{/*)}*/}
-						<img
+						<Image height={100} width={100}
 							className="nav__icon__img"
 							src={blazeIcon}
 							alt="Blaze Icon"
@@ -213,7 +213,7 @@ export default function MenuItems({
 			{/*          </div>*/}
 			{/*        </div>*/}
 			{/*      )}*/}
-			{/*      <img*/}
+			{/*      <Image height={100} width={100}*/}
 			{/*        className="nav__icon__img"*/}
 			{/*        src={*/}
 			{/*          selectedMenuItem === "videos"*/}
@@ -258,7 +258,7 @@ export default function MenuItems({
 			{/*            </div>*/}
 			{/*          </div>*/}
 			{/*        )}*/}
-			{/*        <img*/}
+			{/*        <Image height={100} width={100}*/}
 			{/*          className="nav__icon__img"*/}
 			{/*          src={*/}
 			{/*            selectedMenuItem === "doubts"*/}
@@ -290,7 +290,7 @@ export default function MenuItems({
 			{/*  >*/}
 			{/*    <div className="nav__box__wrapper">*/}
 			{/*      <Icon className="nav__icon">*/}
-			{/*        <img*/}
+			{/*        <Image height={100} width={100}*/}
 			{/*          className="nav__icon__img"*/}
 			{/*          src={*/}
 			{/*            selectedMenuItem === "news"*/}
@@ -329,7 +329,7 @@ export default function MenuItems({
 			{/*            </div>*/}
 			{/*          </div>*/}
 			{/*        )}*/}
-			{/*        <img*/}
+			{/*        <Image height={100} width={100}*/}
 			{/*          className="nav__icon__img"*/}
 			{/*          src={*/}
 			{/*            selectedMenuItem === "blaze"*/}
@@ -362,7 +362,7 @@ export default function MenuItems({
 // {/*  >*/}
 // <div className="nav__box__wrapper">
 //   <Icon className="nav__icon">
-//     <img
+//     <Image height={100} width={100}
 //       {/*          className="nav__icon__img"*/}
 //       {/*          src={*/}
 //       {/*            selectedMenuItem === "homepage"*/}

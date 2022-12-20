@@ -4,6 +4,7 @@ import dynamic from 'next/dynamic';
 const Steps = dynamic(() => import("intro.js-react").then(mod => mod.Steps), {
 	ssr: false
 });
+import Image from 'next/image';
 // import {Helmet} from "react-helmet";
 import Dialog from "@material-ui/core/Dialog";
 import Drawer from "@material-ui/core/Drawer";
@@ -11,51 +12,52 @@ import Hidden from "@material-ui/core/Hidden";
 // import WelcomeBg from "../../assets/onboarding/welcome.jpeg";
 import {useMediaQuery} from "react-responsive";
 import CancelIcon from "@material-ui/icons/Cancel";
-import {circularProgress, HUD, HUD1, logoDark2, proLogoDark, SpaceCraft} from "../public/assets";
+import {circularProgress, HUD, HUD1, logoDark2, proLogoDark, SpaceCraft} from "../../public/assets";
 // import {useLastLocation} from "react-router-last-location";
-import EmptyBox from '../public/assets/lottie/empty-box.json';
-import {IntroContext, NavbarContextProvider, ThemeContext, UserContext,} from "../context";
-import Navbar from "../containers/global/navbar";
-import astronautLottie from "../public/assets/onboarding/astronaut.json";
-import flashSvg from '../public/assets/images/icons/flash_white.svg';
+import EmptyBox from '../../public/assets/lottie/empty-box.json';
+import {IntroContext, NavbarContextProvider, ThemeContext, UserContext,} from "../../context";
+import Navbar from "../../containers/global/navbar";
+import astronautLottie from "../../public/assets/onboarding/astronaut.json";
+import flashSvg from '../../public/assets/images/icons/flash_white.svg';
 
-import ContinueWatchingCarousel from '../components/home/continuewatchingcarousel';
-import HomePageCarouselSlider from '../components/home/carousel';
-import HomePageSubjectModal from '../components/home/subjectmodal';
+import ContinueWatchingCarousel from './continuewatchingcarousel';
+import HomePageCarouselSlider from './carousel';
+import HomePageSubjectModal from './subjectmodal';
 
-import HomeSidebar from "../components/home/sidebar";
-import PuStackCare from "../containers/global/pustack-care";
-import PuStackCareChatPopup from "../containers/global/pustack-care-chat-popup";
+import HomeSidebar from "./Sidebar";
+import PuStackCare from "../../containers/global/pustack-care";
+import PuStackCareChatPopup from "../../containers/global/pustack-care-chat-popup";
 // import "intro.js/introjs.css";
-import {fetchTodayUpcomingSessions, formatDateDoc} from "../database/livesessions/sessions";
-import {castIndianTime} from '../helpers/getIndianTime';
+import {fetchTodayUpcomingSessions, formatDateDoc} from "../../database/livesessions/sessions";
+import {castIndianTime} from '../../helpers/getIndianTime';
 import {ArrowLeft, ArrowRight, EventAvailable, Timer3Rounded, TimerRounded, WatchLater} from "@material-ui/icons";
-import NumberMeter from "../components/global/NumberMeter";
+import NumberMeter from "../global/NumberMeter";
 import SwipeableViews from "react-swipeable-views/lib/SwipeableViews";
 // import {require('../firebase-config.js').db} from "../../firebase_config";
 import {format} from "date-fns";
 import {Area, AreaChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis,} from "recharts";
-import DurationDropdown from "../components/home/DurationDropdown";
+import DurationDropdown from "./DurationDropdown";
 import DateRangeIcon from "@material-ui/icons/DateRangeRounded";
-import BlazeOnGoingCard from "../containers/blaze/BlazeOnGoingCard";
+import BlazeOnGoingCard from "../../containers/blaze/BlazeOnGoingCard";
 import {useRouter} from 'next/router';
-import VideoPlayer from "../components/global/VideoPlayer";
-import BlazeCardLoader from "../components/blaze/CardLoader";
-import useStandardGrade from "../hooks/isStandardGrade";
-import LearnSection from "../components/home/LearnSection";
-import ContinueWatchingSidebar from "../components/home/continue-watching-sidebar";
-import InfiniteScroll from "../components/global/InfiniteScroll";
-import BlazeStudentCard from "../containers/blaze/sidebar/components/StudentCard";
-import BookSession from "../containers/blaze/sidebar/components/BookSession";
-import PustackShimmer from "../components/global/Shimmer";
-import {useIsMounted} from "../hooks/isMounted";
-import VideoShimmer from "../components/home/VideoShimmer";
+import VideoPlayer from "../global/VideoPlayer";
+import BlazeCardLoader from "../blaze/CardLoader";
+import useStandardGrade from "../../hooks/isStandardGrade";
+import LearnSection from "./LearnSection";
+import ContinueWatchingSidebar from "./continue-watching-sidebar";
+import InfiniteScroll from "../global/InfiniteScroll";
+import BlazeStudentCard from "../../containers/blaze/sidebar/components/StudentCard";
+import BookSession from "../../containers/blaze/sidebar/components/BookSession";
+import PustackShimmer from "../global/Shimmer";
+import {useIsMounted} from "../../hooks/isMounted";
+import VideoShimmer from "./VideoShimmer";
 //TODO: Replace axios with fetch API
 import axios from 'axios';
+import useAuth from '../../hooks/useAuth';
 
 const getVimeoVideos = async () => {
 	const vimeoVideos = [];
-	const snapshot = await require('../firebase-config').db
+	const snapshot = await require('../../firebase-config').db
 		.collection('/admin_videos')
 		.doc('pustack_app')
 		.get();
@@ -185,7 +187,7 @@ export class AppValidate {
 export const getInstructorLifetimeEngagement = async ({instructorId, year, setLoadingStatus}) => {
 	// setLoadingStatus("lifetime")
 	if (year === 'all') {
-		return await require('../firebase-config.js').db
+		return await require('../../firebase-config.js').db
 			.collection("blaze_dev")
 			.doc("collections")
 			.collection("students")
@@ -211,7 +213,7 @@ export const getInstructorLifetimeEngagement = async ({instructorId, year, setLo
 	if (!year) {
 		ist = await castIndianTime()
 	}
-	return await require('../firebase-config.js').db
+	return await require('../../firebase-config.js').db
 		.collection("blaze_dev")
 		.doc("collections")
 		.collection("students")
@@ -374,7 +376,15 @@ function formatInTwoDigits(num) {
 
 const lastLocation = {pathname: '/classroom'}
 
-export default function Home() {
+// export default function Home() {
+// 	const {user, isLoading} = useAuth();
+//
+// 	if(isLoading || !user) return null;
+//
+// 	return <Dashboard user={user} />
+// }
+
+export default function Dashboard({user}) {
 	const [sessionsToday, setSessionsToday] = useState([]);
 	const [sectionHighlighted, setSectionHighlighted] =
 		useContext(UserContext).sectionHighlighted;
@@ -382,7 +392,6 @@ export default function Home() {
 	const router = useRouter();
 	const isStandardGrade = useStandardGrade();
 
-	const [user] = useContext(UserContext).user;
 	const [isDark] = useContext(ThemeContext).theme;
 	const [isUserPro] = useContext(UserContext).tier;
 	const isMounted = useIsMounted();
@@ -527,7 +536,7 @@ export default function Home() {
 	useEffect(() => {
 		setLoadingStatus('ongoing+request');
 		if (!user || !user.uid) return () => {};
-		let unsubscribe1 = require('../firebase-config.js').db.collection("blaze_dev")
+		let unsubscribe1 = require('../../firebase-config.js').db.collection("blaze_dev")
 			.doc("collections")
 			.collection("blaze_sessions")
 			.where("session_status", "==", "accepted")
@@ -542,7 +551,7 @@ export default function Home() {
 				setLoadingStatus(false);
 				setOngoingSessions(requests);
 			});
-		let unsubscribe2 = require('../firebase-config.js').db.collection("blaze_dev")
+		let unsubscribe2 = require('../../firebase-config.js').db.collection("blaze_dev")
 			.doc("collections")
 			.collection("blaze_sessions")
 			.where("session_status", "==", "outstanding")
@@ -566,7 +575,7 @@ export default function Home() {
 
 	const fetchMoreRequestedSessions = useCallback(async () => {
 		if (!requestedSessions || !requestedSessions.length > 0 || !user?.uid) return;
-		return require('../firebase-config.js').db.collection("blaze_dev")
+		return require('../../firebase-config.js').db.collection("blaze_dev")
 			.doc("collections")
 			.collection("blaze_sessions")
 			.orderBy("requested_ts", "desc")
@@ -587,7 +596,7 @@ export default function Home() {
 
 	const fetchMoreCompletedSessions = useCallback(async () => {
 		if (!completedSessions || !(completedSessions.length > 0) || !user?.uid) return;
-		return require('../firebase-config.js').db.collection("blaze_dev")
+		return require('../../firebase-config.js').db.collection("blaze_dev")
 			.doc("collections")
 			.collection("blaze_sessions")
 			.where("session_status", "==", "completed")
@@ -620,7 +629,7 @@ export default function Home() {
 	useEffect(() => {
 		if (!user || !user.uid) return () => {};
 		setLoadingStatus('past');
-		let unsubscribe = require('../firebase-config.js').db
+		let unsubscribe = require('../../firebase-config.js').db
 			.collection('/blaze_dev/collections/students')
 			.doc(user.uid)
 			.onSnapshot(snapshot => {
@@ -636,7 +645,7 @@ export default function Home() {
 	useEffect(() => {
 		if (!user || !user.uid) return () => {};
 		setLoadingStatus('completed');
-		let unsubscribe = require('../firebase-config.js').db.collection("blaze_dev")
+		let unsubscribe = require('../../firebase-config.js').db.collection("blaze_dev")
 			.doc("collections")
 			.collection("blaze_sessions")
 			.where("session_status", "==", "completed")
@@ -910,9 +919,9 @@ export default function Home() {
 			{/*	<meta charSet="utf-8"/>*/}
 			{/*	<title>PuStack</title>*/}
 			{/*</Helmet>*/}
-			{/*<NavbarContextProvider>*/}
-			{/*	<Navbar setMobileOpen={setMobileOpen}/>*/}
-			{/*</NavbarContextProvider>*/}
+			<NavbarContextProvider>
+				<Navbar setMobileOpen={setMobileOpen}/>
+			</NavbarContextProvider>
 			<Steps
 				enabled={stepsEnabled}
 				steps={introSteps}
@@ -997,7 +1006,7 @@ export default function Home() {
 														((!ongoingSessions || !(ongoingSessions?.length > 0)) && isLargeScreen && inBrowser) && (
 															<BookSession onBeforeClickStuff={() => router.push('/blaze')}
 															             className="ongoing-sessions-list-request-btn">
-																<img src={flashSvg} width={20} height={20} alt="Blaze Icon"/>
+																<Image height={100} width={100} src={flashSvg} width={20} height={20} alt="Blaze Icon"/>
 																<span>Request</span>
 															</BookSession>
 														)
@@ -1389,7 +1398,7 @@ export default function Home() {
 							setTrialType(null);
 						}}
 					/>
-					<img
+					<Image height={100} width={100}
 						className="logo"
 						src={proLogoDark}
 						alt="logo"
@@ -1399,14 +1408,14 @@ export default function Home() {
 						<Lottie options={{animationData: astronautLottie, loop: true}}/>
 					</div>
 
-					<img
+					<Image height={100} width={100}
 						className="welcome-spacecraft"
 						src={SpaceCraft}
 						alt="spacecraft"
 						draggable={false}
 					/>
 					<div className="welcome-text">
-						<img
+						<Image height={100} width={100}
 							className="welcome-background"
 							src={HUD1}
 							alt="hud"
@@ -1433,13 +1442,13 @@ export default function Home() {
 			{/*      className="close-welcome-dialog"*/}
 			{/*      onClick={() => setOpenWelcome(false)}*/}
 			{/*    />*/}
-			{/*    <img*/}
+			{/*    <Image height={100} width={100}*/}
 			{/*      className="welcome-background"*/}
 			{/*      src={WelcomeBg}*/}
 			{/*      alt="welcome"*/}
 			{/*      draggable={false}*/}
 			{/*    />*/}
-			{/*    <img className="logo" src={logoDark2} alt="logo" draggable={false}/>*/}
+			{/*    <Image height={100} width={100} className="logo" src={logoDark2} alt="logo" draggable={false}/>*/}
 			{/*    <div className="welcome-text">*/}
 			{/*      <h1>Hey {user?.name?.split(" ")[0]}, </h1>{" "}*/}
 			{/*      <h1>Welcome to PuStack!</h1>*/}

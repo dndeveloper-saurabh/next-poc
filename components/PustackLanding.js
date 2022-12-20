@@ -40,7 +40,7 @@ export default function DesktopLanding({isSliderOpen, setIsSliderOpen}) {
       <section className="landing__section">
         <nav className="nav__wrapper">
           <span className="nav__logo">
-            <Image className="nav__logo__img" src={logowhite} alt="Pustack Logo" />
+            <Image height={100} width={100} className="nav__logo__img" src={logowhite} alt="Pustack Logo" />
             {/*<img*/}
             {/*  src={logowhite}*/}
             {/*  alt="Pustack Logo"*/}
@@ -82,7 +82,7 @@ export default function DesktopLanding({isSliderOpen, setIsSliderOpen}) {
                 <div className="backdrop" />
 
                 <div className="app__wrapper">
-                  <Image src={iPhone2} className="iphone__chassis" width={'unset'}  alt="Iphone"/>
+                  <Image height={100} width={100} src={iPhone2} className="iphone__chassis" width={'unset'}  alt="Iphone"/>
                   {/*<img className="iphone__chassis" src={iPhone2} alt="iphone"/>*/}
                   <div className="app__splash">
                     {/*<img style={{position: 'absolute', display: 'bls*/}
@@ -104,7 +104,7 @@ export default function DesktopLanding({isSliderOpen, setIsSliderOpen}) {
                   </div>
                   <div id="homescreen">
                     <div className="hide__bar" />
-                    <Image src="https://d1kjns6e6wnqfd.cloudfront.net/liveclass.webp" alt="Pustack Home" loading="lazy" width={100} height={100} />
+                    <Image height={100} width={100} src="https://d1kjns6e6wnqfd.cloudfront.net/liveclass.webp" alt="Pustack Home" loading="lazy" width={100} height={100} />
                     {/*<img*/}
                     {/*  src={*/}
                     {/*    "https://d1kjns6e6wnqfd.cloudfront.net/liveclass.webp"*/}
@@ -115,7 +115,7 @@ export default function DesktopLanding({isSliderOpen, setIsSliderOpen}) {
                     {/*/>*/}
                   </div>
                   <div id="livescreen">
-                    <Image src={appLive} alt="Pustack Live" loading="lazy" width={'auto'} height={"auto"} />
+                    <Image height={100} width={100} src={appLive} alt="Pustack Live" loading="lazy" width={'auto'} height={"auto"} />
                     {/*<img*/}
                     {/*  src={appLive}*/}
                     {/*  alt="PuStack Live"*/}
@@ -126,7 +126,7 @@ export default function DesktopLanding({isSliderOpen, setIsSliderOpen}) {
                   <div id="livescreen2">
                     <div className="hide__bar" />
                     <div className="live__tag">LIVE</div>
-                    <Image src="https://d1kjns6e6wnqfd.cloudfront.net/liveclassvideo.webp" width={100} height={100} alt="Pustack Live Video" loading="lazy" />
+                    <Image height={100} width={100} src="https://d1kjns6e6wnqfd.cloudfront.net/liveclassvideo.webp" width={100} height={100} alt="Pustack Live Video" loading="lazy" />
                     {/*<img*/}
                     {/*  src="https://d1kjns6e6wnqfd.cloudfront.net/liveclassvideo.webp"*/}
                     {/*  alt="PuStack Live Video"*/}
@@ -143,7 +143,7 @@ export default function DesktopLanding({isSliderOpen, setIsSliderOpen}) {
                   {/*  />*/}
                   {/*</div>*/}
                   <div id="searchscreen">
-                    <Image src="https://d1kjns6e6wnqfd.cloudfront.net/snap.webp" width={100} height={100} alt="Pustack Search" loading="lazy" />
+                    <Image height={100} width={100} src="https://d1kjns6e6wnqfd.cloudfront.net/snap.webp" width={100} height={100} alt="Pustack Search" loading="lazy" />
                     {/*<img*/}
                     {/*  src="https://d1kjns6e6wnqfd.cloudfront.net/snap.webp"*/}
                     {/*  alt="PuStack Search"*/}

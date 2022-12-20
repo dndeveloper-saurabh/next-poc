@@ -3,6 +3,7 @@ import PlayArrowIcon from "@material-ui/icons/PlayArrow";
 import ContentLoader from "react-content-loader";
 import TrendingUpIcon from "@material-ui/icons/TrendingUp";
 import { logoDark, logoDark2, logoLight2 } from "../../../public/assets";
+import Image1 from 'next/image';
 import { ThemeContext } from "../../../context";
 
 const CarouselCard = ({ data, getSubjectName, trending = false }) => {
@@ -20,7 +21,7 @@ const CarouselCard = ({ data, getSubjectName, trending = false }) => {
     <div className="cwc__card" key={data?.chapter_id}>
       <div className="pustack__mark__overlay">
         <h6 className="pustack__mark">
-          <img src={logoDark} alt="p" draggable={false} />
+          <Image1 height={100} width={100} src={logoDark} alt="p" draggable={false} />
         </h6>
         <h6 className="pustack__mark__bg">PuStack</h6>
       </div>
@@ -30,15 +31,16 @@ const CarouselCard = ({ data, getSubjectName, trending = false }) => {
         style={{ backgroundColor: data?.chapter_hex_color }}
       >
         {imageLoaded ? (
-          <img
+          <Image1 height={100} width={100}
             src={data?.chapter_illustration_art}
             alt={data?.chapter_name + " Subject"}
+            unoptimized={true}
             className={
               data?.category_id?.includes("maths") ? "maths__thumbnail" : ""
             }
           />
         ) : (
-          <img
+          <Image1 height={100} width={100}
             src={isDark ? logoDark2 : logoLight2}
             alt={data?.chapter_name + " Subject"}
           />

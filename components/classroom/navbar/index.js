@@ -93,14 +93,14 @@ export default function ClassroomNavbar({ title, chapterID }) {
       <Link href="/">
         <div className="classroom__logo">
           {isUserProTier ? (
-            <Image
+            <Image height={100} width={100}
               className="header__leftImage"
               src={proLogoDark}
               alt="PuStack Pro"
               draggable={false}
             />
           ) : (
-            <Image className="header__leftImage" src={logoDark} alt="PuStack" draggable={false} />
+            <Image height={100} width={100} className="header__leftImage" src={logoDark} alt="PuStack" draggable={false} />
           )}
         </div>
       </Link>

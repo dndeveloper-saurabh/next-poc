@@ -142,6 +142,10 @@
     position: relative;
     text-decoration: none;
 
+    img {
+      width: unset;
+    }
+
     p {
       position: absolute;
       color: white;
@@ -197,6 +201,7 @@
 
 .header__leftImage {
   height: 58px;
+  width: unset;
   display: flex;
 }
 

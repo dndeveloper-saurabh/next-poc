@@ -404,7 +404,7 @@
            id="path1583" />
       </g>
     </g>
-    <image
+    <image height={100} width={100}
        width="151.69444"
        height="129.46945"
        preserveAspectRatio="none"

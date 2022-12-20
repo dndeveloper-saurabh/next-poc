@@ -320,7 +320,7 @@ const ContinueWatchingSidebar = () => {
         {lastEngagement
           ? lastEngagement?.map((data) => (
               <Link
-                href={`/classroom?subject=${getSubjectName(
+                href={`/auth_classroom?subject=${getSubjectName(
                   data?.subject_id
                 )}&chapter=${data?.chapter_id}`}
                 key={data?.chapter_id}
@@ -347,7 +347,7 @@ const ContinueWatchingSidebar = () => {
                 .slice(lastEngagement?.length, trendingVideos.length)
                 .map((data) => (
                   <Link
-                    href={`/classroom?subject=${getSubjectName(
+                    href={`/auth_classroom?subject=${getSubjectName(
                       data?.subject_id
                     )}&chapter=${data?.chapter_id}`}
                     key={data?.chapter_id}
@@ -365,7 +365,7 @@ const ContinueWatchingSidebar = () => {
                 .slice(lastEngagement?.length, trendingVideos.length)
                 .map((data) => (
                   <Link
-                    href={`/classroom?subject=${getSubjectName(
+                    href={`/auth_classroom?subject=${getSubjectName(
                       data?.subject_id
                     )}&chapter=${data?.chapter_id}`}
                     key={data?.chapter_id}
